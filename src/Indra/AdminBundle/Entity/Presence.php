@@ -11,7 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * Presence
  *
  * @ORM\Table(name="presence")
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\PresenceRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\PresenceRepository")
  * @Vich\Uploadable
  */
 class Presence

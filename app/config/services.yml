@@ -180,12 +180,12 @@ services:
 #   Mes services Personnelles
 
     projet.search:
-        class : JanetTransit\AdminBundle\Services\Search
+        class : Indra\AdminBundle\Services\Search
         arguments: ["@doctrine.orm.entity_manager", "@request_stack" ]
         scope: "request"
 
     application.operation:
-        class : JanetTransit\AdminBundle\Services\OperationApp
+        class : Indra\AdminBundle\Services\OperationApp
         arguments: ["@doctrine.orm.entity_manager", "@request_stack" ]
         scope: "request"
 

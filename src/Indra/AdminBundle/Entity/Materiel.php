@@ -11,7 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * Materiel
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\MaterielRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\MaterielRepository")
  * @Vich\Uploadable
  */
 class Materiel

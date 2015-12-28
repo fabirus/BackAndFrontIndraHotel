@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Service
  *
  * @ORM\Table(name="service")
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\ServiceRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\ServiceRepository")
  */
 class Service
 {

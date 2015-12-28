@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Poste
  *
  * @ORM\Table(name="poste")
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\PosteRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\PosteRepository")
  */
 class Poste
 {

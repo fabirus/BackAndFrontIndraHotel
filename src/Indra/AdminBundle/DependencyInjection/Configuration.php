@@ -1,6 +1,6 @@
 <?php
 
-namespace JanetTransit\AdminBundle\DependencyInjection;
+namespace Indra\AdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

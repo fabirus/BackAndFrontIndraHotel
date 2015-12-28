@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TypeContrat
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\TypeContratRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\TypeContratRepository")
  */
 class TypeContrat
 {

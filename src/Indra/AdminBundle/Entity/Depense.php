@@ -12,7 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * Depense
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\DepenseRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\DepenseRepository")
  * @Vich\Uploadable
  */
 class Depense
@@ -59,11 +59,6 @@ class Depense
      */
     private $del = 0;
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Voiture")
-     */
-    private $voiture;
 
     /**
      * @var boolean
@@ -144,23 +139,6 @@ class Depense
     {
         return $this->materiel;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getVoiture()
-    {
-        return $this->voiture;
-    }
-
-    /**
-     * @param mixed $voiture
-     */
-    public function setVoiture($voiture)
-    {
-        $this->voiture = $voiture;
-    }
-
 
     /**
      * @return mixed

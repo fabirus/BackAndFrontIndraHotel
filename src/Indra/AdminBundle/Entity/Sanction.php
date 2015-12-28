@@ -11,7 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * Sanction
  *
  * @ORM\Table(name="sanction")
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\SanctionRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\SanctionRepository")
  * @Vich\Uploadable
  */
 class Sanction

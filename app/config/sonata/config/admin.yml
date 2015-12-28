@@ -15,7 +15,7 @@ sonata_block:
         sonata.formatter.block.formatter:
 
 sonata_admin:
-    title:      JANET TRANSIT
+    title:      INDRA ADMIN
     title_logo: /img/logo.ico
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig

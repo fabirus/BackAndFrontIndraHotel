@@ -1,6 +1,6 @@
 <?php
 
-namespace JanetTransit\AdminBundle\Services;
+namespace Indra\AdminBundle\Services;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

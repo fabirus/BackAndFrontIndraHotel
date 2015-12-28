@@ -1,6 +1,6 @@
 <?php
 // DAWeldonExampleBundle/Form/Type/ProfileFormType.php
-namespace JanetTransit\AdminBundle\Form\Type;
+namespace Indra\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

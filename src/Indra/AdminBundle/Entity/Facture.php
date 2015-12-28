@@ -12,7 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * Facture
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\FactureRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\FactureRepository")
  * @Vich\Uploadable
  */
 class Facture
@@ -70,10 +70,6 @@ class Facture
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Voiture")
-     */
-    private $voiture;
 
     /**
      * @var \boolean
@@ -211,22 +207,6 @@ class Facture
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = new \Datetime();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVoiture()
-    {
-        return $this->voiture;
-    }
-
-    /**
-     * @param mixed $voiture
-     */
-    public function setVoiture($voiture)
-    {
-        $this->voiture = $voiture;
     }
 
     /**

@@ -11,7 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * AvanceSalaire
  *
  * @ORM\Table(name="avancesalaire")
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\AvanceSalaireRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\AvanceSalaireRepository")
  * @Vich\Uploadable
  */
 class AvanceSalaire

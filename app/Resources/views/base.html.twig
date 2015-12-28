@@ -46,7 +46,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ path('admin_homepage') }}">JANET TRANSIT</a>
+                    <a class="navbar-brand" href="{{ path('admin_homepage') }}">INDRA HOTEL</a>
                 </div>
                 {% if app.user %}
                     <span class="label" style="font-size: 20px;">
@@ -116,27 +116,7 @@
                                             <a href="{{ path('service_informations') }}">{{ 'menu.employe.services'|trans }}</a>
                                         </li>
                                     {% endif %}
-                                    {% if is_granted('ROLE_MANAGER') %}
-                                        <li>
-                                            <a href="{{ path('taf_informations') }}">TAF</a>
-                                        </li>
-                                    {% endif %}
-                                    {#{% if is_granted('ROLE_MANAGER') %}#}
-                                        {#<li>#}
-                                            {#<a href="{{ path('prime_informations') }}">{{ 'menu.employe.primes'|trans }}</a>#}
-                                        {#</li>#}
-                                    {#{% endif %}#}
                                 </ul>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_SECRETAIRE') %}
-                            <li>
-                                <a href="{{ path('periodecarburation_informations') }}"><i class="fa fa-dashboard fa-3x"></i> {{ 'menu.carburation'|trans }}</a>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li>
-                                <a  href="{{ path('contratets_informations') }}"><i class="fa fa-file-text fa-3x"></i>{{ 'menu.contrats'|trans }}</a>
                             </li>
                         {% endif %}
                         {% if is_granted('ROLE_SECRETAIRE') %}
@@ -152,11 +132,6 @@
                         {% if is_granted('ROLE_SECRETAIRE') %}
                             <li>
                                 <a  href="{{ path('reunion_informations') }}"><i class="fa fa-table fa-3x"></i>{{ 'menu.reunion'|trans }}</a>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_GESTION') %}
-                            <li>
-                                <a  href="{{ path('typevoiture_informations') }}"><i class="fa fa-truck fa-3x"></i>{{ 'menu.voitures'|trans }}</a>
                             </li>
                         {% endif %}
                         {% if is_granted('ROLE_SECRETAIRE') %}

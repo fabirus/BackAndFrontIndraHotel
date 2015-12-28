@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TypeDepense
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\TypeDepenseRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\TypeDepenseRepository")
  */
 class TypeDepense
 {

@@ -11,7 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * DemandePermission
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\DemandePermissionRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\DemandePermissionRepository")
  * @Vich\Uploadable
  */
 class DemandePermission

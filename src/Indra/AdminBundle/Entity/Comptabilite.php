@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Comptabilite
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\ComptabiliteRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\ComptabiliteRepository")
  */
 class Comptabilite
 {

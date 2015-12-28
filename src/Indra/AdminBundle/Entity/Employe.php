@@ -11,7 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * Employe
  *
  * @ORM\Table(name="employe")
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\EmployeRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\EmployeRepository")
  * @Vich\Uploadable
  */
 class Employe
@@ -86,11 +86,6 @@ class Employe
      * @ORM\OneToMany(targetEntity="Contrat", mappedBy="employe", cascade={"persist"})
      */
     private $contrat;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Tache", mappedBy="employe", cascade={"persist"})
-     */
-    private $tache;
 
 
     /**
@@ -323,26 +318,6 @@ class Employe
     {
         $this->contrat = $contrat;
     }
-
-
-    /**
-     * @return mixed
-     */
-    public function getTache()
-    {
-        return $this->tache;
-    }
-
-    /**
-     * @param mixed $tache
-     */
-    public function setTache($tache)
-    {
-        $this->tache = $tache;
-    }
-
-
-
 
 
     /**

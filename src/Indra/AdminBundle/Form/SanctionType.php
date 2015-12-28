@@ -1,6 +1,6 @@
 <?php
 
-namespace JanetTransit\AdminBundle\Form;
+namespace Indra\AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

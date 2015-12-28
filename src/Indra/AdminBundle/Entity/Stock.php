@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Stock
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\StockRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\StockRepository")
  */
 class Stock
 {

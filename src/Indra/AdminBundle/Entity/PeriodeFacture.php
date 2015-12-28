@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * PeriodeFacture
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="JanetTransit\AdminBundle\Entity\Repository\PeriodeFactureRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\PeriodeFactureRepository")
  */
 class PeriodeFacture
 {
@@ -28,10 +28,6 @@ class PeriodeFacture
      */
     private $dateFacture;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="ContratEts")
-     */
-    private $contrat;
 
     /**
      * @ORM\OneToMany(targetEntity="Facture", mappedBy="periodeFacture", cascade={"persist", "remove"})
@@ -77,21 +73,6 @@ class PeriodeFacture
     }
 
 
-    /**
-     * @return mixed
-     */
-    public function getContrat()
-    {
-        return $this->contrat;
-    }
-
-    /**
-     * @param mixed $contrat
-     */
-    public function setContrat($contrat)
-    {
-        $this->contrat = $contrat;
-    }
 
     /**
      * @return mixed
