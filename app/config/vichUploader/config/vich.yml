@@ -76,16 +76,6 @@ vich_uploader:
             delete_on_remove:   true
             namer:              vich_uploader.namer_uniqid
 
-
-        file_carburation:
-            uri_prefix:         /files/carburation
-            upload_destination: %kernel.root_dir%/../web/files/carburation
-            inject_on_load:     true
-            delete_on_update:   true
-            delete_on_remove:   true
-            namer:              vich_uploader.namer_uniqid
-
-
         file_reunion:
             uri_prefix:         /files/reunion
             upload_destination: %kernel.root_dir%/../web/files/reunion
@@ -93,40 +83,6 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
             namer:              vich_uploader.namer_uniqid
-
-
-        voiture_cartegrise:
-            uri_prefix:         /files/cartegrise
-            upload_destination: %kernel.root_dir%/../web/files/cartegrise
-            inject_on_load:     true
-            delete_on_update:   true
-            delete_on_remove:   true
-            namer:              vich_uploader.namer_uniqid
-
-        voiture_document:
-            uri_prefix:         /files/documentVoiture
-            upload_destination: %kernel.root_dir%/../web/files/documentVoiture
-            inject_on_load:     true
-            delete_on_update:   true
-            delete_on_remove:   true
-            namer:              vich_uploader.namer_uniqid
-
-        contrat_logo:
-            uri_prefix:         /files/entreprise/logo
-            upload_destination: %kernel.root_dir%/../web/files/entreprise/logo
-            inject_on_load:     true
-            delete_on_update:   true
-            delete_on_remove:   true
-            namer:              vich_uploader.namer_uniqid
-
-        contrat_file:
-            uri_prefix:         /files/entreprise/files
-            upload_destination: %kernel.root_dir%/../web/files/entreprise/files
-            inject_on_load:     true
-            delete_on_update:   true
-            delete_on_remove:   true
-            namer:              vich_uploader.namer_uniqid
-
 
         depense_file:
             uri_prefix:         /files/depenses
@@ -139,14 +95,6 @@ vich_uploader:
         facture_file:
             uri_prefix:         /files/factures
             upload_destination: %kernel.root_dir%/../web/files/factures
-            inject_on_load:     true
-            delete_on_update:   true
-            delete_on_remove:   true
-            namer:              vich_uploader.namer_uniqid
-
-        procces_file:
-            uri_prefix:         /files/procces
-            upload_destination: %kernel.root_dir%/../web/files/procces
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true

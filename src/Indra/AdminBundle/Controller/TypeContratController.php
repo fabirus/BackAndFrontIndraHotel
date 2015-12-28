@@ -1,6 +1,6 @@
 <?php
 
-namespace JanetTransit\AdminBundle\Controller;
+namespace Indra\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
