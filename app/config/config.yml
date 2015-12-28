@@ -110,8 +110,9 @@ doctrine:
         entity_managers:
             default:
                 mappings:
-                    JanetTransitWikiBundle: ~
-                    JanetTransitAdminBundle: ~
+                    IndraWikiBundle: ~
+                    IndraAdminBundle: ~
+                    IndraClientBundle: ~
                     SonataMediaBundle: ~
                     ApplicationSonataMediaBundle: ~
                     FOSUserBundle:     ~

@@ -16,7 +16,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new JanetTransit\AdminBundle\JanetTransitAdminBundle(),
+            new Indra\AdminBundle\IndraAdminBundle(),
 
             // user
             //new FOS\UserBundle\FOSUserBundle(),
@@ -55,8 +55,9 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             // mes bundles Personnalisés
-            new JanetTransit\WikiBundle\JanetTransitWikiBundle(),
+            new Indra\WikiBundle\IndraWikiBundle(),
 
+            new Indra\ClientBundle\IndraClientBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

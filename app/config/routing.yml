@@ -1,3 +1,7 @@
+indra_client:
+    resource: "@IndraClientBundle/Resources/config/routing.yml"
+    prefix:   /
+
 #janet_transit_admin:
 #    resource: "@JanetTransitAdminBundle/Resources/config/routing.yml"
 #    prefix:   /{_locale}
