@@ -1,6 +1,6 @@
 <?php
 
-namespace JanetTransit\AdminBundle\Entity\Repository;
+namespace Indra\AdminBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
