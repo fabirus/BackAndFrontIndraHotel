@@ -1,0 +1,145 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} | Matériels {{ employe.nom }} {% endblock %}
+
+{#{% block stylesheets %}#}
+    {#{{ parent() }}#}
+    {#<link rel="stylesheet" href="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')}}" />#}
+    {#<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-multiselect/dist/css/bootstrap-multiselect.css')}}" />#}
+{#{% endblock %}#}
+
+{% block body -%}
+    {#{% include '::common/employe.html.twig' %}#}
+    <div class="alert alert-info" role="alert" style="font-size: 18px">Liste du matériel Fourni à l'employé <b>{{ employe }}</b></div>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{ path('employe_show', {'id' : employe.id} ) }}">
+                <i class="fa fa-backward fa-3x" title="Revenir à la liste" style="color:
+        #0FAD8C;cursor: pointer;"></i>
+            </a>
+            <i class="fa fa-plus-square fa-3x" data-toggle="modal"
+               data-target="#modalForm" title="Ajouter" style="color:#0FAD8C;cursor: pointer;margin-left: 3%"></i>
+        </div>
+        <div class="col-md-6">
+            {% if entities is not empty %}
+                <i title="Imprimer" class="fa fa-print fa-3x" onclick="common().print('noprint', 'Liste du matériel Fourni à l\'employé {{employe}}')" style="float: right; cursor: pointer; margin-right: 2%"></i>
+            {% endif %}
+        </div>
+    </div><br />
+
+    <div class="result" data-route="employe_search">
+        {% if entities is not empty %}
+            <table class=" table table-hover table-bordered dataTable print">
+                <thead>
+                <tr>
+                    <th style="text-align: center">Date</th>
+                    <th style="text-align: center">Matériel</th>
+                    <th style="text-align: center;">Qté</th>
+                    <th style="text-align: center; width: 25%">Motif</th>
+                    <th style="text-align: center">Justificatifs</th>
+                    <th class="noprint" style="text-align: center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td style="text-align: center">{{ entity.at }}</td>
+                        <td style="text-align: center">{{ entity.stock }}</td>
+                        <td style="text-align: center">{{ entity.qte }}</td>
+                        <td style="text-align: center">{{ entity.motif }}</td>
+                        <td style="text-align: center">
+                            {% if not entity.materielFileName %}
+                                <span class="label label-danger">Non renseigné</span>
+                            {% else %}
+                                <a target="_blank" href="{{ app.request.basePath }}{{ vich_uploader_asset(entity, 'materielFile') }}">
+                                    <i style="color: darkred;" class="fa fa-file-text fa-2x"></i>
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td class="noprint" style="text-align: center">
+                            <a href="{{ path('materiel_print', {'id' : entity.id, 'idEmploye' : employe.id}) }}">
+                                <i class="fa fa-eye fa-2x"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="row" style="text-align: center; font-size: 30px">
+                <i class="fa fa-ban fa-5x"></i><br>
+                Aucun Matériel pour cet employé
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert alert-info">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Enregistrement d'un Matériel</h4>
+                </div>
+                {{ form_start(form) }}
+                <div class="modal-body">
+                    {{ form_errors(form) }}
+                    {{ form_label(form.at) }}
+                    <div class="form-group">
+                        <div class='input-group date datetimepicker' id="checkDate" data-employe="{{ employe.id }}">
+                            {{ form_widget(form.at) }}
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                        <span class="error_date" style="display: none; color: red">Cette date existe déja pour cet employé</span>
+                    </div>
+                    {{ form_row(form.stock) }}
+                    {{ form_row(form.qte) }}
+                    <span class="error_qte" style="display: none; color: red"></span>
+                    {{ form_row(form.motif) }}
+                    <select style="display: none" id="janettransit_adminbundle_materiel_employe" name="janettransit_adminbundle_materiel[employe]" class="form-control">
+                        <option value="{{ employe.id }}"></option>
+                    </select>
+                    <div id="remove">
+                        {{ form_row(form.materielFile) }}
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        {{ form_widget(form.submit, { 'label': 'Enregister', 'attr' :{'type' : 'button', 'class' :'btn btn-primary register'}})}}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/lib/common.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/bootstrap-multiselect/dist/js/bootstrap-multiselect.js')}}"></script>
+    <script>
+        {% if success == 'true' %}
+        common().notice('Enregistrement avec succès','ok');
+        {% endif %}
+        $('.multiselectOne').multiselect({
+            enableFiltering: true,
+            nonSelectedText: 'Aucun Choix'
+        });
+        $(".modal-body .btn-group").css({'width' : '80%', 'margin-left' : '5%','margin-bottom': '2%'});
+        common().date();
+        common().dataTable(0);
+        $("form").validate();
+        common().validation();
+        $(".file").rules("add", { filesize: 2 });
+        $("input[type='hidden']").prev().remove();
+        $('#remove').remove();
+    </script>
+{% endblock %}
