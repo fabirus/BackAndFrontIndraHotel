@@ -1,0 +1,4 @@
+services:
+#    indra_client.example:
+#        class: Indra\ClientBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
