@@ -1,27 +1,27 @@
 sanction_create:
     path:     /sanction/create
-    defaults: { _controller: JanetTransitAdminBundle:Sanction:create }
+    defaults: { _controller: IndraAdminBundle:Sanction:create }
 
 sanction_show:
     path:     /sanction/{id}
-    defaults: { _controller: JanetTransitAdminBundle:Sanction:show }
+    defaults: { _controller: IndraAdminBundle:Sanction:show }
 
 sanction_valid:
     path:     /sanction/{id}/{valid}/{idEmploye}
-    defaults: { _controller: JanetTransitAdminBundle:Sanction:valid }
+    defaults: { _controller: IndraAdminBundle:Sanction:valid }
 
 sanction_update:
     path:     /sanction/{id}/
-    defaults: { _controller: JanetTransitAdminBundle:Sanction:update }
+    defaults: { _controller: IndraAdminBundle:Sanction:update }
 
 
 sanction_print:
     path:     /sanction/{id}/{idEmploye}
-    defaults: { _controller: JanetTransitAdminBundle:Sanction:print }
+    defaults: { _controller: IndraAdminBundle:Sanction:print }
 
 
 sanction_checkDate:
     path:     /sanctioncheckDate/{idEmploye}
-    defaults: { _controller: JanetTransitAdminBundle:Sanction:checkDate, _locale : fr }
+    defaults: { _controller: IndraAdminBundle:Sanction:checkDate, _locale : fr }
     options:
         expose: true

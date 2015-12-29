@@ -78,7 +78,7 @@ class SanctionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Sanction'
+            'data_class' => 'Indra\AdminBundle\Entity\Sanction'
         ));
     }
 
@@ -87,6 +87,6 @@ class SanctionType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_sanction';
+        return 'indra_adminbundle_sanction';
     }
 }

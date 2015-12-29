@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Sanction;
-use JanetTransit\AdminBundle\Form\SanctionType;
+use Indra\AdminBundle\Entity\Sanction;
+use Indra\AdminBundle\Form\SanctionType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -33,7 +33,7 @@ class SanctionController extends Controller
         $date           = $request->query->get('date');
 
         $query = $this->getDoctrine()
-            ->getRepository('JanetTransitAdminBundle:Sanction')
+            ->getRepository('IndraAdminBundle:Sanction')
             ->createQueryBuilder('s')
             ->select('s')
             ->where('s.employe =:idEmploye AND (s.dateSanction =:date OR s.dateFin =:date OR s.dateDebut =:date)')
@@ -58,15 +58,15 @@ class SanctionController extends Controller
      *
      * @Route("/sanction/create", name="sanction_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Sanction:new.html.twig")
+     * @Template("IndraAdminBundle:Sanction:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity         = new Sanction();
         $em             = $this->getDoctrine()->getManager();
-        $dataform       = $request->request->get('janettransit_adminbundle_sanction');
+        $dataform       = $request->request->get('indra_adminbundle_sanction');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -140,7 +140,7 @@ class SanctionController extends Controller
         $request    = $this->get('request');
         $success    = $request->query->get('success');
         $em         = $this->getDoctrine()->getManager();
-        $entity     = $em->getRepository('JanetTransitAdminBundle:Sanction')->find($id);
+        $entity     = $em->getRepository('IndraAdminBundle:Sanction')->find($id);
         $editForm   = $this->createEditForm($entity);
         $motif      = wordwrap($entity->getMotif(), 50, "\n", true);
 
@@ -163,7 +163,7 @@ class SanctionController extends Controller
      *
      * @Route("/sanction/{id}", name="sanction_show")
      * @Method("GET")
-     * @Template("JanetTransitAdminBundle:Sanction:show.html.twig")
+     * @Template("IndraAdminBundle:Sanction:show.html.twig")
      */
     public function showAction($id)
     {
@@ -174,8 +174,8 @@ class SanctionController extends Controller
         $form       = $this->createCreateForm($entity);
 
 
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
-        $entities       = $em->getRepository('JanetTransitAdminBundle:Sanction')->findBy(
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($id);
+        $entities       = $em->getRepository('IndraAdminBundle:Sanction')->findBy(
             array('employe' => $id), array('dateSanction' => 'DESC'));
 
         if (!$entity) {
@@ -215,15 +215,15 @@ class SanctionController extends Controller
      *
      * @Route("/sanction/{id}", name="sanction_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Sanction:edit.html.twig")
+     * @Template("IndraAdminBundle:Sanction:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em             = $this->getDoctrine()->getManager();
-        $entity         = $em->getRepository('JanetTransitAdminBundle:Sanction')->find($id);
-        $dataform       = $request->request->get('janettransit_adminbundle_sanction');
+        $entity         = $em->getRepository('IndraAdminBundle:Sanction')->find($id);
+        $dataform       = $request->request->get('indra_adminbundle_sanction');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Sanction entity.');
@@ -256,7 +256,7 @@ class SanctionController extends Controller
     public function validAction($id, $valid, $idEmploye)
     {
         $em     = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Sanction')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Sanction')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Sanction entity.');
