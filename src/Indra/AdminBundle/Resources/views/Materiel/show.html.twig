@@ -2,14 +2,7 @@
 
 {% block title %} {{ parent() }} | Matériels {{ employe.nom }} {% endblock %}
 
-{#{% block stylesheets %}#}
-    {#{{ parent() }}#}
-    {#<link rel="stylesheet" href="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')}}" />#}
-    {#<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-multiselect/dist/css/bootstrap-multiselect.css')}}" />#}
-{#{% endblock %}#}
-
 {% block body -%}
-    {#{% include '::common/employe.html.twig' %}#}
     <div class="alert alert-info" role="alert" style="font-size: 18px">Liste du matériel Fourni à l'employé <b>{{ employe }}</b></div>
     <div class="row">
         <div class="col-md-6">
@@ -98,7 +91,7 @@
                     {{ form_row(form.qte) }}
                     <span class="error_qte" style="display: none; color: red"></span>
                     {{ form_row(form.motif) }}
-                    <select style="display: none" id="janettransit_adminbundle_materiel_employe" name="janettransit_adminbundle_materiel[employe]" class="form-control">
+                    <select style="display: none" id="indra_adminbundle_materiel_employe" name="indra_adminbundle_materiel[employe]" class="form-control">
                         <option value="{{ employe.id }}"></option>
                     </select>
                     <div id="remove">

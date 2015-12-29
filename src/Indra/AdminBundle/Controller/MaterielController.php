@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Materiel;
-use JanetTransit\AdminBundle\Form\MaterielType;
+use Indra\AdminBundle\Entity\Materiel;
+use Indra\AdminBundle\Form\MaterielType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Response;
 /**
@@ -32,7 +32,7 @@ class MaterielController extends Controller
         $date           = $request->query->get('date');
 
         $query = $this->getDoctrine()
-            ->getRepository('JanetTransitAdminBundle:Materiel')
+            ->getRepository('IndraAdminBundle:Materiel')
             ->createQueryBuilder('a')
             ->select('a')
             ->where('a.employe =:idEmploye AND a.at =:date')
@@ -64,7 +64,7 @@ class MaterielController extends Controller
         $em             = $this->getDoctrine()->getManager();
         $request        = $this->get('request');
         $qte            = $request->query->get('qte');
-        $entityStock    = $em->getRepository('JanetTransitAdminBundle:Stock')->find($idStock);
+        $entityStock    = $em->getRepository('IndraAdminBundle:Stock')->find($idStock);
 
         if($entityStock->getQteStock() >= $qte) {
             $response = new Response('false');
@@ -81,17 +81,17 @@ class MaterielController extends Controller
      *
      * @Route("/", name="materiel_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Materiel:new.html.twig")
+     * @Template("IndraAdminBundle:Materiel:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity         = new Materiel();
         $em             = $this->getDoctrine()->getManager();
-        $dataform       = $request->request->get('janettransit_adminbundle_materiel');
+        $dataform       = $request->request->get('indra_adminbundle_materiel');
         $idEmploye      = $dataform['employe'];
         $idStock        = $dataform['stock'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
-        $entityStock    = $em->getRepository('JanetTransitAdminBundle:Stock')->find($idStock);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
+        $entityStock    = $em->getRepository('IndraAdminBundle:Stock')->find($idStock);
 
         $form   = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -117,7 +117,6 @@ class MaterielController extends Controller
         $newQte = $entityStock->getQteStock() - $qte;
         $entityStock->setQteStock($newQte);
         $em->flush();
-//        echo 'update'.$entityStock->getQteStock();
 
     }
 
@@ -125,7 +124,6 @@ class MaterielController extends Controller
         $newQte = $entityStock->getQteStock() + $qte;
         $entityStock->setQteStock($newQte);
         $em->flush();
-//        echo 'preupdate'.$entityStock->getQteStock();
 
     }
 
@@ -158,12 +156,12 @@ class MaterielController extends Controller
     public function printAction($id, $idEmploye)
     {
         $em         = $this->getDoctrine()->getManager();
-        $entity     = $em->getRepository('JanetTransitAdminBundle:Materiel')->find($id);
+        $entity     = $em->getRepository('IndraAdminBundle:Materiel')->find($id);
         $editForm   = $this->createEditForm($entity);
         $motif      = wordwrap($entity->getMotif(), 50, "\n", true);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find AvanceSalaire entity.');
+            throw $this->createNotFoundException('Unable to find Materiel entity.');
         }
 
         return array(
@@ -209,8 +207,8 @@ class MaterielController extends Controller
         $entity     = new Materiel();
         $form       = $this->createCreateForm($entity);
 
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
-        $entities       = $em->getRepository('JanetTransitAdminBundle:Materiel')->findBy(
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($id);
+        $entities       = $em->getRepository('IndraAdminBundle:Materiel')->findBy(
             array('employe' => $id), array('at' => 'DESC'));
 
 
@@ -250,18 +248,18 @@ class MaterielController extends Controller
      *
      * @Route("/{id}", name="materiel_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Materiel:edit.html.twig")
+     * @Template("IndraAdminBundle:Materiel:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em             = $this->getDoctrine()->getManager();
-        $dataform       = $request->request->get('janettransit_adminbundle_materiel');
+        $dataform       = $request->request->get('indra_adminbundle_materiel');
         $idEmploye      = $dataform['employe'];
         $idStock        = $dataform['stock'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
-        $entityStock    = $em->getRepository('JanetTransitAdminBundle:Stock')->find($idStock);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
+        $entityStock    = $em->getRepository('IndraAdminBundle:Stock')->find($idStock);
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Materiel')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Materiel')->find($id);
         $qteStock =  $entity->getQte();
 
         if (!$entity) {
@@ -277,7 +275,6 @@ class MaterielController extends Controller
             $em->flush();
             $this->operationUpdate($entity, 'MODIFICATION');
             $this->mouvementStock($em, $entityStock, $entity->getQte());
-            echo 'afer'.$entity->getQte();
 
             return $this->redirect($this->generateUrl('materiel_show', array('id' => $entityEmploye->getId())));
         }
@@ -300,7 +297,7 @@ class MaterielController extends Controller
 //
 //        if ($form->isValid()) {
 //            $em = $this->getDoctrine()->getManager();
-//            $entity = $em->getRepository('JanetTransitAdminBundle:Materiel')->find($id);
+//            $entity = $em->getRepository('IndraAdminBundle:Materiel')->find($id);
 //
 //            if (!$entity) {
 //                throw $this->createNotFoundException('Unable to find Materiel entity.');

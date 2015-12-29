@@ -38,8 +38,8 @@ class MaterielType extends AbstractType
                     'onBlur'   => "common().checkQte('materiel_checkQte', 'qte', 'stock')"
                 )))
             ->add('stock','entity', array(
-                'class' =>'JanetTransit\AdminBundle\Entity\Stock',
-                'query_builder' => function(\JanetTransit\AdminBundle\Entity\Repository\StockRepository $repository){
+                'class' =>'Indra\AdminBundle\Entity\Stock',
+                'query_builder' => function(\Indra\AdminBundle\Entity\Repository\StockRepository $repository){
                     return $repository->findAdministratifQueryBuilder();
                 },
                 'label' => 'Matériel *',
@@ -71,7 +71,7 @@ class MaterielType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Materiel'
+            'data_class' => 'Indra\AdminBundle\Entity\Materiel'
         ));
     }
 
@@ -80,6 +80,6 @@ class MaterielType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_materiel';
+        return 'indra_adminbundle_materiel';
     }
 }
