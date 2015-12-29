@@ -32,13 +32,6 @@ class PeriodeDepenseType extends AbstractType
                     'class' => 'form-control'
                 )
             ))
-            ->add('contrat',null, array(
-                'label' => 'Contrat *',
-                'required' => true,
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            ))
         ;
     }
     
@@ -48,7 +41,7 @@ class PeriodeDepenseType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\PeriodeDepense'
+            'data_class' => 'Indra\AdminBundle\Entity\PeriodeDepense'
         ));
     }
 
@@ -57,6 +50,6 @@ class PeriodeDepenseType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_periodedepense';
+        return 'indra_adminbundle_periodedepense';
     }
 }

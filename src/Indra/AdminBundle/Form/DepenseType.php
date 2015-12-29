@@ -71,7 +71,7 @@ class DepenseType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Depense'
+            'data_class' => 'Indra\AdminBundle\Entity\Depense'
         ));
     }
 
@@ -80,6 +80,6 @@ class DepenseType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_depense';
+        return 'indra_adminbundle_depense';
     }
 }

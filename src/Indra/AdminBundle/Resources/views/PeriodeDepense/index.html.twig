@@ -12,7 +12,7 @@
     <div class="alert alert-info" role="alert" style="font-size: 18px">Liste des Journées des dépenses de type <b>{{ typeDepense.nom|upper }}</b> </div>
     <div class="row">
         <div class="col-md-6">
-            <a href="{{ path('type_depense', {'id' : idContrat}) }}">
+            <a href="{{ path('depense_informations') }}">
                 <i class="fa fa-backward fa-3x" title="Revenir à la liste" style="color:
         #0FAD8C;cursor: pointer;"></i>
             </a>
@@ -35,10 +35,10 @@
                     <tr {% if entity.del == 1 %} class="danger" {% endif %}>
                         <td style="text-align: center">{{ entity.dateDepense }}</td>
                         <td style="text-align: center">
-                            <a href="{{ path('depense_show', {'idPeriodeDepense' : entity.id, 'idContrat' : idContrat, 'idTypeDepense' : idTypeDepense }) }}">
+                            <a href="{{ path('depense_show', {'idPeriodeDepense' : entity.id, 'idTypeDepense' : idTypeDepense }) }}">
                                 <i class="fa fa-eye fa-2x"></i>
                             </a>
-                            <a href="{{ path('periodedepense_edit', {'id' : entity.id, 'idContrat' :idContrat, 'idTypeDepense' : idTypeDepense }) }}">
+                            <a href="{{ path('periodedepense_edit', {'id' : entity.id,'idTypeDepense' : idTypeDepense }) }}">
                                 <i title="Modifier" style="color: orange; cursor: pointer; margin-left: 4%" class="fa fa-pencil fa-2x"></i>
                             </a>
                         </td>
@@ -67,7 +67,7 @@
                     {{ form_errors(form) }}
                     {{ form_label(form.dateDepense) }}
                     <div class="form-group">
-                        <div class='input-group date datetimepicker' id="checkDate" data-contrat="{{ idContrat }}" data-typedepense="{{ idTypeDepense }}">
+                        <div class='input-group date datetimepicker' id="checkDate" data-typedepense="{{ idTypeDepense }}">
                             {{ form_widget(form.dateDepense) }}
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
@@ -77,13 +77,9 @@
                     </div>
                     <div id="remove">
                         {{ form_row(form.typeDepense) }}
-                        {{ form_row(form.contrat) }}
                     </div>
-                    <select style="display: none;" id="janettransit_adminbundle_periodedepense_typeDepense" name="janettransit_adminbundle_periodedepense[typeDepense]">
+                    <select style="display: none;" id="indra_adminbundle_periodedepense_typeDepense" name="indra_adminbundle_periodedepense[typeDepense]">
                         <option value="{{ idTypeDepense }}"></option>
-                    </select>
-                    <select style="display: none;" id="janettransit_adminbundle_periodedepense_contrat" name="janettransit_adminbundle_periodedepense[contrat]">
-                        <option value="{{ idContrat }}"></option>
                     </select>
 
                     <div class="modal-footer">

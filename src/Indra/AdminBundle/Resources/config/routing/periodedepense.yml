@@ -1,5 +1,5 @@
 periodedepense_informations:
-    path:     /periodedepense/{idTypeDepense}/{idContrat}
+    path:     /periodedepense/{idTypeDepense}²
     defaults: { _controller: IndraAdminBundle:PeriodeDepense:index }
 
 periodedepense_create:

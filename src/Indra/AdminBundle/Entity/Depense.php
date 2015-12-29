@@ -204,8 +204,6 @@ class Depense
         $this->del = $del;
     }
 
-
-
     /**
      * @return boolean
      */
@@ -269,9 +267,6 @@ class Depense
     {
         $this->depenseFileName = $depenseFileName;
     }
-
-
-
 
     /**
      * Set montant

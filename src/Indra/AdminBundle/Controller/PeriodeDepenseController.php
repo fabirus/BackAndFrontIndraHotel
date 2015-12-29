@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\PeriodeDepense;
-use JanetTransit\AdminBundle\Form\PeriodeDepenseType;
+use Indra\AdminBundle\Entity\PeriodeDepense;
+use Indra\AdminBundle\Form\PeriodeDepenseType;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -26,19 +26,18 @@ class PeriodeDepenseController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction($idTypeDepense, $idContrat)
+    public function indexAction($idTypeDepense)
     {
         $em             = $this->getDoctrine()->getManager();
         $entity         = new PeriodeDepense();
         $form           = $this->createCreateForm($entity);
-        $typeDépense    = $em->getRepository('JanetTransitAdminBundle:TypeDepense')->find($idTypeDepense);
-        $entities   = $em->getRepository('JanetTransitAdminBundle:PeriodeDepense')->findBy(
-            array('typeDepense' => $idTypeDepense, 'contrat' => $idContrat)
+        $typeDépense    = $em->getRepository('IndraAdminBundle:TypeDepense')->find($idTypeDepense);
+        $entities       = $em->getRepository('IndraAdminBundle:PeriodeDepense')->findBy(
+            array('typeDepense' => $idTypeDepense)
         );
         return array(
             'entities'      => $entities,
             'idTypeDepense' => $idTypeDepense,
-            'idContrat'     => $idContrat,
             'typeDepense'   => $typeDépense,
             'form'          => $form->createView()
         );
@@ -51,15 +50,14 @@ class PeriodeDepenseController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function checkDateAction($idContrat, $idTypeDepense){
+    public function checkDateAction($idTypeDepense){
 
         $request        = $this->get('request');
         $date           = $request->query->get('date');
         $em             = $this->getDoctrine()->getManager();
 
-
-        $entities   = $em->getRepository('JanetTransitAdminBundle:PeriodeDepense')->findBy(
-            array('typeDepense' => $idTypeDepense, 'contrat' => $idContrat, 'dateDepense' => $date, 'del' => 0)
+        $entities   = $em->getRepository('IndraAdminBundle:PeriodeDepense')->findBy(
+            array('typeDepense' => $idTypeDepense, 'dateDepense' => $date, 'del' => 0)
         );
 
         if(count($entities) == 0) {
@@ -77,14 +75,13 @@ class PeriodeDepenseController extends Controller
      *
      * @Route("/", name="periodedepense_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:PeriodeDepense:new.html.twig")
+     * @Template("IndraAdminBundle:PeriodeDepense:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity             = new PeriodeDepense();
-        $dataform           = $request->request->get('janettransit_adminbundle_periodedepense');
+        $dataform           = $request->request->get('indra_adminbundle_periodedepense');
         $idTypeDepense      = $dataform['typeDepense'];
-        $idContrat          = $dataform['contrat'];
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -96,7 +93,6 @@ class PeriodeDepenseController extends Controller
             return $this->redirect($this->generateUrl('periodedepense_informations',
                 array(
                     'idTypeDepense' => $idTypeDepense,
-                    'idContrat'     => $idContrat
                 )));
         }
 
@@ -133,10 +129,10 @@ class PeriodeDepenseController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id, $idTypeDepense, $idContrat )    {
+    public function editAction($id, $idTypeDepense )    {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:PeriodeDepense')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:PeriodeDepense')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find PeriodeDepense entity.');
@@ -148,7 +144,6 @@ class PeriodeDepenseController extends Controller
             'entity'        => $entity,
             'edit_form'     => $editForm->createView(),
             'idTypeDepense' => $idTypeDepense,
-            'idContrat'     => $idContrat
         );
     }
 
@@ -175,16 +170,15 @@ class PeriodeDepenseController extends Controller
      *
      * @Route("/{id}", name="periodedepense_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:PeriodeDepense:edit.html.twig")
+     * @Template("IndraAdminBundle:PeriodeDepense:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em                 = $this->getDoctrine()->getManager();
-        $dataform           = $request->request->get('janettransit_adminbundle_periodedepense');
+        $dataform           = $request->request->get('indra_adminbundle_periodedepense');
         $idTypeDepense      = $dataform['typeDepense'];
-        $idContrat          = $dataform['contrat'];
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:PeriodeDepense')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:PeriodeDepense')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find PeriodeDepense entity.');
@@ -199,7 +193,6 @@ class PeriodeDepenseController extends Controller
             return $this->redirect($this->generateUrl('periodedepense_informations',
                 array(
                     'idTypeDepense' => $idTypeDepense,
-                    'idContrat'     => $idContrat
                 )));
         }
 
@@ -214,10 +207,10 @@ class PeriodeDepenseController extends Controller
      * @Route("/{id}", name="data_delete")
      * @Method("DELETE")
      */
-    public function deleteAction($id, $del, $idRefresh, $idRefresh2)
+    public function deleteAction($id, $del, $idRefresh)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:PeriodeDepense')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:PeriodeDepense')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find PeriodeDepense entity.');
@@ -227,7 +220,6 @@ class PeriodeDepenseController extends Controller
 
         return $this->redirect($this->generateUrl('periodedepense_informations', array(
             'idTypeDepense' => $idRefresh,
-            'idContrat' => $idRefresh2
         )));
     }
 

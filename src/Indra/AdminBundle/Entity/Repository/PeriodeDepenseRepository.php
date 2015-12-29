@@ -10,16 +10,13 @@ namespace Indra\AdminBundle\Entity\Repository;
  */
 class PeriodeDepenseRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findTypeDepenseAndContratQueryBuilder($idTypeDepense, $idContrat){
+    public function findTypeDepenseAndContratQueryBuilder($idTypeDepense){
 
         $qb =  $this->createQueryBuilder('d')
             ->join('d.typeDepense', 't')
             ->addSelect('t')
-            ->join('d.contrat', 'c')
-            ->addSelect('c')
-            ->where('t.id =:idTypeDepense AND c.id =:idTypeDepense')
+            ->where('t.id =:idTypeDepense')
             ->setParameter('idTypeDepense', $idTypeDepense)
-//            ->setParameter('idContrat', $idContrat)
         ;
         return $qb->getQuery()->getResult();
     }

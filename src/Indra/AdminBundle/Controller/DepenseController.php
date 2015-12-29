@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Depense;
-use JanetTransit\AdminBundle\Form\DepenseType;
+use Indra\AdminBundle\Entity\Depense;
+use Indra\AdminBundle\Form\DepenseType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,12 +29,19 @@ class DepenseController extends Controller
      */
     public function indexAction()
     {
-        $em         = $this->getDoctrine()->getManager();
-        $entities   = $em->getRepository('JanetTransitAdminBundle:ContratEts')->findTypeMecaniqueQueryBuilder();
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('IndraAdminBundle:TypeDepense')->findAll();
 
         return array(
-            'entities' => $entities,
+            'entities'  => $entities,
         );
+//        $em         = $this->getDoctrine()->getManager();
+//        $entities   = $em->getRepository('IndraAdminBundle:ContratEts')->findTypeMecaniqueQueryBuilder();
+//
+//        return array(
+//            'entities' => $entities,
+//        );
     }
 
     /**
@@ -48,7 +55,7 @@ class DepenseController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:TypeDepense')->findAll();
+        $entities = $em->getRepository('IndraAdminBundle:TypeDepense')->findAll();
 
         return array(
             'entities'  => $entities,
@@ -62,7 +69,7 @@ class DepenseController extends Controller
      *
      * @Route("/", name="depense_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Depense:new.html.twig")
+     * @Template("IndraAdminBundle:Depense:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -126,7 +133,7 @@ class DepenseController extends Controller
     public function validAction($id, $valid, $idPeriodeDepense, $idContrat, $idTypeDepense)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Depense')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Depense')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Depense entity.');
@@ -175,11 +182,11 @@ class DepenseController extends Controller
         $entity         = new Depense();
         $form           = $this->createCreateForm($entity);
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:Depense')->findBy(
+        $entities = $em->getRepository('IndraAdminBundle:Depense')->findBy(
             array('periodeDepense' => $idPeriodeDepense)
         );
 
-        $entityPeriode = $em->getRepository('JanetTransitAdminBundle:PeriodeDepense')->find($idPeriodeDepense);
+        $entityPeriode = $em->getRepository('IndraAdminBundle:PeriodeDepense')->find($idPeriodeDepense);
 
         return array(
             'entities'          => $entities,
@@ -201,7 +208,7 @@ class DepenseController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Depense')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Depense')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Depense entity.');
@@ -241,7 +248,7 @@ class DepenseController extends Controller
      *
      * @Route("/{id}", name="depense_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Depense:edit.html.twig")
+     * @Template("IndraAdminBundle:Depense:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -251,7 +258,7 @@ class DepenseController extends Controller
         $idContrat          = $request->request->get('contrat');
         $idTypeDepense      = $request->request->get('depense');
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Depense')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Depense')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Depense entity.');
@@ -299,13 +306,13 @@ class DepenseController extends Controller
         if($request->isXmlHttpRequest()) {
 
             if ($searchText !== '') {
-                $entities   = $em->getRepository('JanetTransitAdminBundle:ContratEts')->findTypeMecaniqueSearchQueryBuilder($searchText);
+                $entities   = $em->getRepository('IndraAdminBundle:ContratEts')->findTypeMecaniqueSearchQueryBuilder($searchText);
             }
             else {
-                $entities = $em->getRepository('JanetTransitAdminBundle:ContratEts')->findTypeMecaniqueQueryBuilder();
+                $entities = $em->getRepository('IndraAdminBundle:ContratEts')->findTypeMecaniqueQueryBuilder();
             }
 
-            $json['view'] = $this->renderView('JanetTransitAdminBundle:Depense:search.html.twig',
+            $json['view'] = $this->renderView('IndraAdminBundle:Depense:search.html.twig',
                 array(
                     'entities' => $entities,
                     'searchText' => $searchText
@@ -327,7 +334,7 @@ class DepenseController extends Controller
      */
     public function deleteAction($id, $del, $idRefresh, $idRefresh2, $idRefresh3){
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Depense')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Depense')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Depense entity.');
