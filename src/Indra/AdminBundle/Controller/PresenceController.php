@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Presence;
-use JanetTransit\AdminBundle\Form\PresenceType;
+use Indra\AdminBundle\Entity\Presence;
+use Indra\AdminBundle\Form\PresenceType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,7 +28,7 @@ class PresenceController extends Controller
      */
     public function checkFileAction($file){
         $em     = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Presence')->findOneBy(array('absenceFileName' => $file));
+        $entity = $em->getRepository('IndraAdminBundle:Presence')->findOneBy(array('absenceFileName' => $file));
 
         if($entity == null) {
             $response = new Response('false');
@@ -53,7 +53,7 @@ class PresenceController extends Controller
         $request    = $this->get('request');
         $date       = $request->query->get('date');
         $em         = $this->getDoctrine()->getManager();
-        $entity     = $em->getRepository('JanetTransitAdminBundle:Presence')->findOneBy(
+        $entity     = $em->getRepository('IndraAdminBundle:Presence')->findOneBy(
             array('at'        => $date,
                   'employe'   => $idEmploye
             ));
@@ -74,16 +74,16 @@ class PresenceController extends Controller
      *
      * @Route("/presence/create", name="presence_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Presence:new.html.twig")
+     * @Template("IndraAdminBundle:Presence:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity         = new Presence();
         $em             = $this->getDoctrine()->getManager();
         $form           = $this->createCreateForm($entity);
-        $dataform       = $request->request->get('janettransit_adminbundle_presence');
+        $dataform       = $request->request->get('indra_adminbundle_presence');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -157,8 +157,8 @@ class PresenceController extends Controller
         $entity     = new Presence();
         $form       = $this->createCreateForm($entity);
 
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
-        $entities       = $em->getRepository('JanetTransitAdminBundle:Presence')->findBy(
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($id);
+        $entities       = $em->getRepository('IndraAdminBundle:Presence')->findBy(
             array('employe' => $id), array('at' => 'DESC'));
 
 
@@ -180,7 +180,7 @@ class PresenceController extends Controller
     public function editAction($id, $idEmploye)
     {
         $em         = $this->getDoctrine()->getManager();
-        $entity     = $em->getRepository('JanetTransitAdminBundle:Presence')->find($id);
+        $entity     = $em->getRepository('IndraAdminBundle:Presence')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presence entity.');
@@ -218,15 +218,15 @@ class PresenceController extends Controller
      *
      * @Route("/presence/{id}", name="presence_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Presence:edit.html.twig")
+     * @Template("IndraAdminBundle:Presence:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em             = $this->getDoctrine()->getManager();
-        $entity         = $em->getRepository('JanetTransitAdminBundle:Presence')->find($id);
-        $dataform       = $request->request->get('janettransit_adminbundle_presence');
+        $entity         = $em->getRepository('IndraAdminBundle:Presence')->find($id);
+        $dataform       = $request->request->get('indra_adminbundle_presence');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presence entity.');
