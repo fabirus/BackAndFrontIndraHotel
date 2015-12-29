@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\DemandePermission;
-use JanetTransit\AdminBundle\Form\DemandePermissionType;
+use Indra\AdminBundle\Entity\DemandePermission;
+use Indra\AdminBundle\Form\DemandePermissionType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,7 +32,7 @@ class DemandePermissionController extends Controller
         $date           = $request->query->get('date');
 
         $query = $this->getDoctrine()
-            ->getRepository('JanetTransitAdminBundle:DemandePermission')
+            ->getRepository('IndraAdminBundle:DemandePermission')
             ->createQueryBuilder('d')
             ->select('d')
             ->where('d.employe =:idEmploye AND (d.dateDemande =:date OR d.dateFin =:date OR d.dateDebut =:date)')
@@ -56,15 +56,15 @@ class DemandePermissionController extends Controller
      *
      * @Route("/demandepermission/create", name="demandepermission_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:DemandePermission:new.html.twig")
+     * @Template("IndraAdminBundle:DemandePermission:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity         = new DemandePermission();
         $em             = $this->getDoctrine()->getManager();
-        $dataform       = $request->request->get('janettransit_adminbundle_demandepermission');
+        $dataform       = $request->request->get('indra_adminbundle_demandepermission');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
 
         $form = $this->createCreateForm($entity);
@@ -137,7 +137,7 @@ class DemandePermissionController extends Controller
         $request    = $this->get('request');
         $success    = $request->query->get('success');
         $em         = $this->getDoctrine()->getManager();
-        $entity     = $em->getRepository('JanetTransitAdminBundle:DemandePermission')->find($id);
+        $entity     = $em->getRepository('IndraAdminBundle:DemandePermission')->find($id);
         $editForm   = $this->createEditForm($entity);
         $motif      = wordwrap($entity->getMotif(), 50, "\n", true);
 
@@ -169,8 +169,8 @@ class DemandePermissionController extends Controller
         $entity     = new DemandePermission();
         $form       = $this->createCreateForm($entity);
 
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
-        $entities       = $em->getRepository('JanetTransitAdminBundle:DemandePermission')->findBy(
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($id);
+        $entities       = $em->getRepository('IndraAdminBundle:DemandePermission')->findBy(
             array('employe' => $id), array('dateDemande' => 'DESC'));
 
         if (!$entity) {
@@ -211,15 +211,15 @@ class DemandePermissionController extends Controller
      *
      * @Route("/demandepermission/{id}", name="demandepermission_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:DemandePermission:edit.html.twig")
+     * @Template("IndraAdminBundle:DemandePermission:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em             = $this->getDoctrine()->getManager();
-        $entity         = $em->getRepository('JanetTransitAdminBundle:DemandePermission')->find($id);
-        $dataform       = $request->request->get('janettransit_adminbundle_demandepermission');
+        $entity         = $em->getRepository('IndraAdminBundle:DemandePermission')->find($id);
+        $dataform       = $request->request->get('indra_adminbundle_demandepermission');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find DemandePermission entity.');
@@ -250,7 +250,7 @@ class DemandePermissionController extends Controller
     public function validAction($id, $valid, $idEmploye)
     {
         $em     = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:DemandePermission')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:DemandePermission')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find DemandePermission entity.');

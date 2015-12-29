@@ -1,25 +1,25 @@
 demandepermission_create:
     path:     /demandepermission/create
-    defaults: { _controller: JanetTransitAdminBundle:DemandePermission:create }
+    defaults: { _controller: IndraAdminBundle:DemandePermission:create }
 
 demandepermission_show:
     path:     /demandepermission/{id}
-    defaults: { _controller: JanetTransitAdminBundle:DemandePermission:show }
+    defaults: { _controller: IndraAdminBundle:DemandePermission:show }
 
 demandepermission_valid:
     path:     /demandepermission/{id}/{valid}/{idEmploye}
-    defaults: { _controller: JanetTransitAdminBundle:DemandePermission:valid }
+    defaults: { _controller: IndraAdminBundle:DemandePermission:valid }
 
 demandepermission_update:
     path:     /demandepermission/{id}/
-    defaults: { _controller: JanetTransitAdminBundle:DemandePermission:update }
+    defaults: { _controller: IndraAdminBundle:DemandePermission:update }
 
 demandepermission_checkDate:
     path:     /demandepermissioncheckDate/{idEmploye}
-    defaults: { _controller: JanetTransitAdminBundle:DemandePermission:checkDate, _locale : fr }
+    defaults: { _controller: IndraAdminBundle:DemandePermission:checkDate, _locale : fr }
     options:
         expose: true
 
 demandepermission_print:
     path:     /demandepermission/{id}/{idEmploye}
-    defaults: { _controller: JanetTransitAdminBundle:DemandePermission:print }
+    defaults: { _controller: IndraAdminBundle:DemandePermission:print }

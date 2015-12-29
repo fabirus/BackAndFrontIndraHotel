@@ -72,7 +72,7 @@ class DemandePermissionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\DemandePermission'
+            'data_class' => 'Indra\AdminBundle\Entity\DemandePermission'
         ));
     }
 
@@ -81,6 +81,6 @@ class DemandePermissionType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_demandepermission';
+        return 'indra_adminbundle_demandepermission';
     }
 }
