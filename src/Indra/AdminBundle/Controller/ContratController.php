@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Contrat;
-use JanetTransit\AdminBundle\Form\ContratType;
+use Indra\AdminBundle\Entity\Contrat;
+use Indra\AdminBundle\Form\ContratType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -32,7 +32,7 @@ class ContratController extends Controller
         $date           = $request->query->get('date');
 
         $query = $this->getDoctrine()
-            ->getRepository('JanetTransitAdminBundle:Contrat')
+            ->getRepository('IndraAdminBundle:Contrat')
             ->createQueryBuilder('a')
             ->select('a')
             ->where('a.employe =:idEmploye AND (a.dateDebut =:date OR a.dateFin =:date) ')
@@ -56,15 +56,15 @@ class ContratController extends Controller
      *
      * @Route("/", name="contrat_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Contrat:new.html.twig")
+     * @Template("IndraAdminBundle:Contrat:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity         = new Contrat();
         $em             = $this->getDoctrine()->getManager();
-        $dataform       = $request->request->get('janettransit_adminbundle_contrat');
+        $dataform       = $request->request->get('indra_adminbundle_contrat');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
 
         $form = $this->createCreateForm($entity);
@@ -138,7 +138,7 @@ class ContratController extends Controller
         $request    = $this->get('request');
         $success    = $request->query->get('success');
         $em         = $this->getDoctrine()->getManager();
-        $entity     = $em->getRepository('JanetTransitAdminBundle:Contrat')->find($id);
+        $entity     = $em->getRepository('IndraAdminBundle:Contrat')->find($id);
         $editForm   = $this->createEditForm($entity);
 
         if (!$entity) {
@@ -169,8 +169,8 @@ class ContratController extends Controller
         $entity     = new Contrat();
         $form       = $this->createCreateForm($entity);
 
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
-        $entities       = $em->getRepository('JanetTransitAdminBundle:Contrat')->findBy(
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($id);
+        $entities       = $em->getRepository('IndraAdminBundle:Contrat')->findBy(
             array('employe' => $id), array('dateDebut' => 'DESC'));
 
 
@@ -197,7 +197,7 @@ class ContratController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Contrat')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Contrat')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Contrat entity.');
@@ -234,15 +234,15 @@ class ContratController extends Controller
      *
      * @Route("/{id}", name="contrat_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Contrat:edit.html.twig")
+     * @Template("IndraAdminBundle:Contrat:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em             = $this->getDoctrine()->getManager();
-        $entity         = $em->getRepository('JanetTransitAdminBundle:Contrat')->find($id);
-        $dataform       = $request->request->get('janettransit_adminbundle_contrat');
+        $entity         = $em->getRepository('IndraAdminBundle:Contrat')->find($id);
+        $dataform       = $request->request->get('indra_adminbundle_contrat');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Contrat entity.');
@@ -278,7 +278,7 @@ class ContratController extends Controller
 //
 //        if ($form->isValid()) {
 //            $em = $this->getDoctrine()->getManager();
-//            $entity = $em->getRepository('JanetTransitAdminBundle:Contrat')->find($id);
+//            $entity = $em->getRepository('IndraAdminBundle:Contrat')->find($id);
 //
 //            if (!$entity) {
 //                throw $this->createNotFoundException('Unable to find Contrat entity.');

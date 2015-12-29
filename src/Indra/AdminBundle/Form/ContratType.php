@@ -80,7 +80,7 @@ class ContratType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Contrat'
+            'data_class' => 'Indra\AdminBundle\Entity\Contrat'
         ));
     }
 
@@ -89,6 +89,6 @@ class ContratType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_contrat';
+        return 'indra_adminbundle_contrat';
     }
 }

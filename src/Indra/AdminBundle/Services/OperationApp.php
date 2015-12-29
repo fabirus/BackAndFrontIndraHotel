@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\Repository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\RequestStack;
-use JanetTransit\AdminBundle\Entity\Operation;
+use Indra\AdminBundle\Entity\Operation;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 

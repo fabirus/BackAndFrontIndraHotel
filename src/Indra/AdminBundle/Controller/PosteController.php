@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Poste;
-use JanetTransit\AdminBundle\Form\PosteType;
+use Indra\AdminBundle\Entity\Poste;
+use Indra\AdminBundle\Form\PosteType;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -33,7 +33,7 @@ class PosteController extends Controller
         $entity     = new Poste();
         $form       = $this->createCreateForm($entity);
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:Poste')->findAll();
+        $entities = $em->getRepository('IndraAdminBundle:Poste')->findAll();
 
         return array(
             'entities' => $entities,
@@ -51,12 +51,12 @@ class PosteController extends Controller
     public function servicePosteAction($id)
     {
         $em       = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('JanetTransitAdminBundle:Poste')->findBy(array(
+        $entities = $em->getRepository('IndraAdminBundle:Poste')->findBy(array(
             'service' => $id,
             'del'     => 0
         ));
 
-        $json['view'] = $this->renderView('JanetTransitAdminBundle:Poste:servicePoste.html.twig',
+        $json['view'] = $this->renderView('IndraAdminBundle:Poste:servicePoste.html.twig',
             array(
                 'entities' => $entities
             ));
@@ -72,7 +72,7 @@ class PosteController extends Controller
      *
      * @Route("/poste/create", name="poste_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Poste:new.html.twig")
+     * @Template("IndraAdminBundle:Poste:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -125,7 +125,7 @@ class PosteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Poste')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Poste')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Poste entity.');
@@ -148,7 +148,7 @@ class PosteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Poste')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Poste')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Poste entity.');
@@ -185,13 +185,13 @@ class PosteController extends Controller
      *
      * @Route("/poste/{id}", name="poste_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Poste:edit.html.twig")
+     * @Template("IndraAdminBundle:Poste:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Poste')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Poste')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Poste entity.');
@@ -220,7 +220,7 @@ class PosteController extends Controller
     public function deleteAction($id, $del)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Poste')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Poste')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Poste entity.');

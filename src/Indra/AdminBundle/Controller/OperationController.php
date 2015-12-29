@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Operation;
-use JanetTransit\AdminBundle\Form\OperationType;
+use Indra\AdminBundle\Entity\Operation;
+use Indra\AdminBundle\Form\OperationType;
 
 /**
  * Operation controller.
@@ -28,7 +28,7 @@ class OperationController extends Controller
     public function indexAction()
     {
         $em         = $this->getDoctrine()->getManager();
-        $entities   = $em->getRepository('JanetTransitAdminBundle:Operation')->findAll();
+        $entities   = $em->getRepository('IndraAdminBundle:Operation')->findAll();
 
         return array(
             'entities' => $entities,

@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Service;
-use JanetTransit\AdminBundle\Form\ServiceType;
+use Indra\AdminBundle\Entity\Service;
+use Indra\AdminBundle\Form\ServiceType;
 
 /**
  * Service controller.
@@ -31,7 +31,7 @@ class ServiceController extends Controller
         $entity     = new Service();
         $form       = $this->createCreateForm($entity);
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:Service')->findAll();
+        $entities = $em->getRepository('IndraAdminBundle:Service')->findAll();
 
         return array(
             'entities' => $entities,
@@ -95,7 +95,7 @@ class ServiceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Service')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Service')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Service entity.');
@@ -118,7 +118,7 @@ class ServiceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Service')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Service')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Service entity.');
@@ -161,7 +161,7 @@ class ServiceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Service')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Service')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Service entity.');
@@ -190,7 +190,7 @@ class ServiceController extends Controller
     public function deleteAction($id, $del)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Service')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Service')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Service entity.');

@@ -43,7 +43,7 @@ class PosteType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Poste'
+            'data_class' => 'Indra\AdminBundle\Entity\Poste'
         ));
     }
 
@@ -52,6 +52,6 @@ class PosteType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_poste';
+        return 'indra_adminbundle_poste';
     }
 }

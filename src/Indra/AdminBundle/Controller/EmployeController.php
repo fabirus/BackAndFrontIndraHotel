@@ -157,7 +157,7 @@ class EmployeController extends Controller
         $em         = $this->getDoctrine()->getManager();
         $select     = array(
             'searchText'    => $searchText,
-            'entity'        => 'JanetTransitAdminBundle:Employe',
+            'entity'        => 'IndraAdminBundle:Employe',
             'select'        => 'e',
             'where'         => 'e.nom LIKE :searchText OR e.prenom LIKE :searchText',
             'orderBy'       => 'e.nom', 'ASC',
@@ -238,7 +238,7 @@ class EmployeController extends Controller
      *
      * @Route("/employe/{id}", name="employe_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Employe:edit.html.twig")
+     * @Template("IndraAdminBundle:Employe:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
