@@ -1,21 +1,21 @@
 data_informations:
     path:     /data
-    defaults: { _controller: JanetTransitAdminBundle:Data:index }
+    defaults: { _controller: IndraAdminBundle:Data:index }
 
 data_create:
     path:     /data/create
-    defaults: { _controller: JanetTransitAdminBundle:Data:create }
+    defaults: { _controller: IndraAdminBundle:Data:create }
 
 data_edit:
     path:     /data/edit/{id}
-    defaults: { _controller: JanetTransitAdminBundle:Data:edit }
+    defaults: { _controller: IndraAdminBundle:Data:edit }
 
 data_update:
     path:     /data/{id}/
-    defaults: { _controller: JanetTransitAdminBundle:Data:update }
+    defaults: { _controller: IndraAdminBundle:Data:update }
 
 data_delete:
     path:     /data/delete/{id}/{del}
-    defaults: { _controller: JanetTransitAdminBundle:Data:delete, _locale : fr}
+    defaults: { _controller: IndraAdminBundle:Data:delete, _locale : fr}
     options:
         expose: true

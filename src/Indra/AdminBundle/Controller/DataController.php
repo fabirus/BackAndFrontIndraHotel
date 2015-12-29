@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Data;
-use JanetTransit\AdminBundle\Form\DataType;
+use Indra\AdminBundle\Entity\Data;
+use Indra\AdminBundle\Form\DataType;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -32,7 +32,7 @@ class DataController extends Controller
         $entity     = new Data();
         $form       = $this->createCreateForm($entity);
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:Data')->findAll();
+        $entities = $em->getRepository('IndraAdminBundle:Data')->findAll();
 
         return array(
             'entities' => $entities,
@@ -45,7 +45,7 @@ class DataController extends Controller
      *
      * @Route("/", name="data_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Data:new.html.twig")
+     * @Template("IndraAdminBundle:Data:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -117,7 +117,7 @@ class DataController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Data')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Data')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Data entity.');
@@ -154,13 +154,13 @@ class DataController extends Controller
      *
      * @Route("/{id}", name="data_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Data:edit.html.twig")
+     * @Template("IndraAdminBundle:Data:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Data')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Data')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Data entity.');
@@ -192,7 +192,7 @@ class DataController extends Controller
     public function deleteAction($id, $del)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Data')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Data')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Data entity.');

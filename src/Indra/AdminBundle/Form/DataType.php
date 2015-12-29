@@ -44,7 +44,7 @@ class DataType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Data'
+            'data_class' => 'Indra\AdminBundle\Entity\Data'
         ));
     }
 
@@ -53,6 +53,6 @@ class DataType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_data';
+        return 'indra_adminbundle_data';
     }
 }
