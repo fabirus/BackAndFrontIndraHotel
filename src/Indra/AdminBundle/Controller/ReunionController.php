@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Reunion;
-use JanetTransit\AdminBundle\Form\ReunionType;
+use Indra\AdminBundle\Entity\Reunion;
+use Indra\AdminBundle\Form\ReunionType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -34,7 +34,7 @@ class ReunionController extends Controller
         $success    = $request->query->get('success');
         $entity     = new Reunion();
         $form       = $this->createCreateForm($entity);
-        $entities   = $em->getRepository('JanetTransitAdminBundle:Reunion')->findAll();
+        $entities   = $em->getRepository('IndraAdminBundle:Reunion')->findAll();
 
         return array(
             'entities' => $entities,
@@ -56,7 +56,7 @@ class ReunionController extends Controller
         $date           = $request->query->get('date');
         $em             = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:Reunion')->findBy(
+        $entities = $em->getRepository('IndraAdminBundle:Reunion')->findBy(
             array('dateReunion' => $date, 'del' => 0)
         );
 
@@ -74,7 +74,7 @@ class ReunionController extends Controller
      *
      * @Route("/", name="reunion_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Reunion:new.html.twig")
+     * @Template("IndraAdminBundle:Reunion:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -145,7 +145,7 @@ class ReunionController extends Controller
         $em         = $this->getDoctrine()->getManager();
         $request    = $this->get('request');
         $success    = $request->query->get('success');
-        $entity     = $em->getRepository('JanetTransitAdminBundle:Reunion')->find($id);
+        $entity     = $em->getRepository('IndraAdminBundle:Reunion')->find($id);
         $form       = $this->createEditForm($entity);
 
         if (!$entity) {
@@ -183,13 +183,13 @@ class ReunionController extends Controller
      *
      * @Route("/{id}", name="reunion_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Reunion:edit.html.twig")
+     * @Template("IndraAdminBundle:Reunion:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Reunion')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Reunion')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Reunion entity.');
@@ -219,7 +219,7 @@ class ReunionController extends Controller
     public function deleteAction($id, $del)
     {
         $em     = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Reunion')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Reunion')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Reunion entity.');

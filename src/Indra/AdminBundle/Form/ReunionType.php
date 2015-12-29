@@ -30,12 +30,6 @@ class ReunionType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control'
                 )))
-//            ->add('compteRendu','textarea', array(
-//                'label' => 'Compte Rendu *',
-//                'required' => true,
-//                'attr' => array(
-//                    'class' => 'form-control',
-//                )))
             ->add('compteRendu','ckeditor', array(
                 'plugins' => array(
                     'wordcount' => array(
@@ -85,7 +79,7 @@ class ReunionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Reunion'
+            'data_class' => 'Indra\AdminBundle\Entity\Reunion'
         ));
     }
 
@@ -94,6 +88,6 @@ class ReunionType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_reunion';
+        return 'indra_adminbundle_reunion';
     }
 }
