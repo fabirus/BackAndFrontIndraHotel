@@ -49,7 +49,7 @@ class StockType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Stock'
+            'data_class' => 'Indra\AdminBundle\Entity\Stock'
         ));
     }
 
@@ -58,6 +58,6 @@ class StockType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_stock';
+        return 'indra_adminbundle_stock';
     }
 }

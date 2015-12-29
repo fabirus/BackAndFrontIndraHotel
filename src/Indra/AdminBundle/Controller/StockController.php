@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Stock;
-use JanetTransit\AdminBundle\Form\StockType;
+use Indra\AdminBundle\Entity\Stock;
+use Indra\AdminBundle\Form\StockType;
 
 /**
  * Stock controller.
@@ -29,7 +29,7 @@ class StockController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:TypeStock')->findAll();
+        $entities = $em->getRepository('IndraAdminBundle:TypeStock')->findAll();
 
         return array(
             'entities' => $entities,
@@ -40,15 +40,15 @@ class StockController extends Controller
      *
      * @Route("/", name="stock_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Stock:new.html.twig")
+     * @Template("IndraAdminBundle:Stock:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity             = new Stock();
         $em                 = $this->getDoctrine()->getManager();
-        $dataform           = $request->request->get('janettransit_adminbundle_stock');
+        $dataform           = $request->request->get('indra_adminbundle_stock');
         $idTypeStock        = $dataform['typeStock'];
-        $entityTypeStock    = $em->getRepository('JanetTransitAdminBundle:TypeStock')->find($idTypeStock);
+        $entityTypeStock    = $em->getRepository('IndraAdminBundle:TypeStock')->find($idTypeStock);
 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -99,8 +99,8 @@ class StockController extends Controller
         $entity             = new Stock();
         $em                 = $this->getDoctrine()->getManager();
         $form               = $this->createCreateForm($entity);
-        $entityTypeStock    = $em->getRepository('JanetTransitAdminBundle:TypeStock')->find($id);
-        $entities           = $em->getRepository('JanetTransitAdminBundle:Stock')->findBy(
+        $entityTypeStock    = $em->getRepository('IndraAdminBundle:TypeStock')->find($id);
+        $entities           = $em->getRepository('IndraAdminBundle:Stock')->findBy(
             array('typeStock' => $id)
         );
 
@@ -122,7 +122,7 @@ class StockController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Stock')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Stock')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Stock entity.');
@@ -160,16 +160,16 @@ class StockController extends Controller
      *
      * @Route("/{id}", name="stock_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Stock:edit.html.twig")
+     * @Template("IndraAdminBundle:Stock:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em                 = $this->getDoctrine()->getManager();
-        $dataform           = $request->request->get('janettransit_adminbundle_stock');
+        $dataform           = $request->request->get('indra_adminbundle_stock');
         $idTypeStock        = $dataform['typeStock'];
-        $entityTypeStock    = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idTypeStock);
+        $entityTypeStock    = $em->getRepository('IndraAdminBundle:Employe')->find($idTypeStock);
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Stock')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Stock')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Stock entity.');
@@ -197,7 +197,7 @@ class StockController extends Controller
      */
     public function deleteAction($id, $del, $idRefresh){
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Stock')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Stock')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Stock entity.');

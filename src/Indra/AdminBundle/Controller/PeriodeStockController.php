@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\PeriodeStock;
-use JanetTransit\AdminBundle\Form\PeriodeStockType;
+use Indra\AdminBundle\Entity\PeriodeStock;
+use Indra\AdminBundle\Form\PeriodeStockType;
 use Symfony\Component\HttpFoundation\Response;
 /**
  * PeriodeStock controller.
@@ -30,11 +30,11 @@ class PeriodeStockController extends Controller
         $em             = $this->getDoctrine()->getManager();
         $entity         = new PeriodeStock();
         $form           = $this->createCreateForm($entity);
-        $stock          = $em->getRepository('JanetTransitAdminBundle:Stock')->find($idStock);
-        $typeStock      = $em->getRepository('JanetTransitAdminBundle:TypeStock')->find($idTypeStock);
+        $stock          = $em->getRepository('IndraAdminBundle:Stock')->find($idStock);
+        $typeStock      = $em->getRepository('IndraAdminBundle:TypeStock')->find($idTypeStock);
 
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:PeriodeStock')->findBy(
+        $entities = $em->getRepository('IndraAdminBundle:PeriodeStock')->findBy(
             array('stock' => $idStock)
         );
 
@@ -50,16 +50,16 @@ class PeriodeStockController extends Controller
      *
      * @Route("/", name="periodestock_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:PeriodeStock:new.html.twig")
+     * @Template("IndraAdminBundle:PeriodeStock:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $em                 = $this->getDoctrine()->getManager();
-        $dataform           = $request->request->get('janettransit_adminbundle_periodestock');
+        $dataform           = $request->request->get('indra_adminbundle_periodestock');
         $idStock            = $dataform['stock'];
         $idTypeStock        = $request->request->get('typeStock');
-        $entityStock        = $em->getRepository('JanetTransitAdminBundle:Stock')->find($idStock);
-        $entityTypeStock    = $em->getRepository('JanetTransitAdminBundle:TypeStock')->find($idTypeStock);
+        $entityStock        = $em->getRepository('IndraAdminBundle:Stock')->find($idStock);
+        $entityTypeStock    = $em->getRepository('IndraAdminBundle:TypeStock')->find($idTypeStock);
         $entity             = new PeriodeStock();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -98,7 +98,7 @@ class PeriodeStockController extends Controller
         $date           = $request->query->get('date');
         $em             = $this->getDoctrine()->getManager();
 
-        $entities   = $em->getRepository('JanetTransitAdminBundle:PeriodeStock')->findBy(
+        $entities   = $em->getRepository('IndraAdminBundle:PeriodeStock')->findBy(
             array('stock' => $idEmploye, 'datePeriode' => $date, 'del' =>0)
         );
 
@@ -143,7 +143,7 @@ class PeriodeStockController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:PeriodeStock')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:PeriodeStock')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find PeriodeStock entity.');
@@ -182,16 +182,16 @@ class PeriodeStockController extends Controller
      *
      * @Route("/{id}", name="periodestock_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:PeriodeStock:edit.html.twig")
+     * @Template("IndraAdminBundle:PeriodeStock:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em                 = $this->getDoctrine()->getManager();
-        $dataform           = $request->request->get('janettransit_adminbundle_periodestock');
+        $dataform           = $request->request->get('indra_adminbundle_periodestock');
         $idStock            = $dataform['stock'];
         $idTypeStock        = $request->request->get('typeStock');
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:PeriodeStock')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:PeriodeStock')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find PeriodeStock entity.');
@@ -223,7 +223,7 @@ class PeriodeStockController extends Controller
      */
     public function deleteAction($id, $del, $idRefresh, $idRefresh2){
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:PeriodeStock')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:PeriodeStock')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find PeriodeStock entity.');

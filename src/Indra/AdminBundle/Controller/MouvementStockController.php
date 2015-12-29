@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\MouvementStock;
-use JanetTransit\AdminBundle\Form\MouvementStockType;
+use Indra\AdminBundle\Entity\MouvementStock;
+use Indra\AdminBundle\Form\MouvementStockType;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -31,12 +31,12 @@ class MouvementStockController extends Controller
         $em             = $this->getDoctrine()->getManager();
         $entity         = new MouvementStock();
         $form           = $this->createCreateForm($entity);
-        $stock          = $em->getRepository('JanetTransitAdminBundle:Stock')->find($idStock);
-        $typeStock      = $em->getRepository('JanetTransitAdminBundle:TypeStock')->find($idTypeStock);
-        $periodeStock   = $em->getRepository('JanetTransitAdminBundle:PeriodeStock')->find($idPeriode);
+        $stock          = $em->getRepository('IndraAdminBundle:Stock')->find($idStock);
+        $typeStock      = $em->getRepository('IndraAdminBundle:TypeStock')->find($idTypeStock);
+        $periodeStock   = $em->getRepository('IndraAdminBundle:PeriodeStock')->find($idPeriode);
 
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:MouvementStock')->findBy(
+        $entities = $em->getRepository('IndraAdminBundle:MouvementStock')->findBy(
             array('periodeStock' => $idPeriode)
         );
 
@@ -54,17 +54,17 @@ class MouvementStockController extends Controller
      *
      * @Route("/", name="mouvementstock_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:MouvementStock:new.html.twig")
+     * @Template("IndraAdminBundle:MouvementStock:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $em                 = $this->getDoctrine()->getManager();
-        $dataform           = $request->request->get('janettransit_adminbundle_mouvementstock');
+        $dataform           = $request->request->get('indra_adminbundle_mouvementstock');
         $idPeriodeStock     = $dataform['periodeStock'];
         $idStock            = $request->request->get('stock');
         $idTypeStock        = $request->request->get('typeStock');
-        $entityStock        = $em->getRepository('JanetTransitAdminBundle:Stock')->find($idStock);
-        $entityTypeStock    = $em->getRepository('JanetTransitAdminBundle:TypeStock')->find($idTypeStock);
+        $entityStock        = $em->getRepository('IndraAdminBundle:Stock')->find($idStock);
+        $entityTypeStock    = $em->getRepository('IndraAdminBundle:TypeStock')->find($idTypeStock);
         $entity             = new MouvementStock();
         $form               = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -169,11 +169,11 @@ class MouvementStockController extends Controller
     public function editAction($id, $idPeriode, $idStock, $idTypeStock)
     {
         $em             = $this->getDoctrine()->getManager();
-        $stock          = $em->getRepository('JanetTransitAdminBundle:Stock')->find($idStock);
-        $typeStock      = $em->getRepository('JanetTransitAdminBundle:TypeStock')->find($idTypeStock);
-        $periodeStock   = $em->getRepository('JanetTransitAdminBundle:PeriodeStock')->find($idPeriode);
+        $stock          = $em->getRepository('IndraAdminBundle:Stock')->find($idStock);
+        $typeStock      = $em->getRepository('IndraAdminBundle:TypeStock')->find($idTypeStock);
+        $periodeStock   = $em->getRepository('IndraAdminBundle:PeriodeStock')->find($idPeriode);
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:MouvementStock')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:MouvementStock')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find MouvementStock entity.');
@@ -213,18 +213,18 @@ class MouvementStockController extends Controller
      *
      * @Route("/{id}", name="mouvementstock_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:MouvementStock:edit.html.twig")
+     * @Template("IndraAdminBundle:MouvementStock:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em                 = $this->getDoctrine()->getManager();
-        $dataform           = $request->request->get('janettransit_adminbundle_mouvementstock');
+        $dataform           = $request->request->get('indra_adminbundle_mouvementstock');
         $idPeriodeStock     = $dataform['periodeStock'];
         $idStock            = $request->request->get('stock');
         $idTypeStock        = $request->request->get('typeStock');
-        $entityStock        = $em->getRepository('JanetTransitAdminBundle:Stock')->find($idStock);
+        $entityStock        = $em->getRepository('IndraAdminBundle:Stock')->find($idStock);
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:MouvementStock')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:MouvementStock')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find MouvementStock entity.');
@@ -269,7 +269,7 @@ class MouvementStockController extends Controller
      */
     public function deleteAction($id, $del, $idRefresh, $idRefresh2, $idRefresh3){
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:MouvementStock')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:MouvementStock')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find MouvementStock entity.');

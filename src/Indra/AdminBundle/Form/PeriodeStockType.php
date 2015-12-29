@@ -40,7 +40,7 @@ class PeriodeStockType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\PeriodeStock'
+            'data_class' => 'Indra\AdminBundle\Entity\PeriodeStock'
         ));
     }
 
@@ -49,6 +49,6 @@ class PeriodeStockType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_periodestock';
+        return 'indra_adminbundle_periodestock';
     }
 }
