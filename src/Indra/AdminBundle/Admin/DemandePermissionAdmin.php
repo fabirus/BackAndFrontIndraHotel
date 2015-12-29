@@ -16,7 +16,7 @@ class DemandePermissionAdmin extends Admin
             ->add('employe', 'sonata_type_model', array(
                 'label'     => 'Nom de l\'employe',
                 'required'  => true,
-                'class'     => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'     => 'Indra\AdminBundle\Entity\Employe',
                 'property'  => 'nom'
             ))
             ->add('motif', 'textarea', array(
@@ -29,7 +29,7 @@ class DemandePermissionAdmin extends Admin
     {
         $datagridMapper
             ->add('employe', null, array(), 'entity', array(
-                'class'    => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'    => 'Indra\AdminBundle\Entity\Employe',
                 'property' => 'nom'
             ));
     }

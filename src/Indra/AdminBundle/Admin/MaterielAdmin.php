@@ -36,7 +36,7 @@ class MaterielAdmin extends Admin
                 )))
             ->add('stock','entity', array(
                 'class' =>'JanetTransit\AdminBundle\Entity\Stock',
-                'query_builder' => function(\JanetTransit\AdminBundle\Entity\Repository\StockRepository $repository){
+                'query_builder' => function(\Indra\AdminBundle\Entity\Repository\StockRepository $repository){
                     return $repository->findAdministratifQueryBuilder();
                 },
                 'label' => 'Matériel',
@@ -66,12 +66,12 @@ class MaterielAdmin extends Admin
     {
         $datagridMapper
             ->add('employe', null, array(), 'entity', array(
-                'class'    => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'    => 'Indra\AdminBundle\Entity\Employe',
                 'property' => 'nom'
             ))
         ->add('stock', null, array(),'entity', array(
             'class' =>'JanetTransit\AdminBundle\Entity\Stock',
-            'query_builder' => function(\JanetTransit\AdminBundle\Entity\Repository\StockRepository $repository){
+            'query_builder' => function(\Indra\AdminBundle\Entity\Repository\StockRepository $repository){
                 return $repository->findAdministratifQueryBuilder();
             }
         ))

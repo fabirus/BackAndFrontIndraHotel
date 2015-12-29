@@ -28,7 +28,7 @@ class PosteAdmin extends Admin
             ->add('service', 'sonata_type_model', array(
                 'label'     => 'Nom du service',
                 'required'  => true,
-                'class'     => 'JanetTransit\AdminBundle\Entity\Service',
+                'class'     => 'Indra\AdminBundle\Entity\Service',
                 'property'  => 'nom'
             ));
     }
@@ -38,7 +38,7 @@ class PosteAdmin extends Admin
         $datagridMapper
             ->add('nom')
             ->add('service', null, array(), 'entity', array(
-                'class'    => 'JanetTransit\AdminBundle\Entity\Service',
+                'class'    => 'Indra\AdminBundle\Entity\Service',
                 'property' => 'nom'
             ));
     }

@@ -17,13 +17,13 @@ class DepenseAdmin extends Admin
             ->add('employe','sonata_type_model', array(
                 'label' => 'Employé',
                 'required' => false,
-                'class'     => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'     => 'Indra\AdminBundle\Entity\Employe',
 
             ))
             ->add('voiture','sonata_type_model', array(
                 'label' => 'Voiture Concerné',
                 'required' => false,
-                'class'     => 'JanetTransit\AdminBundle\Entity\Voiture',
+                'class'     => 'Indra\AdminBundle\Entity\Voiture',
             ))
             ->add('motif','textarea', array(
                 'label' => 'Motifs',
@@ -52,7 +52,7 @@ class DepenseAdmin extends Admin
             ->add('periodeDepense','sonata_type_model', array(
                 'label' => 'PeriodeDépense',
                 'required' => false,
-                'class'     => 'JanetTransit\AdminBundle\Entity\PeriodeDepense',
+                'class'     => 'Indra\AdminBundle\Entity\PeriodeDepense',
 
             ))
             ;

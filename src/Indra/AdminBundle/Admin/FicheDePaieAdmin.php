@@ -16,7 +16,7 @@ class FicheDePaieAdmin extends Admin
             ->add('employe', 'sonata_type_model', array(
                 'label'     => 'Nom de l\'employe',
                 'required'  => true,
-                'class'     => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'     => 'Indra\AdminBundle\Entity\Employe',
                 'property'  => 'nom'
             ))
         ;
@@ -26,7 +26,7 @@ class FicheDePaieAdmin extends Admin
     {
         $datagridMapper
             ->add('employe', null, array(), 'entity', array(
-                'class'    => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'    => 'Indra\AdminBundle\Entity\Employe',
                 'property' => 'nom'
             ))
             ->add('periode', null ,array('label' => 'Période'))

@@ -20,12 +20,12 @@ class ContratAdmin extends Admin
         $formMapper
             ->add('typeContrat', 'sonata_type_model', array(
                 'label'     => 'Type de Contrat',
-                'class'     => 'JanetTransit\AdminBundle\Entity\TypeContrat',
+                'class'     => 'Indra\AdminBundle\Entity\TypeContrat',
                 'property'  => 'nom'
             ))
             ->add('employe', 'sonata_type_model', array(
                 'label'     => 'Employe',
-                'class'     => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'     => 'Indra\AdminBundle\Entity\Employe',
                 'property'  => 'nom'
             ))
             ->add('dateDebut', null, array(
@@ -50,7 +50,7 @@ class ContratAdmin extends Admin
                 'label'     => 'Type de Contrat',
             ))
             ->add('employe', null, array(), 'entity', array(
-                'class'    => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'    => 'Indra\AdminBundle\Entity\Employe',
                 'property' => 'nom'
             ))
         ;

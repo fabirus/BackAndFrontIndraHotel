@@ -23,7 +23,7 @@ class SanctionAdmin extends Admin
             ->add('employe', 'sonata_type_model', array(
                 'label'     => 'Nom de l\'employe',
                 'required'  => true,
-                'class'     => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'     => 'Indra\AdminBundle\Entity\Employe',
                 'property'  => 'nom'
             ))
             ->add('dateSanction', 'date' ,array('label' => 'Date Sanction'))
@@ -37,7 +37,7 @@ class SanctionAdmin extends Admin
     {
         $datagridMapper
             ->add('employe', null, array(), 'entity', array(
-                'class'    => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'    => 'Indra\AdminBundle\Entity\Employe',
                 'property' => 'nom'
             ))
             ->add('dateSanction', null ,array('label' => 'Date Sanction'))

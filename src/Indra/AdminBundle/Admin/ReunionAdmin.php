@@ -13,7 +13,7 @@ class ReunionAdmin extends Admin
         $formMapper
             ->add('employeIntervenants', 'sonata_type_model', array(
                 'label'     => 'Employe',
-                'class'     => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'     => 'Indra\AdminBundle\Entity\Employe',
                 'property'  => 'nom',
                 "multiple"  => true
             ))
@@ -35,12 +35,12 @@ class ReunionAdmin extends Admin
             ))
             ->add('employePresident', 'sonata_type_model', array(
                 'label'     => 'Président de la reunion',
-                'class'     => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'     => 'Indra\AdminBundle\Entity\Employe',
                 'property'  => 'nom'
             ))
             ->add('employeAssistant', 'sonata_type_model', array(
                 'label'     => 'Assistant(e) de la reunion',
-                'class'     => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'     => 'Indra\AdminBundle\Entity\Employe',
                 'property'  => 'nom'
             ))
             ->add('updatedAt', 'date', array(
@@ -54,7 +54,7 @@ class ReunionAdmin extends Admin
         $datagridMapper
             ->add('dateReunion')
             ->add('employePresident', null, array(), 'entity', array(
-                'class'    => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'    => 'Indra\AdminBundle\Entity\Employe',
                 'property' => 'nom'
             ))
         ;

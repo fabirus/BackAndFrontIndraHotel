@@ -23,7 +23,7 @@ class PresenceAdmin extends Admin
             ->add('employe', 'sonata_type_model', array(
                 'label'     => 'Nom de l\'employe',
                 'required'  => true,
-                'class'     => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'     => 'Indra\AdminBundle\Entity\Employe',
                 'property'  => 'nom'
             ))
             ->add('at', 'date', array(
@@ -36,7 +36,7 @@ class PresenceAdmin extends Admin
     {
         $datagridMapper
             ->add('employe', null, array(), 'entity', array(
-                'class'    => 'JanetTransit\AdminBundle\Entity\Employe',
+                'class'    => 'Indra\AdminBundle\Entity\Employe',
                 'property' => 'nom'
             ))
             ->add('at', null ,array('label' => 'Date'))
