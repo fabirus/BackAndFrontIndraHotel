@@ -18,11 +18,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     'http://fonts.googleapis.com/css?family=Open+Sans:600italic,700italic,800italic,400,300,600,700,800'
     'http://fonts.googleapis.com/css?family=Pinyon+Script'
     'http://fonts.googleapis.com/css?family=Quicksand:400,700'
-    'css/client/style.css'
-    'css/client/owl.carousel.css'
-    'css/client/jquery-ui.css'
+    'bundles/indraclient/css/style.css'
+    'bundles/indraclient/css/owl.carousel.css'
+    'bundles/indraclient/css/jquery-ui.css'
     'assets/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
     'assets/vendor/bootstrap-multiselect/dist/css/bootstrap-multiselect.css'
+    'assets/vendor/flag-icon-css/css/flag-icon.min.css'
     %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
     {% endstylesheets %}
@@ -35,23 +36,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header">
     <div class="top-header">
         <div class="container">
-            <div class="logo">
-                <a href="index.html"><img src="images/logo.png"/></a>
+            <div class="row">
+                <div class="col-md-3" style="margin-top: 2%;">
+                    <span class="label" style="font-size: 20px;">
+                        <a style="color:white;" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}"><span style="margin-top: 1%;" class="flag-icon flag-icon-gb"></span> EN</a>
+                        <a style="color:white;" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}"><span class="flag-icon flag-icon-fr"></span> FR</a>
+                        <a style="color:white;" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}"><span class="flag-icon flag-icon-es"></span> ESP</a>
+                    </span>
+                </div>
+                <div class="col-md-9">
+                    {#<div class="logo" style="padding-top: 0">#}
+                        {#<a href="index.html"><img width="200px" height="80px" src="{{ asset('bundles/indraclient/images/indra.jpg')}}"/></a>#}
+                    {#</div>#}
+                    <span class="menu"> </span>
+                    <div class="m-clear"></div>
+                    <div class="top-menu">
+                        <ul>
+                            <li class="active"><a href="index.html">START</a></li>
+                            <li><a class="scroll" href="facilities.html">FACILITIES</a></li>
+                            <li><a class="scroll" href="restaurant.html">RESTAURANT</a></li>
+                            <li><a class="scroll" href="conference.html">CONFERENCE</a></li>
+                            <li><a class="scroll" href="booking.html">BOOKING</a></li>
+                            <li><a class="scroll" href="booking.html">BLOG</a></li>
+                            <li><a class="scroll" href="contact.html">CONTACT US</a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
             </div>
-            <span class="menu"> </span>
-            <div class="m-clear"></div>
-            <div class="top-menu">
-                <ul>
-                    <li class="active"><a href="index.html">START</a></li>
-                    <li><a class="scroll" href="facilities.html">FACILITIES</a></li>
-                    <li><a class="scroll" href="restaurant.html">RESTAURANT</a></li>
-                    <li><a class="scroll" href="conference.html">CONFERENCE</a></li>
-                    <li><a class="scroll" href="booking.html">BOOKING</a></li>
-                    <li><a class="scroll" href="booking.html">BLOG</a></li>
-                    <li><a class="scroll" href="contact.html">CONTACT US</a></li>
-                </ul>
-            </div>
-            <div class="clearfix"></div>
+
         </div>
     </div>
     <div class="banner">
@@ -246,7 +260,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <h3>143 City Located Hotels WorldWide</h3>
         <h4>"Hospitality, Quality & Good Locations. We only provide you with the best hotels" - John Deo</h4>
         <i class="man"> </i>
-        {#<img src="{{ asset('img/client/man.png')}}">#}
     </div>
 </div>
 <!---->
