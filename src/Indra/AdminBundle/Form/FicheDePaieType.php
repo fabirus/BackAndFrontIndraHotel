@@ -60,7 +60,7 @@ class FicheDePaieType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\FicheDePaie'
+            'data_class' => 'Indra\AdminBundle\Entity\FicheDePaie'
         ));
     }
 
@@ -69,6 +69,6 @@ class FicheDePaieType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_fichedepaie';
+        return 'indra_adminbundle_fichedepaie';
     }
 }

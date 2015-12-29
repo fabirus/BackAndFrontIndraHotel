@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\FicheDePaie;
-use JanetTransit\AdminBundle\Form\FicheDePaieType;
+use Indra\AdminBundle\Entity\FicheDePaie;
+use Indra\AdminBundle\Form\FicheDePaieType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,7 +32,7 @@ class FicheDePaieController extends Controller
         $date           = $request->query->get('date');
 
         $query = $this->getDoctrine()
-            ->getRepository('JanetTransitAdminBundle:FicheDePaie')
+            ->getRepository('IndraAdminBundle:FicheDePaie')
             ->createQueryBuilder('a')
             ->select('a')
             ->where('a.employe =:idEmploye AND a.periode =:date')
@@ -56,15 +56,15 @@ class FicheDePaieController extends Controller
      *
      * @Route("/", name="fichedepaie_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:FicheDePaie:new.html.twig")
+     * @Template("IndraAdminBundle:FicheDePaie:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity         = new FicheDePaie();
         $em             = $this->getDoctrine()->getManager();
-        $dataform       = $request->request->get('janettransit_adminbundle_fichedepaie');
+        $dataform       = $request->request->get('indra_adminbundle_fichedepaie');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
 
         $form   = $this->createCreateForm($entity);
@@ -116,15 +116,15 @@ class FicheDePaieController extends Controller
         $request            = $this->get('request');
         $success            = $request->query->get('success');
         $em                 = $this->getDoctrine()->getManager();
-        $entity             = $em->getRepository('JanetTransitAdminBundle:FicheDePaie')->find($id);
-        $prime              = $em->getRepository('JanetTransitAdminBundle:Prime')->findOneBy(
+        $entity             = $em->getRepository('IndraAdminBundle:FicheDePaie')->find($id);
+        $prime              = $em->getRepository('IndraAdminBundle:Prime')->findOneBy(
             array(
                 'employe' => $idEmploye,
                 'periode' => $entity->getPeriode(),
                 'valid'   => 0
                 )
         );
-        $avanceSalaire  = $em->getRepository('JanetTransitAdminBundle:AvanceSalaire')->findOneBy(
+        $avanceSalaire  = $em->getRepository('IndraAdminBundle:AvanceSalaire')->findOneBy(
             array(
                 'employe' => $idEmploye,
                 'periode' => $entity->getPeriode(),
@@ -169,7 +169,7 @@ class FicheDePaieController extends Controller
 
     public function absence($entity, $idEmploye){
         $query = $this->getDoctrine()
-            ->getRepository('JanetTransitAdminBundle:Presence')
+            ->getRepository('IndraAdminBundle:Presence')
             ->createQueryBuilder('p')
             ->select('p')
             ->where('p.employe =:idEmploye AND p.at LIKE :date AND p.statut =:absent')
@@ -187,7 +187,7 @@ class FicheDePaieController extends Controller
 
     public function daysofWeek($entity, $idEmploye){
         $query = $this->getDoctrine()
-            ->getRepository('JanetTransitAdminBundle:Contrat')
+            ->getRepository('IndraAdminBundle:Contrat')
             ->createQueryBuilder('c')
             ->select('c')
             ->where('c.employe =:idEmploye AND c.dateDebut LIKE :date')
@@ -209,7 +209,7 @@ class FicheDePaieController extends Controller
 
     public function sanction($entity, $idEmploye){
         $query = $this->getDoctrine()
-            ->getRepository('JanetTransitAdminBundle:Sanction')
+            ->getRepository('IndraAdminBundle:Sanction')
             ->createQueryBuilder('p')
             ->select('p')
             ->where('p.employe =:idEmploye AND p.dateSanction LIKE :date AND p.valid = 0')
@@ -244,8 +244,8 @@ class FicheDePaieController extends Controller
         $entity     = new FicheDePaie();
         $form       = $this->createCreateForm($entity);
 
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
-        $entities       = $em->getRepository('JanetTransitAdminBundle:FicheDePaie')->findBy(
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($id);
+        $entities       = $em->getRepository('IndraAdminBundle:FicheDePaie')->findBy(
             array('employe' => $id), array('periode' => 'DESC'));
 
 
@@ -272,7 +272,7 @@ class FicheDePaieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:FicheDePaie')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:FicheDePaie')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find FicheDePaie entity.');
@@ -309,15 +309,15 @@ class FicheDePaieController extends Controller
      *
      * @Route("/{id}", name="fichedepaie_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:FicheDePaie:edit.html.twig")
+     * @Template("IndraAdminBundle:FicheDePaie:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em             = $this->getDoctrine()->getManager();
-        $entity         = $em->getRepository('JanetTransitAdminBundle:FicheDePaie')->find($id);
-        $dataform       = $request->request->get('janettransit_adminbundle_fichedepaie');
+        $entity         = $em->getRepository('IndraAdminBundle:FicheDePaie')->find($id);
+        $dataform       = $request->request->get('indra_adminbundle_fichedepaie');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find FicheDePaie entity.');
