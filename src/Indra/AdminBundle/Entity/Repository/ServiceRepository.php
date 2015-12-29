@@ -26,7 +26,7 @@ class ServiceRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         return $qb->select('s')
-            ->from('JanetTransitAdminBundle:Service', 's')
+            ->from('IndraAdminBundle:Service', 's')
             ->where('s.del = 0')
             ->orderBy('s.nom');
 

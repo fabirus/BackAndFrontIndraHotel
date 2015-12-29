@@ -74,17 +74,10 @@ class EmployeType extends AbstractType
                     'class' => 'form-control'
                 )
             ))
-//            ->add('services',null, array(
-//                'label' => 'Service *',
-//                'required' => true,
-//                'attr' => array(
-//                    'class' => 'form-control'
-//                )
-//            ))
           ->add('services','entity', array(
-                'class' =>'JanetTransit\AdminBundle\Entity\Service',
+                'class' =>'Indra\AdminBundle\Entity\Service',
                 'property' =>'nom',
-                'query_builder' => function(\JanetTransit\AdminBundle\Entity\Repository\ServiceRepository $repository){
+                'query_builder' => function(\Indra\AdminBundle\Entity\Repository\ServiceRepository $repository){
                     return $repository->findActiveServiceQueryBuilder();
                 },
                 'label' => 'Service *',
@@ -130,8 +123,6 @@ class EmployeType extends AbstractType
             ->add('identiteFile', null, array(
                 'label' => 'Pièce d\'identité de l\'employé Extension (pdf)',
                 'required' => false,
-//                'data_class' => 'Symfony\Component\HttpFoundation\File\File',
-//                'property_path' => 'identiteFileName',
                 'attr' => array(
                     'class' => 'form-control file filePdf',
                     'accept' =>'application/pdf'
@@ -146,7 +137,7 @@ class EmployeType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Employe'
+            'data_class' => 'Indra\AdminBundle\Entity\Employe'
         ));
     }
 
@@ -155,6 +146,6 @@ class EmployeType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_employe';
+        return 'indra_adminbundle_employe';
     }
 }

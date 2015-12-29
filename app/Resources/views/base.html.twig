@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{% block title %}JANET ADMIN{% endblock %}</title>
+        <title>{% block title %}INDRA ADMIN{% endblock %}</title>
         {% stylesheets filter='cssrewrite, ?yui_css'
         'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
         'css/font-awesome.css'
@@ -62,8 +62,8 @@
                         {{ 'home.messages'|trans({'%username%' : app.user.username, '%date%' : app.user.lastLogin|date("d/m/Y") }) }}&nbsp;
 
                         <div class="btn-group ">
-                            <button type="button" class="btn btn-danger">{{ 'home.user.user'|trans }}</button>
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-warning">{{ 'home.user.user'|trans }}</button>
+                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>

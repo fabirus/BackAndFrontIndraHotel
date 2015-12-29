@@ -52,13 +52,13 @@ body {
 }
 
 .removeFile, .removeFile1{
-    color: darkred;
+    color: darkorange;
 }
 
 .fileUpload:hover, .fileUpload1:hover{
     opacity : 0.9;
     background: darkgrey;
-    color :red !important;
+    color :darkorange !important;
 }
 
 /*.fileUpload {*/
@@ -79,7 +79,7 @@ body {
 /*}*/
 
 title{
-    color : red;
+    color : darkorange;
 }
 
 .bg-color-dark{
@@ -106,7 +106,7 @@ title{
 #wikiTitle h1{
     font-family: 'Lobster', cursive;
     font-size: 50px;
-    color: #f00;
+    color: darkorange;
     -webkit-animation-name: title; /* Chrome, Safari, Opera */
     -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
     animation-name: title;
@@ -145,7 +145,7 @@ title{
 }
 
 #user_menu li :hover{
-    background: red;
+    background: darkorange;
     color: white;
 }
 /* scroll to top */
@@ -185,7 +185,7 @@ title{
     border:1px solid #f3f3f3;
 }
 h2 {
-    color: #f00;
+    color: darkorange;
 }
 h4 {
     padding-top:10px;
@@ -247,7 +247,7 @@ background-color: #A95DF0;
 color: #fff;
 }
   .bg-color-red {
-background-color: #DB0630;
+background-color: darkorange;
 color: #fff;
 }
   .bg-color-brown {
@@ -300,7 +300,7 @@ color:#fff;
     border-top: 0px solid #fff;
 }
      .back-footer-red {
-    background-color: #AF0000;
+    background-color: darkorange;
     border-top: 0px solid #fff;
 }
      .color-bottom-txt {
@@ -355,12 +355,12 @@ max-width:140px;
 */
 
 .active-menu {
-    background-color:#C90000!important;
+    background-color:darkorange!important;
 }
 
 .navbar-cls-top .navbar-brand {
 	color: #fff;
-background: #C90000;
+background: darkorange;
 width: 260px;
 text-align: center;
 height: 60px;
@@ -369,7 +369,7 @@ font-weight: 700;
 }
 
 .avatar_employe:hover{
-    background: darkred;
+    background: darkorange;
     opacity: 0.5;
     cursor: pointer;
 }
@@ -378,7 +378,7 @@ font-weight: 700;
     color : red;
 }
 
-.red-tooltip + .tooltip > .tooltip-inner {background-color: #f00;}
+.red-tooltip + .tooltip > .tooltip-inner {background-color: darkorange;}
 
 
 .not-active{
@@ -458,7 +458,7 @@ a:hover{
     background-color: #58c255;
 }
 .ko {
-    background-color: #f3252f;
+    background-color: darkorange;
 }
 .info {
     background-color: #16447d;
@@ -497,7 +497,7 @@ a:hover{
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
 	
-	background:#C90000;
+	background:darkorange;
 	outline:0;
 }
 
@@ -509,7 +509,7 @@ a:hover{
 	left:20px;
 	width:15px;
 	height:1px;
-	background:#ff0000;
+	background:darkorange;
 	top:20px;
 }
 .nav-second-level > li > a:after,
@@ -520,7 +520,7 @@ a:hover{
 	left:20px;
 	width:1px;
 	height:100%;
-	background:#ff0000;
+	background:darkorange;
 	top:0px;
 	z-index:10;
 }
@@ -544,7 +544,7 @@ a:hover{
 }
 .navbar-cls-top .navbar-brand:hover {
 
-background: #C90000;
+background: darkorange;
 color:#fff;
 
 }
@@ -554,10 +554,10 @@ border:0px solid black;
      
 }
 .navbar-header {
-    background: #A70303;
+    background: darkorange;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-background-color: #B40101;
+background-color: darkorange;
 }
 .navbar-default .navbar-toggle {
 border-color: #fff;

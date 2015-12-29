@@ -2,11 +2,6 @@
 
 {% block title %} {{ parent() }} | Employés {% endblock %}
 
-{#{% block stylesheets %}#}
-    {#{{ parent() }}#}
-    {#<link rel="stylesheet" href="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')}}" />#}
-{#{% endblock %}#}
-
 {% block body -%}
     <div class="alert alert-info" role="alert" style="font-size: 18px">{{ 'employe.liste.infos'|trans({}, 'employe') }}</div>
     <div class="row">
@@ -131,7 +126,7 @@
 
 
                         {{ form_label(form.poste) }}
-                        <select id="janettransit_adminbundle_employe_poste" name="janettransit_adminbundle_employe[poste]" class="selectPoste form-control" required>
+                        <select id="indra_adminbundle_employe_poste" name="indra_adminbundle_employe[poste]" class="selectPoste form-control" required>
                         </select><br>
                         {#{{ form_row(form.poste) }}#}
 
@@ -169,20 +164,7 @@
             common().notice('Enregistrement avec succès','ok');
         {% endif %}
         common().date();
-        $("form").validate({
-//            errorLabelContainer: '#errors',
-//            wrapper:'li'
-//            errorPlacement: function (error, element) {
-//                switch (element) {
-//                    case element.attr("name") === 'janettransit_adminbundle_employe[tel]':
-//                            console.log('oyoyoy');
-//                        error.insertAfter($("#tel"));
-//                        break;
-//                    default:
-//                    //nothing
-//                }
-//            }
-        });
+        $("form").validate();
         common().validation();
         $(".file").rules("add", { filesize: 2 });
         $(".phoneNumber").rules("add", { phone: "" });

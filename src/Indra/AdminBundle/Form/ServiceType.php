@@ -36,7 +36,7 @@ class ServiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Service'
+            'data_class' => 'Indra\AdminBundle\Entity\Service'
         ));
     }
 
@@ -45,6 +45,6 @@ class ServiceType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_service';
+        return 'indra_adminbundle_service';
     }
 }

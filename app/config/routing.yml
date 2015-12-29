@@ -15,12 +15,12 @@ indra_client:
 #        _locale: en|fr
 
 
-janet_transit_admin:
+indra_admin:
     resource: "@IndraAdminBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /backoffice
 
 
-janet_transit_wiki:
+indra_wiki:
     resource: "@IndraWikiBundle/Resources/config/routing.yml"
     prefix:   /
 

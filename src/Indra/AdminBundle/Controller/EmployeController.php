@@ -8,8 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Doctrine\ORM\Repository;
-use JanetTransit\AdminBundle\Entity\Employe;
-use JanetTransit\AdminBundle\Form\EmployeType;
+use Indra\AdminBundle\Entity\Employe;
+use Indra\AdminBundle\Form\EmployeType;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -38,8 +38,7 @@ class EmployeController extends Controller
         $entity     = new Employe();
         $form       = $this->createCreateForm($entity);
 
-//        $entities   = $em->getRepository('JanetTransitAdminBundle:Employe')->findBy(array('del' => 0));
-        $entities   = $em->getRepository('JanetTransitAdminBundle:Employe')->findAll();
+        $entities   = $em->getRepository('IndraAdminBundle:Employe')->findAll();
 
         return array(
             'entities' => $entities,
@@ -53,7 +52,7 @@ class EmployeController extends Controller
      *
      * @Route("/employe/create", name="employe_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Employe:new.html.twig")
+     * @Template("IndraAdminBundle:Employe:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -169,10 +168,10 @@ class EmployeController extends Controller
                 $entities = $this->get('projet.search')->search($select);
             }
             else {
-                $entities = $em->getRepository('JanetTransitAdminBundle:Employe')->findAll();
+                $entities = $em->getRepository('IndraAdminBundle:Employe')->findAll();
             }
 
-            $json['view'] = $this->renderView('JanetTransitAdminBundle:Employe:search.html.twig',
+            $json['view'] = $this->renderView('IndraAdminBundle:Employe:search.html.twig',
                 array(
                     'entities' => $entities,
                     'searchText' => $searchText
@@ -202,7 +201,7 @@ class EmployeController extends Controller
         $success    = $request->query->get('success');
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Employe')->find($id);
 
         if (!$entity) {
 //            throw $this->createNotFoundException('Unable to find Employe entity.');
@@ -245,7 +244,7 @@ class EmployeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Employe')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Employe entity.');
@@ -276,7 +275,7 @@ class EmployeController extends Controller
     public function deleteAction($id, $del)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Employe')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Employe entity.');
@@ -287,9 +286,6 @@ class EmployeController extends Controller
         if ($del == 1){
             $this->operationUpdate($entity, 'SUPPRESSION');
         }
-
-
-
 
         return $this->redirect($this->generateUrl('employe_informations'));
     }
