@@ -82,7 +82,7 @@ color:#fff;
 border-top:2px solid #FFD700;
 }
 .banner{
-background:#00CCFF;
+background:darkslategray;
 min-height:300px;
 padding:2em 0 4em 0;
 }
@@ -262,9 +262,7 @@ select option{
 	-moz-border-radius: 9px;
 	-o-border-radius: 9px;
 }
-.date{
-	background:url(../images/icon.png) no-repeat 3% 50% #FFF;
-}
+
 .date_btn{
 	margin:22px 0 0 0px;
 }
@@ -357,7 +355,18 @@ select option{
 .copy p a:hover{
 	color: #9c9c9c;
 }
+
+.upArrow {
+	background: url("../images/uparrow.png");
+	cursor: pointer;
+	width: 66px;
+	height: 67px;
+	position: fixed;
+	bottom: 30px;
+	right:30px;
+	display:none;
 }
+
 /* start soc_icons */
 .soc_icons {
 	text-align: center;
@@ -378,7 +387,7 @@ select option{
 }
 .soc_icons ul li a{
 	display: block;
-	background: url('../images/soc_icons.png') no-repeat 0px 0px;
+	/*background: url('../images/soc_icons.png') no-repeat 0px 0px;*/
 	width: 46px;
 	height: 46px;
 	-webkit-transition: all 0.3s ease-in-out;
@@ -500,7 +509,7 @@ p.para{
 }
 .s_nav1 li a{
 	display: block;
-	background: url('../images/s_icons.png') no-repeat 0px 0px;
+	/*background: url('../images/s_icons.png') no-repeat 0px 0px;*/
 	width: 32px;
 	height: 32px;
 	-webkit-transition: all 0.3s ease-in-out;
@@ -2218,7 +2227,7 @@ span.menu:before {
 	z-index: 999;
 	position: absolute;
 	width: 91%;
-	background:rgba(0, 185, 231, 1);
+	background: darkslategray;
 	text-align: center;
 }
 .online_reservation {
