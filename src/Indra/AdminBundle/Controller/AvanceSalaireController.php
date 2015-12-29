@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\AvanceSalaire;
-use JanetTransit\AdminBundle\Form\AvanceSalaireType;
+use Indra\AdminBundle\Entity\AvanceSalaire;
+use Indra\AdminBundle\Form\AvanceSalaireType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,7 +34,7 @@ class AvanceSalaireController extends Controller
         $date           = $request->query->get('date');
 
         $query = $this->getDoctrine()
-            ->getRepository('JanetTransitAdminBundle:AvanceSalaire')
+            ->getRepository('IndraAdminBundle:AvanceSalaire')
             ->createQueryBuilder('a')
             ->select('a')
             ->where('a.employe =:idEmploye AND a.at =:date')
@@ -58,15 +58,15 @@ class AvanceSalaireController extends Controller
      *
      * @Route("/avancesalaire/create", name="avancesalaire_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:AvanceSalaire:new.html.twig")
+     * @Template("IndraAdminBundle:AvanceSalaire:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity         = new AvanceSalaire();
         $em             = $this->getDoctrine()->getManager();
-        $dataform       = $request->request->get('janettransit_adminbundle_avancesalaire');
+        $dataform       = $request->request->get('indra_adminbundle_avancesalaire');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
         $form   = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -137,7 +137,7 @@ class AvanceSalaireController extends Controller
         $request    = $this->get('request');
         $success    = $request->query->get('success');
         $em         = $this->getDoctrine()->getManager();
-        $entity     = $em->getRepository('JanetTransitAdminBundle:AvanceSalaire')->find($id);
+        $entity     = $em->getRepository('IndraAdminBundle:AvanceSalaire')->find($id);
         $editForm   = $this->createEditForm($entity);
         $motif      = wordwrap($entity->getMotif(), 50, "\n", true);
 
@@ -178,8 +178,8 @@ class AvanceSalaireController extends Controller
         $entity     = new AvanceSalaire();
         $form       = $this->createCreateForm($entity);
 
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
-        $entities       = $em->getRepository('JanetTransitAdminBundle:AvanceSalaire')->findBy(
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($id);
+        $entities       = $em->getRepository('IndraAdminBundle:AvanceSalaire')->findBy(
             array('employe' => $id), array('at' => 'DESC'));
 
         if (!$entity) {
@@ -219,15 +219,15 @@ class AvanceSalaireController extends Controller
      *
      * @Route("/avancesalaire/{id}", name="avancesalaire_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:AvanceSalaire:edit.html.twig")
+     * @Template("IndraAdminBundle:AvanceSalaire:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em             = $this->getDoctrine()->getManager();
-        $entity         = $em->getRepository('JanetTransitAdminBundle:AvanceSalaire')->find($id);
-        $dataform       = $request->request->get('janettransit_adminbundle_avancesalaire');
+        $entity         = $em->getRepository('IndraAdminBundle:AvanceSalaire')->find($id);
+        $dataform       = $request->request->get('indra_adminbundle_avancesalaire');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find AvanceSalaire entity.');
@@ -258,7 +258,7 @@ class AvanceSalaireController extends Controller
     public function validAction($id, $valid, $idEmploye)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:AvanceSalaire')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:AvanceSalaire')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find AvanceSalaire entity.');

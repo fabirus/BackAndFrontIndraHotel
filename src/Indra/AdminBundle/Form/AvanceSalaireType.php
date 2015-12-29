@@ -69,7 +69,7 @@ class AvanceSalaireType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\AvanceSalaire'
+            'data_class' => 'Indra\AdminBundle\Entity\AvanceSalaire'
         ));
     }
 
@@ -78,6 +78,6 @@ class AvanceSalaireType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_avancesalaire';
+        return 'indra_adminbundle_avancesalaire';
     }
 }
