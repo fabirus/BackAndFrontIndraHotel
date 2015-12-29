@@ -1,38 +1,38 @@
 prime_informations:
     path:     /prime
-    defaults: { _controller: JanetTransitAdminBundle:Prime:index }
+    defaults: { _controller: IndraAdminBundle:Prime:index }
 
 
 prime_create:
     path:     /prime/create
-    defaults: { _controller: JanetTransitAdminBundle:Prime:create }
+    defaults: { _controller: IndraAdminBundle:Prime:create }
 
 prime_show:
     path:     /prime/{id}
-    defaults: { _controller: JanetTransitAdminBundle:Prime:show }
+    defaults: { _controller: IndraAdminBundle:Prime:show }
 
 
 prime_delete:
     path:     /prime/delete/{id}/{del}
-    defaults: { _controller: JanetTransitAdminBundle:Prime:delete, _locale : fr }
+    defaults: { _controller: IndraAdminBundle:Prime:delete, _locale : fr }
     options:
         expose: true
 
 prime_edit:
     path:     /prime/{id}/edit/{idEmploye}
-    defaults: { _controller: JanetTransitAdminBundle:Prime:edit }
+    defaults: { _controller: IndraAdminBundle:Prime:edit }
 
 prime_update:
     path:     /prime/{id}/
-    defaults: { _controller: JanetTransitAdminBundle:Prime:update }
+    defaults: { _controller: IndraAdminBundle:Prime:update }
 
 
 prime_checkDate:
     path:     /prime/check/date/{idEmploye}
-    defaults: { _controller: JanetTransitAdminBundle:Prime:checkDate, _locale : fr }
+    defaults: { _controller: IndraAdminBundle:Prime:checkDate, _locale : fr }
     options:
         expose: true
 
 prime_valid:
     path:     /prime/{id}/{valid}/{idEmploye}
-    defaults: { _controller: JanetTransitAdminBundle:Prime:valid }
+    defaults: { _controller: IndraAdminBundle:Prime:valid }

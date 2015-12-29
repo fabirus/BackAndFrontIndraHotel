@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JanetTransit\AdminBundle\Entity\Prime;
-use JanetTransit\AdminBundle\Form\PrimeType;
+use Indra\AdminBundle\Entity\Prime;
+use Indra\AdminBundle\Form\PrimeType;
 use Symfony\Component\HttpFoundation\Response;
 /**
  * Prime controller.
@@ -29,7 +29,7 @@ class PrimeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JanetTransitAdminBundle:Employe')->findAll();
+        $entities = $em->getRepository('IndraAdminBundle:Employe')->findAll();
 
         return array(
             'entities' => $entities,
@@ -40,16 +40,16 @@ class PrimeController extends Controller
      *
      * @Route("/", name="prime_create")
      * @Method("POST")
-     * @Template("JanetTransitAdminBundle:Prime:new.html.twig")
+     * @Template("IndraAdminBundle:Prime:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity         = new Prime();
         $em             = $this->getDoctrine()->getManager();
         $form           = $this->createCreateForm($entity);
-        $dataform       = $request->request->get('janettransit_adminbundle_prime');
+        $dataform       = $request->request->get('indra_adminbundle_prime');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -95,7 +95,7 @@ class PrimeController extends Controller
     public function validAction($id, $valid, $idEmploye)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JanetTransitAdminBundle:Prime')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Prime')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Prime entity.');
@@ -118,7 +118,7 @@ class PrimeController extends Controller
         $request    = $this->get('request');
         $date       = $request->query->get('date');
         $em         = $this->getDoctrine()->getManager();
-        $entity     = $em->getRepository('JanetTransitAdminBundle:Prime')->findOneBy(
+        $entity     = $em->getRepository('IndraAdminBundle:Prime')->findOneBy(
             array(  'periode'        => $date,
                     'employe'        => $idEmploye
             ));
@@ -168,8 +168,8 @@ class PrimeController extends Controller
         $entity     = new Prime();
         $form       = $this->createCreateForm($entity);
 
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($id);
-        $entities       = $em->getRepository('JanetTransitAdminBundle:Prime')->findBy(
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($id);
+        $entities       = $em->getRepository('IndraAdminBundle:Prime')->findBy(
             array('employe' => $id)
         );
 
@@ -192,7 +192,7 @@ class PrimeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JanetTransitAdminBundle:Prime')->find($id);
+        $entity = $em->getRepository('IndraAdminBundle:Prime')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Prime entity.');
@@ -230,15 +230,15 @@ class PrimeController extends Controller
      *
      * @Route("/{id}", name="prime_update")
      * @Method("PUT")
-     * @Template("JanetTransitAdminBundle:Prime:edit.html.twig")
+     * @Template("IndraAdminBundle:Prime:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em             = $this->getDoctrine()->getManager();
-        $entity         = $em->getRepository('JanetTransitAdminBundle:Prime')->find($id);
-        $dataform       = $request->request->get('janettransit_adminbundle_prime');
+        $entity         = $em->getRepository('IndraAdminBundle:Prime')->find($id);
+        $dataform       = $request->request->get('indra_adminbundle_prime');
         $idEmploye      = $dataform['employe'];
-        $entityEmploye  = $em->getRepository('JanetTransitAdminBundle:Employe')->find($idEmploye);
+        $entityEmploye  = $em->getRepository('IndraAdminBundle:Employe')->find($idEmploye);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Prime entity.');

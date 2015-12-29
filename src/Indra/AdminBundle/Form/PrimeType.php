@@ -50,7 +50,7 @@ class PrimeType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JanetTransit\AdminBundle\Entity\Prime'
+            'data_class' => 'Indra\AdminBundle\Entity\Prime'
         ));
     }
 
@@ -59,6 +59,6 @@ class PrimeType extends AbstractType
      */
     public function getName()
     {
-        return 'janettransit_adminbundle_prime';
+        return 'indra_adminbundle_prime';
     }
 }
