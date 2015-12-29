@@ -36,6 +36,14 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.register label{
+    display: none;
+}
+
+.register input{
+    margin-top : 2%;
+}
+
 .fileUpload, .fileUpload1{
     margin-top: 2%;
     background: gainsboro;

@@ -1,5 +1,7 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+    <div class="alert alert-success" role="alert" id="error" style="width: 55%">
+        <i class="fa fa-envelope fa-2x"></i>  {{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}
+    </div>
 {% endblock fos_user_content %}
