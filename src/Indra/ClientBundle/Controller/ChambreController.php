@@ -15,4 +15,14 @@ class ChambreController extends Controller
             'entities' => $entities,
         ));
     }
+
+    public function showAction($id)
+    {
+        $em         = $this->getDoctrine()->getManager();
+        $entity     = $em->getRepository('IndraAdminBundle:CategorieChambre')->find($id);
+
+        return $this->render('IndraClientBundle:Chambre:show.html.twig', array(
+            'entity' => $entity,
+        ));
+    }
 }

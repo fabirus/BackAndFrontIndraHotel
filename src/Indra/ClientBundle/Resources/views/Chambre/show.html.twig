@@ -1,0 +1,23 @@
+{% extends 'baseClient.html.twig' %}
+{% block title %}INDRA Hotel | {{ entity.nom }} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="main">
+            <div class="details">
+                <a href="#"><h2>{{ entity.nom }}</h2></a>
+                <div class="det_pic">
+                    <img width="1094px" height="417px" src="{{ app.request.basePath }}{{ vich_uploader_asset(entity, 'imageFile') }}" alt="" />
+                </div>
+                <div class="det_text">
+                    <p class="para">{{ entity.description }} </p>
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

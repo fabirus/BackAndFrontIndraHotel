@@ -1,3 +1,7 @@
 chambre_informations:
     path:     /chambres
     defaults: { _controller: IndraClientBundle:Chambre:index }
+
+chambre_show:
+    path:     /chambres/{id}
+    defaults: { _controller: IndraClientBundle:Chambre:show }

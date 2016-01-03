@@ -8,14 +8,14 @@
                 {% for entity in entities %}
                     <li>
                         <div class="ser_img">
-                            <a href="">
+                            <a href="{{ path('chambre_show', {'id' : entity.id}) }}">
                                 <img width="244px" height="165px"  src="{{ app.request.basePath }}{{ vich_uploader_asset(entity, 'imageFile') }}" alt="" />
                                 <span class="next"> </span>
                             </a>
                         </div>
-                        <a href="details.html"><h3>{{ entity.nom }}</h3></a>
+                        <a href="{{ path('chambre_show', {'id' : entity.id}) }}"><h3>{{ entity.nom }}</h3></a>
                         <p class="para">{{ entity.description|slice(0, 62)|raw  }}</p>
-                        <h4><a  href="">{{ entity.prix }} <b>FCFA</b></a></h4>
+                        <h4><a  href="{{ path('chambre_show', {'id' : entity.id}) }}">{{ entity.prix }} <b>FCFA</b></a></h4>
                     </li>
                 {% endfor %}
                 <div class="clear"></div>
