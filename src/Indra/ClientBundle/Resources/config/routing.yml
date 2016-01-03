@@ -1,3 +1,7 @@
 indra_client_homepage:
     path:     /
     defaults: { _controller: IndraClientBundle:Home:index }
+
+chambre:
+    resource: "@IndraClientBundle/Resources/config/routing/chambre.yml"
+    prefix:   /

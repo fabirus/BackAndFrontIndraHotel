@@ -3,12 +3,16 @@
 namespace Indra\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * CategorieChambre
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\CategorieChambreRepository")
+ * @Vich\Uploadable
  */
 class CategorieChambre
 {
@@ -50,6 +54,37 @@ class CategorieChambre
 
 
     /**
+     *
+     * @Vich\UploadableField(mapping="chambre_image", fileNameProperty="imageName")
+     * @Assert\File(
+     * maxSize="2M",
+     * maxSizeMessage = "Taille max 2Mo",
+     * mimeTypes = {"image/jpeg", "image/png"},
+     * mimeTypesMessage = "Uploader une image au format jpg ou png"
+     * )
+     *
+     * @var File
+     */
+    private $imageFile;
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $imageName;
+
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+
+    /**
      * Get id
      *
      * @return integer
@@ -57,6 +92,22 @@ class CategorieChambre
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = new \Datetime();
     }
 
     /**
@@ -82,6 +133,40 @@ class CategorieChambre
     {
         return $this->nom;
     }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+
 
     /**
      * Set prix

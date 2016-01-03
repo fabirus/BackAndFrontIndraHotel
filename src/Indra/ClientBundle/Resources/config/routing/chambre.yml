@@ -1,0 +1,3 @@
+chambre_informations:
+    path:     /
+    defaults: { _controller: IndraClientBundle:Chambre:index }

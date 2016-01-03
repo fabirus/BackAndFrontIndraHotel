@@ -139,3 +139,11 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
             namer:              vich_uploader.namer_uniqid
+
+        chambre_image:
+            uri_prefix:         /img/chambre
+            upload_destination: %kernel.root_dir%/../web/img/chambre
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer:              vich_uploader.namer_uniqid

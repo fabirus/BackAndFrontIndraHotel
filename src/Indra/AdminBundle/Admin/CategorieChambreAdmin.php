@@ -28,6 +28,15 @@ class CategorieChambreAdmin extends Admin
                     'class' => 'form-control'
                 )))
             ->add('gallery')
+            ->add('imageFile', 'file', array(
+                'label' => 'Image Principale',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control file fileImage',
+                    'accept' =>'image/jpeg, image/png'
+                )
+            ))
+            ->add('updatedAt', 'datetime')
 
         ;
     }
@@ -47,6 +56,9 @@ class CategorieChambreAdmin extends Admin
             ->addIdentifier('nom')
             ->addIdentifier('prix')
             ->addIdentifier('gallery')
+            ->addIdentifier('imageFile', NULL, array(
+                'template' => 'IndraAdminBundle:TplAdmin:image.html.twig'
+            ))
 
         ;
     }

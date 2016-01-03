@@ -28,6 +28,7 @@ class ImageAdmin extends Admin
                     'accept' =>'image/jpeg, image/png'
                 )
             ))
+            ->add('updatedAt', 'datetime')
             ;
     }
 
@@ -42,6 +43,7 @@ class ImageAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('gallery')
+            ->addIdentifier('imageName')
             ->addIdentifier('imageFile', NULL, array(
                 'template' => 'IndraAdminBundle:TplAdmin:image.html.twig'
             ))
