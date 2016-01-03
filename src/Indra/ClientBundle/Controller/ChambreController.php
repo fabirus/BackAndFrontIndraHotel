@@ -11,8 +11,8 @@ class ChambreController extends Controller
         $em         = $this->getDoctrine()->getManager();
         $entities   = $em->getRepository('IndraAdminBundle:CategorieChambre')->findAll();
 
-        return array(
+        return $this->render('IndraClientBundle:Chambre:index.html.twig', array(
             'entities' => $entities,
-        );
+        ));
     }
 }

@@ -30,7 +30,7 @@ class CategorieChambreAdmin extends Admin
             ->add('gallery')
             ->add('imageFile', 'file', array(
                 'label' => 'Image Principale',
-                'required' => true,
+                'required' => false,
                 'attr' => array(
                     'class' => 'form-control file fileImage',
                     'accept' =>'image/jpeg, image/png'

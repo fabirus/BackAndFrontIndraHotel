@@ -1,41 +1,30 @@
-{% extends '::base.html.twig' %}
+{% extends 'baseClient.html.twig' %}
+{% block title %}INDRA Hotel | Chambres {% endblock %}
 
-{% block body -%}
-    <h1>Chambre list</h1>
-
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Numero</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('chambre_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.numero }}</td>
-                <td>
-                <ul>
+{% block body %}
+    <div class="container">
+        <div class="main">
+            <ul class="service_list">
+                {% for entity in entities %}
                     <li>
-                        <a href="{{ path('chambre_show', { 'id': entity.id }) }}">show</a>
+                        <div class="ser_img">
+                            <a href="">
+                                <img width="244px" height="165px"  src="{{ app.request.basePath }}{{ vich_uploader_asset(entity, 'imageFile') }}" alt="" />
+                                <span class="next"> </span>
+                            </a>
+                        </div>
+                        <a href="details.html"><h3>{{ entity.nom }}</h3></a>
+                        <p class="para">{{ entity.description|slice(0, 62)|raw  }}</p>
+                        <h4><a  href="">{{ entity.prix }} <b>FCFA</b></a></h4>
                     </li>
-                    <li>
-                        <a href="{{ path('chambre_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+                <div class="clear"></div>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
 
-        <ul>
-        <li>
-            <a href="{{ path('chambre_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
