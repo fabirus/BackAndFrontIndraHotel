@@ -121,6 +121,16 @@
                         {% endif %}
                         {% if is_granted('ROLE_SECRETAIRE') %}
                             <li>
+                                <a  href=""><i class="fa fa-book fa-3x"></i>CHAMBRES</a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_SECRETAIRE') %}
+                            <li>
+                                <a  href=""><i class="fa fa-book fa-3x"></i>RESERVATIONS</a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_SECRETAIRE') %}
+                            <li>
                                 <a  href="{{ path('facture_informations') }}"><i class="fa fa-book fa-3x"></i>{{ 'menu.manutention'|trans }}</a>
                             </li>
                         {% endif %}

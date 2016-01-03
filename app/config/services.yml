@@ -154,6 +154,18 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: MATERIEL FORUNI, label: Matériels}
 
+    admin.chambre:
+        class: Indra\AdminBundle\Admin\ChambreAdmin
+        arguments: [~, Indra\AdminBundle\Entity\Chambre, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CHAMBRES, label: chambres}
+
+    admin.categorieChambre:
+        class: Indra\AdminBundle\Admin\CategorieChambreAdmin
+        arguments: [~, Indra\AdminBundle\Entity\CategorieChambre, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CHAMBRES, label: Categories}
+
 
 
 #mes services personnalisées

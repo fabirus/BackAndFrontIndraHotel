@@ -22,7 +22,7 @@ indra_admin:
 
 indra_wiki:
     resource: "@IndraWikiBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /backoffice
 
 #    prefix:   /{_locale}
 #    requirements:

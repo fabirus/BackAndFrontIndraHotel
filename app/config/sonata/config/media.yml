@@ -9,15 +9,14 @@ sonata_media:
                 - sonata.media.provider.image
                 - sonata.media.provider.file
             formats:
-                small   : { width: 200 , quality: 70}
-#                big     : { width: 500 , quality: 70}
+                chambre : { width: 1094 , quality: 417}
                 wiki    : { width: 1250 , quality: 70}
 
     cdn:
         server:
-            path: /janettransitAdmin/web/uploads/media # http://media.sonata-project.org/
+            path: /uploads/media # http://media.sonata-project.org/
 
     filesystem:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
-            create:     false
+            create:     true

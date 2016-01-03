@@ -2,7 +2,7 @@
 
 namespace Indra\WikiBundle\Admin;
 
-use JanetTransit\WikiBundle\Entity\Category;
+use Indra\WikiBundle\Entity\Category;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -50,7 +50,7 @@ class ArticleAdmin extends Admin
                 ->add('category', 'sonata_type_model', array(
                     'label'     => 'Categorie',
                     'required'  => false,
-                    'class'     => 'JanetTransit\WikiBundle\Entity\Category',
+                    'class'     => 'Indra\WikiBundle\Entity\Category',
                     'property'  => 'name'
                 ))
             ->add('updatedAt', 'datetime', array(
@@ -64,7 +64,7 @@ class ArticleAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('category', null, array(), 'entity', array(
-                'class'    => 'JanetTransit\WikiBundle\Entity\Category',
+                'class'    => 'Indra\WikiBundle\Entity\Category',
                 'property' => 'name'
             ));
     }

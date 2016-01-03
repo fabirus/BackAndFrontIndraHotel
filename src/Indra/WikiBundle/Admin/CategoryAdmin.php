@@ -2,7 +2,7 @@
 
 namespace Indra\WikiBundle\Admin;
 
-use JanetTransit\WikiBundle\Entity\Category;
+use Indra\WikiBundle\Entity\Category;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -27,7 +27,7 @@ class CategoryAdmin extends Admin
                 ->add('parent', 'sonata_type_model', array(
                     'label'     => 'catégorie',
                     'required'  => false,
-                    'class'     => 'JanetTransit\WikiBundle\Entity\Category',
+                    'class'     => 'Indra\WikiBundle\Entity\Category',
                     'property'  => 'name'
                 ))
             ->end();
@@ -38,7 +38,7 @@ class CategoryAdmin extends Admin
         $datagridMapper
             ->add('name')
             ->add('parent', null, array('label' => 'Catégorie Parente'), 'entity', array(
-                'class'    => 'JanetTransit\WikiBundle\Entity\Category',
+                'class'    => 'Indra\WikiBundle\Entity\Category',
                 'property' => 'name'
             ));
     }

@@ -1,11 +1,11 @@
 janet_transit_wiki_homepage:
     path:     /wiki
-    defaults: { _controller: JanetTransitWikiBundle:Wiki:index }
+    defaults: { _controller: IndraWikiBundle:Wiki:index }
 
 janet_transit_wiki_articles:
     path:     /category/{id}
-    defaults: { _controller: JanetTransitWikiBundle:Wiki:articles }
+    defaults: { _controller: IndraWikiBundle:Wiki:articles }
 
 janet_transit_wiki_articles_show:
     path:     /article/{id}/{idCat}
-    defaults: { _controller: JanetTransitWikiBundle:Wiki:show }
+    defaults: { _controller: IndraWikiBundle:Wiki:show }
