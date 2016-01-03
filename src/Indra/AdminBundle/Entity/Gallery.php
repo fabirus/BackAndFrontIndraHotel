@@ -5,12 +5,12 @@ namespace Indra\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CategorieChambre
+ * Gallery
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\CategorieChambreRepository")
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\GalleryRepository")
  */
-class CategorieChambre
+class Gallery
 {
     /**
      * @var integer
@@ -29,24 +29,22 @@ class CategorieChambre
     private $nom;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float")
-     */
-    private $prix;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
 
-
     /**
-     * @ORM\ManyToOne(targetEntity="Gallery")
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="gallery", cascade={"persist", "remove"})
      */
-    private $gallery;
+    private $image;
+
+
+    public function __toString(){
+        return $this->nom;
+
+    }
 
 
     /**
@@ -60,11 +58,28 @@ class CategorieChambre
     }
 
     /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+
+    /**
      * Set nom
      *
      * @param string $nom
      *
-     * @return CategorieChambre
+     * @return Gallery
      */
     public function setNom($nom)
     {
@@ -84,35 +99,11 @@ class CategorieChambre
     }
 
     /**
-     * Set prix
-     *
-     * @param float $prix
-     *
-     * @return CategorieChambre
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return float
-     */
-    public function getPrix()
-    {
-        return $this->prix;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
      *
-     * @return CategorieChambre
+     * @return Gallery
      */
     public function setDescription($description)
     {
@@ -130,22 +121,5 @@ class CategorieChambre
     {
         return $this->description;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getGallery()
-    {
-        return $this->gallery;
-    }
-
-    /**
-     * @param mixed $gallery
-     */
-    public function setGallery($gallery)
-    {
-        $this->gallery = $gallery;
-    }
-
-
 }
+

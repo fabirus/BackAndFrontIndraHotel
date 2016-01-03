@@ -7,47 +7,44 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class CategorieChambreAdmin extends Admin
+class ImageAdmin extends Admin
 {
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('nom')
-            ->add('prix','number', array(
-                'label' => 'Prix',
+            ->add('gallery', 'sonata_type_model', array(
+                'label'     => 'Gallery d\'image',
+                'required'  => true,
+                'class'     => 'Indra\AdminBundle\Entity\Gallery',
+                'property'  => 'nom'
+            ))
+            ->add('imageFile', 'file', array(
+                'label' => 'Image',
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control number'
-                )))
-            ->add('description','textarea', array(
-                'label' => 'Description',
-                'required' => true,
-                'attr' => array(
-                    'class' => 'form-control'
-                )))
-            ->add('gallery')
-
-        ;
+                    'class' => 'form-control file fileImage',
+                    'accept' =>'image/jpeg, image/png'
+                )
+            ))
+            ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('prix')
-            ->add('gallery')
-            ;
+            ->add('gallery');
     }
 
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('nom')
-            ->addIdentifier('prix')
             ->addIdentifier('gallery')
-
+            ->addIdentifier('imageFile', NULL, array(
+                'template' => 'IndraAdminBundle:TplAdmin:image.html.twig'
+            ))
         ;
     }
 

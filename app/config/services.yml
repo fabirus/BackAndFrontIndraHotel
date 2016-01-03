@@ -166,6 +166,18 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: CHAMBRES, label: Categories}
 
+    admin.gallery:
+        class: Indra\AdminBundle\Admin\GalleryAdmin
+        arguments: [~, Indra\AdminBundle\Entity\Gallery, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: GALLERY & MEDIA, label: Gallery}
+
+    admin.image:
+        class: Indra\AdminBundle\Admin\ImageAdmin
+        arguments: [~, Indra\AdminBundle\Entity\Image, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: GALLERY & MEDIA, label: Images}
+
 
 
 #mes services personnalisées

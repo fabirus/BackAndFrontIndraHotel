@@ -131,3 +131,11 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
             namer:              vich_uploader.namer_uniqid
+
+        gallery_image:
+            uri_prefix:         /img/gallery
+            upload_destination: %kernel.root_dir%/../web/img/gallery
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer:              vich_uploader.namer_uniqid
