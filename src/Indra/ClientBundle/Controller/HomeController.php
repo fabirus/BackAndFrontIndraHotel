@@ -8,6 +8,11 @@ class HomeController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('IndraClientBundle:Home:index.html.twig');
+        $em         = $this->getDoctrine()->getManager();
+        $entities   = $em->getRepository('IndraAdminBundle:CategorieChambre')->findAll();
+
+        return $this->render('IndraClientBundle:Home:index.html.twig', array(
+            'entities' => $entities,
+        ));
     }
 }

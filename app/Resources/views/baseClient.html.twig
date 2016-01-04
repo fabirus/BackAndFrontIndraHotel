@@ -57,7 +57,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="top-menu">
                         <ul>
                             <li ><a href="{{ path('indra_client_homepage') }}">ACCUEIL</a></li>
-                            <li><a class="scroll" href="{{ path('chambre_informations') }}">CHAMBRES</a></li>
                             <li><a class="scroll" href="restaurant.html">RESTAURANT & BAR</a></li>
                             <li><a class="scroll" href="conference.html">TOURISME</a></li>
                             <li><a class="scroll" href="booking.html">RESERVATION</a></li>
@@ -156,8 +155,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             lazyLoad : true,
             autoPlay : true,
             navigation : true,
-            navigationText :  false,
+//            navigationText :  false,
+            navigationText : [
+                "<span style='color:black' class='glyphicon glyphicon-chevron-left fa-5x'></span>",
+                "<span style='color:black' class='glyphicon glyphicon-chevron-right fa-5x'></span>"
+            ],
             pagination : false,
+            next : 'nextsqsqsq'
         });
     </script>
 {% endblock %}
