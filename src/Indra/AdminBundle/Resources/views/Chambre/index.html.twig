@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} | Employés {% endblock %}
+
+{% block body -%}
+    <div class="alert alert-info" role="alert" style="font-size: 18px">Liste des Chambres et leur Statut</div>
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            {% include '::common/search.html.twig' %}
+        </div>
+
+    </div><br />
+
+    <div class="row result" data-content="employe" data-route="employe_search">
+        {% for entity in entities %}
+            {#{% if entity.del == 0 %}#}
+                <div style="height: 424px" class="infos_employe col-sm-6 col-md-3" aria-disabled="false">
+                    <div class="thumbnail" >
+                        <div class="caption">
+                            <h3>{{ entity.categorie }}</h3>
+                        </div>
+                        <div class="row" style="font-size: 20px; text-align: center">
+                            {% if entity.statut == 1 %}
+                                <i title="Libre" style="color: forestgreen; cursor: pointer;" class="fa fa-check fa-5x"></i>
+                            {% else %}
+                                <i title="Occupée" style="color: darkred; cursor: pointer;" class="fa fa-times fa-5x"></i>
+                            {% endif %}
+                        </div>
+                        <div class="caption">
+                            <h4><span class="label label-primary">Numéro</span> {{ entity.numero }}</h4>
+                            <h4><span class="label label-primary">Prix</span> {{ entity.categorie.prix }} <b>FCFA</b></h4>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/lib/common.js') }}"></script>
+{% endblock %}

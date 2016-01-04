@@ -1,0 +1,4 @@
+chambre_statut:
+    path:     /chambres/statut
+    defaults: { _controller: IndraAdminBundle:Chambre:index }
+

@@ -83,6 +83,11 @@ class CategorieChambre
      */
     private $updatedAt;
 
+    public function __toString(){
+        return $this->nom;
+
+    }
+
 
     /**
      * Get id

@@ -121,12 +121,12 @@
                         {% endif %}
                         {% if is_granted('ROLE_SECRETAIRE') %}
                             <li>
-                                <a  href=""><i class="fa fa-book fa-3x"></i>CHAMBRES</a>
+                                <a  href="{{ path('chambre_statut') }}"><i class="glyphicon glyphicon-bed fa-3x"></i>CHAMBRES</a>
                             </li>
                         {% endif %}
                         {% if is_granted('ROLE_SECRETAIRE') %}
                             <li>
-                                <a  href=""><i class="fa fa-book fa-3x"></i>RESERVATIONS</a>
+                                <a  href=""><i class="glyphicon glyphicon-bookmark fa-3x"></i>RESERVATIONS</a>
                             </li>
                         {% endif %}
                         {% if is_granted('ROLE_SECRETAIRE') %}

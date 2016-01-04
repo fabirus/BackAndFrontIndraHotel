@@ -43,28 +43,8 @@ contrat:
     resource: "@IndraAdminBundle/Resources/config/routing/contrat.yml"
     prefix:   /
 
-taf:
-    resource: "@IndraAdminBundle/Resources/config/routing/taf.yml"
-    prefix:   /
-
-tache:
-    resource: "@IndraAdminBundle/Resources/config/routing/tache.yml"
-    prefix:   /
-
 reunion:
     resource: "@IndraAdminBundle/Resources/config/routing/reunion.yml"
-    prefix:   /
-
-voiture:
-    resource: "@IndraAdminBundle/Resources/config/routing/voiture.yml"
-    prefix:   /
-
-document:
-    resource: "@IndraAdminBundle/Resources/config/routing/document.yml"
-    prefix:   /
-
-contratEts:
-    resource: "@IndraAdminBundle/Resources/config/routing/contratEts.yml"
     prefix:   /
 
 depense:
@@ -109,4 +89,8 @@ periodestock:
 
 materiel:
     resource: "@IndraAdminBundle/Resources/config/routing/materiel.yml"
+    prefix:   /
+
+chambre:
+    resource: "@IndraAdminBundle/Resources/config/routing/chambre.yml"
     prefix:   /

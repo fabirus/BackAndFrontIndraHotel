@@ -28,6 +28,18 @@ class Chambre
      */
     private $numero;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="statut", type="boolean")
+     */
+    private $statut = 1;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CategorieChambre")
+     */
+    private $categorie;
+
 
     /**
      * Get id
@@ -38,6 +50,40 @@ class Chambre
     {
         return $this->id;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isStatut()
+    {
+        return $this->statut;
+    }
+
+    /**
+     * @param boolean $statut
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param mixed $categorie
+     */
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
+    }
+
 
     /**
      * Set numero

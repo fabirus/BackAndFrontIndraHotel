@@ -17,15 +17,16 @@ class ChambreAdmin extends Admin
             ->add('numero', 'number', array(
                 'label' => 'Numéro',
                 'required'  => true,
-
             ))
+            ->add('categorie')
             ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('numero');
+            ->add('numero')
+            ->add('categorie');
     }
 
     // Fields to be shown on lists
@@ -33,6 +34,8 @@ class ChambreAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('numero')
+            ->addIdentifier('categorie')
+            ->addIdentifier('statut')
         ;
     }
 
