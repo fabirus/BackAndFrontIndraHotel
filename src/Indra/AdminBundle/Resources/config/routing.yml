@@ -94,3 +94,7 @@ materiel:
 chambre:
     resource: "@IndraAdminBundle/Resources/config/routing/chambre.yml"
     prefix:   /
+
+reservation:
+    resource: "@IndraAdminBundle/Resources/config/routing/reservation.yml"
+    prefix:   /

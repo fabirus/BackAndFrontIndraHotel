@@ -1,0 +1,31 @@
+reservation_informations:
+    path:     /reservation
+    defaults: { _controller: IndraAdminBundle:Reservation:index }
+
+reservation_create:
+    path:     /reservation/create
+    defaults: { _controller: IndraAdminBundle:Reservation:create }
+
+reservation_show:
+    path:     /reservation/{id}
+    defaults: { _controller: IndraAdminBundle:Reservation:show }
+
+reservation_delete:
+    path:     /reservation/delete/{id}/{del}
+    defaults: { _controller: IndraAdminBundle:Reservation:delete, _locale : fr}
+    options:
+        expose: true
+
+reservation_edit:
+    path:     /reservation/{id}/edit
+    defaults: { _controller: IndraAdminBundle:Reservation:edit }
+
+reservation_update:
+    path:     /reservation/{id}/
+    defaults: { _controller: IndraAdminBundle:Reservation:update }
+
+poste_of_service:
+    path:     /poste/service/{id}/
+    defaults: { _controller: IndraAdminBundle:Reservation:servicePoste, _locale : fr }
+    options:
+        expose: true
