@@ -1,55 +1,155 @@
 {% extends '::base.html.twig' %}
 
+{% block title %} {{ parent() }} | Réservations {% endblock %}
+
 {% block body -%}
-    <h1>Reservation list</h1>
+<div class="alert alert-info" role="alert" style="font-size: 18px">Liste des Réservations</div>
+<div class="row">
+    <div class="col-md-6">
+        <i class="fa fa-plus-square fa-3x" data-toggle="modal"
+           data-target="#modalForm" title="Ajouter" style="color:
+        #0FAD8C;cursor: pointer;"></i>
+    </div>
+    <div class="col-md-6">
+        <i title="Imprimer" class="fa fa-print fa-3x" onclick="common().print('noprint', 'Liste des Réservations')" style="float: right; cursor: pointer; margin-right: 2%"></i>
+    </div>
+</div><br />
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Tel</th>
-                <th>Requete</th>
-                <th>Heure</th>
-                <th>Arrive</th>
-                <th>Depart</th>
-                <th>Statut</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('reservation_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nom }}</td>
-                <td>{{ entity.email }}</td>
-                <td>{{ entity.tel }}</td>
-                <td>{{ entity.requete }}</td>
-                <td>{{ entity.heure }}</td>
-                <td>{{ entity.arrive }}</td>
-                <td>{{ entity.depart }}</td>
-                <td>{{ entity.statut }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('reservation_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('reservation_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<table class="table table-hover table-bordered dataTable">
+    <thead>
+    <tr>
+        <th style="text-align: center">Arrivée</th>
+        <th style="text-align: center">Départ</th>
+        <th style="text-align: center">Heure A</th>
+        <th style="text-align: center">Nom</th>
+        <th style="text-align: center">Email</th>
+        <th style="text-align: center">Date Réservation</th>
+        <th style="text-align: center">Téléphone</th>
+        <th style="text-align: center">Requète</th>
+        <th style="text-align: center">Type Log</th>
+        <th style="text-align: center">Chambre</th>
+        <th style="text-align: center">Statut</th>
+        <th class="noprint" style="text-align: center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr {% if entity.del == 1 %} class="danger" {% endif %}>
+            <td style="text-align: center">{{ entity.arrive }}</td>
+            <td style="text-align: center">{{ entity.depart }}</td>
+            <td style="text-align: center">{{ entity.heure }}</td>
+            <td style="text-align: center">{{ entity.nom }}</td>
+            <td style="text-align: center">
+                {% if entity.email is not null %}
+                    {{ entity.email }}
+                {% else %}
+                    <span class="label label-danger">Non renseigné</span>
+                {% endif %}
+            </td>
+            <td style="text-align: center">{{ entity.updatedAt|date("d/m/Y") }}</td>
+            <td style="text-align: center">{{ entity.tel }}</td>
+            <td style="text-align: center">
+                {% if entity.requete is not null %}
+                    {{ entity.requete }}
+                {% else %}
+                    <span class="label label-danger">Non renseigné</span>
+                {% endif %}
+            </td>
+            <td style="text-align: center">{{ entity.categorieChambre }}</td>
+            <td style="text-align: center">
+                {% if entity.chambre is not null %}
+                    {{ entity.chambre }}
+                {% else %}
+                    <span class="label label-danger">Non renseigné</span>
+                {% endif %}
+            </td>
+            <td style="text-align: center">{{ entity.statut }}</td>
+            <td class="noprint" style="text-align: center">
+                <a href="{{ path('reservation_show', {'id' : entity.id}) }}">
+                    <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
-        <ul>
-        <li>
-            <a href="{{ path('reservation_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+<!-- Modal -->
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-info">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Enregistrement d'une réservation</h4>
+            </div>
+            {{ form_start(form) }}
+            <div class="modal-body">
+                {{ form_errors(form) }}
+
+                {{ form_row(form.nom) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.tel) }}
+                {{ form_label(form.heure) }}
+                <div class="form-group">
+                    <div class='input-group date hourpicker'>
+                        {{ form_widget(form.heure) }}
+                        <span class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </span>
+                    </div>
+                </div>
+                {{ form_label(form.arrive) }}
+                <div class="form-group">
+                    <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                        {{ form_widget(form.arrive) }}
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                {{ form_label(form.depart) }}
+                <div class="form-group">
+                    <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                        {{ form_widget(form.depart) }}
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                {{ form_row(form.categorieChambre) }}
+                {{ form_label(form.chambre) }}
+                <select id="indra_adminbundle_reservation_chambre" name="indra_adminbundle_reservation[chambre]" class="result form-control">
+                </select><br>
+                <div id="remove">
+                    {{ form_row(form.chambre) }}
+                </div>
+                {{ form_row(form.requete) }}
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    {{ form_widget(form.submit, { 'label': 'Enregister', 'attr' :{'type' : 'button', 'class' :'btn btn-primary register'}})}}
+
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+        <script>
+            common().date();
+            common().heure();
+            common().dataTable(0);
+            $("form").validate();
+            common().validation();
+            $(".phoneNumber").rules("add", { phone: "" });
+            $('#remove').remove();
+        </script>
+
     {% endblock %}

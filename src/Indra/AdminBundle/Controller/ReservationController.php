@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Indra\AdminBundle\Entity\Reservation;
 use Indra\AdminBundle\Form\ReservationType;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Reservation controller.
@@ -37,6 +39,31 @@ class ReservationController extends Controller
             'form'     => $form->createView(),
         );
     }
+
+    /**
+     * Lists all Room By passing id of entity Categrory Room.
+     *
+     * @Route("/poste/service/{id}", name="poste_of_service")
+     * @Method("GET")
+     * @Template()
+     */
+    public function chambreCategorieAction($id)
+    {
+        $em       = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('IndraAdminBundle:Chambre')->findBy(array(
+            'categorie' => $id
+
+        ));
+
+        $json['view'] = $this->renderView('IndraAdminBundle:Reservation:roomCategorie.html.twig',
+            array(
+                'entities' => $entities
+            ));
+
+        $response = new Response(json_encode($json));
+        return $response;
+
+    }
     /**
      * Creates a new Reservation entity.
      *
@@ -51,17 +78,42 @@ class ReservationController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $entity->setUpdatedAt(new DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('reservation_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('reservation_informations'));
         }
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
         );
+    }
+
+    /**
+     * Operation Create Entity
+     */
+
+    public function operationUpdate($entity, $action) {
+        $user  = $this->get('security.context')->getToken()->getUser();
+        $data   = array(
+            "id"                =>  $entity->getId(),
+            "entite"            => 'RESERVATIOn',
+            "nom"               =>  $entity->getNom(),
+            "telephome"         =>  $entity->getTel(),
+            "TypeChambre"       =>  $action == 'SUPPRESSION' ? 'none' : $entity->getCategorieChambre(),
+            "Chambre"           =>  $action == 'SUPPRESSION' ? 'none' : $entity->getChambre(),
+            'heure'             =>  $entity->getHeure(),
+            "Arrivée"           =>  $entity->getArrive(),
+            "Départ"            =>  $entity->getDepart(),
+            "email"             =>  $entity->getEmail()
+
+        );
+
+        $this->get('application.operation')->update($data, $user, $action);
+
     }
 
     /**
@@ -83,23 +135,6 @@ class ReservationController extends Controller
         return $form;
     }
 
-    /**
-     * Displays a form to create a new Reservation entity.
-     *
-     * @Route("/new", name="reservation_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new Reservation();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
 
     /**
      * Finds and displays a Reservation entity.
@@ -113,43 +148,16 @@ class ReservationController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IndraAdminBundle:Reservation')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Reservation entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-     * Displays a form to edit an existing Reservation entity.
-     *
-     * @Route("/{id}/edit", name="reservation_edit")
-     * @Method("GET")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('IndraAdminBundle:Reservation')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Reservation entity.');
-        }
-
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Reservation entity.');
+        }
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -188,62 +196,42 @@ class ReservationController extends Controller
             throw $this->createNotFoundException('Unable to find Reservation entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+//            $entity->setUpdatedAt(new DateTime());
             $em->flush();
-
-            return $this->redirect($this->generateUrl('reservation_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('reservation_show', array('id' => $id)));
         }
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
     /**
-     * Deletes a Reservation entity.
+     * Deletes a Employe entity.
      *
-     * @Route("/{id}", name="reservation_delete")
+     * @Route("/employe/delete/{id}/{del}", name="employe_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id, $del)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('IndraAdminBundle:Reservation')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('IndraAdminBundle:Reservation')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Reservation entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Reservation entity.');
         }
 
-        return $this->redirect($this->generateUrl('reservation'));
+        $entity->setDel($del);
+        $em->flush();
+        if ($del == 1){
+            $this->operationUpdate($entity, 'SUPPRESSION');
+        }
+
+        return $this->redirect($this->generateUrl('reservation_show', array('id' => $id)));
     }
 
-    /**
-     * Creates a form to delete a Reservation entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('reservation_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
-    }
 }

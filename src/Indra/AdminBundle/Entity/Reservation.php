@@ -31,7 +31,7 @@ class Reservation
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
@@ -45,7 +45,7 @@ class Reservation
     /**
      * @var string
      *
-     * @ORM\Column(name="requete", type="text")
+     * @ORM\Column(name="requete", type="text", nullable=true)
      */
     private $requete;
 
@@ -92,6 +92,20 @@ class Reservation
      */
     private $statut = 1;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="del", type="boolean")
+     */
+    private $del = 0;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
 
     /**
      * Get id
@@ -101,6 +115,38 @@ class Reservation
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDel()
+    {
+        return $this->del;
+    }
+
+    /**
+     * @param boolean $del
+     */
+    public function setDel($del)
+    {
+        $this->del = $del;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = new \Datetime();
     }
 
     /**

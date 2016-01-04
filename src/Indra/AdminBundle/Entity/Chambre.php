@@ -40,6 +40,11 @@ class Chambre
      */
     private $categorie;
 
+    public function __toString(){
+        return ''.$this->numero;
+
+    }
+
 
     /**
      * Get id

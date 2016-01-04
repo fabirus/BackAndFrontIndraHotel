@@ -24,8 +24,8 @@ reservation_update:
     path:     /reservation/{id}/
     defaults: { _controller: IndraAdminBundle:Reservation:update }
 
-poste_of_service:
-    path:     /poste/service/{id}/
-    defaults: { _controller: IndraAdminBundle:Reservation:servicePoste, _locale : fr }
+room_category:
+    path:     /reservation/chambre/{id}/
+    defaults: { _controller: IndraAdminBundle:Reservation:chambreCategorie, _locale : fr }
     options:
         expose: true

@@ -288,6 +288,24 @@ function common() {
         });
     };
 
+    /**
+     * Select All Room for Categorie Room
+     */
+    var selectEntity = function selectEntity(route) {
+        $.ajax({
+            type: "GET",
+            url : Routing.generate(route, {'id' : $('.select').val() }),
+            cache: false,
+            dataType: 'json',
+            success : function(response){
+                $('.result').html(response['view']);
+            },
+            error : function(err){
+                console.log(err);
+            }
+        });
+    };
+
 
     /**
      * Search existing file in BDD
@@ -543,7 +561,8 @@ function common() {
         validation          : validation,
         checkDateCustomBDD  : checkDateCustomBDD,
         fileShow            : fileShow,
-        checkQte            : checkQte
+        checkQte            : checkQte,
+        selectEntity        : selectEntity
     };
 }
 
