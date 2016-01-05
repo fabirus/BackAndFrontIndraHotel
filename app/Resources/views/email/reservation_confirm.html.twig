@@ -1,0 +1,59 @@
+{% extends 'email/layout.html.twig' %}
+
+{% block body %}
+    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entity.nom}}</td>
+            </tr>
+            {% if entity.email is not null %}
+                <tr>
+                    <th>Email</th>
+                    <td>{{ entity.email }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ entity.tel}}</td>
+            </tr>
+            <tr>
+                <th>Heure Arrivée</th>
+                <td>{{ entity.heure}}</td>
+            </tr>
+            <tr>
+                <th>Date Arrivée</th>
+                <td>{{ entity.arrive}}</td>
+            </tr>
+            <tr>
+                <th>Date Départ</th>
+                <td>{{ entity.depart }}</td>
+            </tr>
+            <tr>
+                <th>Type de Logement</th>
+                <td>{{ entity.categorieChambre }}</td>
+            </tr>
+            {% if entity.chambre is not null %}
+                <tr>
+                    <th>Chambre</th>
+                    <td>{{ entity.chambre }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>Nombre de Chambres</th>
+                <td>{{ entity.qte }}</td>
+            </tr>
+            {% if entity.requete is not null %}
+                <tr>
+                    <th>Requète</th>
+                    <td>{{ entity.requete }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>Montant </th>
+                <td>{{ montant }} <b>FCFA</b></td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

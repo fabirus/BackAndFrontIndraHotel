@@ -257,14 +257,53 @@ class ReservationController extends Controller
         }
         $entity->setStatut($valid);
         $em->flush();
+
         if($valid == 1){
             $this->get('session')->getFlashBag()->add('error', 'Réseravtion refusée !!');
         }
+
         if($valid == 0) {
             $this->get('session')->getFlashBag()->add('success', 'Réseravtion validée avec Succès !!');
         }
 
-        return $this->redirect($this->generateUrl('reservation_informations'));
+        if($entity->getEmail() != null && $valid == 0 ){
+            $this->sendMail($entity);
+        }
+
+//        return $this->redirect($this->generateUrl('reservation_informations'));
+    }
+
+
+    public function sendMail($entity){
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Validation de la Réservation')
+            ->setFrom('indrahotel@gmail.com')
+            ->setTo($entity->getEmail())
+            ->setBody(
+                $this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                    'email/reservation_confirm.html.twig',
+                    array(
+                        'entity'  => $entity,
+                        'montant' => $this->calculMontant($entity)
+                    )
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
+    }
+
+    public function calculMontant($entity){
+        $arrive = strtotime(str_replace('/', '-', $entity->getArrive()));
+        $depart = strtotime(str_replace('/', '-', $entity->getDepart()));
+        $datediff = $depart - $arrive;
+        $jours = (int)($datediff/(60*60*24));
+
+        $montant = $jours * $entity->getCategorieChambre()->getPrix() * $entity->getQte();
+
+        return $montant;
+
     }
 
 }
