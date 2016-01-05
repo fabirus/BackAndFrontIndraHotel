@@ -178,7 +178,7 @@
                 common().notice('{{ flashMessage }}','ok');
             {% endfor %}
             {% for flashMessage in app.session.flashbag.get('error') %}
-            common().notice('{{ flashMessage }}','ko');
+                common().notice('{{ flashMessage }}','ko');
             {% endfor %}
             common().date();
             common().heure();

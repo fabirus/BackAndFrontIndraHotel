@@ -2,3 +2,8 @@ chambre_statut:
     path:     /chambres/statut
     defaults: { _controller: IndraAdminBundle:Chambre:index }
 
+chambre_search:
+    path:     /recheche/chambre
+    defaults: { _controller: IndraAdminBundle:Chambre:search, _locale : fr }
+    options:
+        expose: true

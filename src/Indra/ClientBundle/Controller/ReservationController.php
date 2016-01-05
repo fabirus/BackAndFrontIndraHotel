@@ -52,7 +52,7 @@ class ReservationController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'Réservation envoyée avec Succès !!');
+            $this->get('session')->getFlashBag()->add('successClientReservation', 'Réservation envoyée avec Succès !!');
 
             return $this->redirect($this->generateUrl('reservationClient_informations'));
         }

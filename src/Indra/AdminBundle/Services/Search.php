@@ -18,29 +18,29 @@ class Search extends Controller{
 //*    "em" = @Inject("doctrine.orm.entity_manager")
 //* })
 //*/
-public function __construct(EntityManager $em, RequestStack $requestStack){
-    $this->request  = $requestStack->getCurrentRequest();
-    $this->em       = $em;
-}
+    public function __construct(EntityManager $em, RequestStack $requestStack){
+        $this->request  = $requestStack->getCurrentRequest();
+        $this->em       = $em;
+    }
 
 
-/**
- * @param $select Array of Informations of Select
- * @return array
- */
-public function search($select) {
+    /**
+     * @param $select Array of Informations of Select
+     * @return array
+     */
+    public function search($select) {
 
-    $qb = $this->em->createQueryBuilder();
-    $qb->select($select['select'])
-        ->from($select['entity'], $select['select'])
-        ->where($select['where'])
-        ->orderBy($select['orderBy'])
-        ->setParameter('searchText', '%'.$select['searchText'].'%');
+        $qb = $this->em->createQueryBuilder();
+        $qb->select($select['select'])
+            ->from($select['entity'], $select['select'])
+            ->where($select['where'])
+            ->orderBy($select['orderBy'])
+            ->setParameter('searchText', '%'.$select['searchText'].'%');
 
-    $query = $qb->getQuery();
+        $query = $qb->getQuery();
 
-    return $query->getResult();
-}
+        return $query->getResult();
+    }
 
 
 

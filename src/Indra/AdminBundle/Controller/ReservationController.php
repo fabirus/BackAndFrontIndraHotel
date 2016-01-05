@@ -270,7 +270,7 @@ class ReservationController extends Controller
             $this->sendMail($entity);
         }
 
-//        return $this->redirect($this->generateUrl('reservation_informations'));
+        return $this->redirect($this->generateUrl('reservation_informations'));
     }
 
 

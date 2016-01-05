@@ -4,7 +4,7 @@
 {% block body %}
     <div class="contact-bg2">
         <div class="container">
-            {% for flashMessage in app.session.flashbag.get('success') %}
+            {% for flashMessage in app.session.flashbag.get('successClientReservation') %}
                 <div class="alert alert-success" role="alert" style="font-size: 18px;margin-top: 2%;">
                     {{ flashMessage }}
                 </div>
