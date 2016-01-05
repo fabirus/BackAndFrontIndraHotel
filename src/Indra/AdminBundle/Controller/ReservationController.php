@@ -11,6 +11,8 @@ use Indra\AdminBundle\Entity\Reservation;
 use Indra\AdminBundle\Form\ReservationType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 
 /**
  * Reservation controller.
@@ -82,7 +84,9 @@ class ReservationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'Réservation ajoutée avec Succès !!');
             $this->operationUpdate($entity, 'CREATION');
+
 
             return $this->redirect($this->generateUrl('reservation_informations'));
         }
@@ -203,6 +207,7 @@ class ReservationController extends Controller
         if ($editForm->isValid()) {
 //            $entity->setUpdatedAt(new DateTime());
             $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'Modification de la Réservation avec Succès !!');
             $this->operationUpdate($entity, 'MODIFICATION');
             return $this->redirect($this->generateUrl('reservation_show', array('id' => $id)));
         }

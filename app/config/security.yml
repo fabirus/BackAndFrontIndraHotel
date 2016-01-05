@@ -112,6 +112,6 @@ security:
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/profile/edit-profile, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/_console, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-        - { path: ^/.*, role: ROLE_USER }
+        - { path: ^/backoffice/.*, role: ROLE_USER }
 #        - { path: ^/profile$, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
 

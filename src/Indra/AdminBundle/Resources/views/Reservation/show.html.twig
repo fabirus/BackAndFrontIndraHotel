@@ -138,7 +138,7 @@
                         {{ form_row(edit_form.chambre) }}
                     </div>
                     <div id="display">
-                        {{ form_row(form.qte) }}
+                        {{ form_row(edit_form.qte) }}
                     </div>
                     {{ form_row(edit_form.requete) }}
 
@@ -161,6 +161,9 @@
     <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
     <script>
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            common().notice('{{ flashMessage }}','ok');
+        {% endfor %}
         common().initPopover();
         common().date();
         common().heure();
