@@ -82,6 +82,7 @@ class ReservationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->operationUpdate($entity, 'CREATION');
 
             return $this->redirect($this->generateUrl('reservation_informations'));
         }
@@ -202,6 +203,7 @@ class ReservationController extends Controller
         if ($editForm->isValid()) {
 //            $entity->setUpdatedAt(new DateTime());
             $em->flush();
+            $this->operationUpdate($entity, 'MODIFICATION');
             return $this->redirect($this->generateUrl('reservation_show', array('id' => $id)));
         }
 
