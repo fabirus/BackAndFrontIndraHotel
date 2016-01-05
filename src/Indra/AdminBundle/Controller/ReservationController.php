@@ -241,4 +241,30 @@ class ReservationController extends Controller
         return $this->redirect($this->generateUrl('reservation_show', array('id' => $id)));
     }
 
+    /**
+     * Valid AvanceSalaire entity.
+     *
+     * @Route("/avancesalaire/{id}/{valid}/{idEmploye}", name="avancesalaire_valid")
+     * @Method("VALID")
+     */
+    public function validAction($id, $valid)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('IndraAdminBundle:Reservation')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Reservation entity.');
+        }
+        $entity->setStatut($valid);
+        $em->flush();
+        if($valid == 1){
+            $this->get('session')->getFlashBag()->add('error', 'Réseravtion refusée !!');
+        }
+        if($valid == 0) {
+            $this->get('session')->getFlashBag()->add('success', 'Réseravtion validée avec Succès !!');
+        }
+
+        return $this->redirect($this->generateUrl('reservation_informations'));
+    }
+
 }

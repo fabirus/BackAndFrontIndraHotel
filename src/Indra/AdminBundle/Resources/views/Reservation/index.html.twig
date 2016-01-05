@@ -65,7 +65,33 @@
                 {% endif %}
             </td>
             <td style="text-align: center">{{ entity.qte }}</td>
-            <td style="text-align: center">{{ entity.statut }}</td>
+            <td style="text-align: center">
+                {% if entity.statut == 1 %}
+                    <button type="button" class="btn btn-danger">
+                        <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('reservation_valid', {'id' : entity.id, 'valid' : 0}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Refusé
+                        </a>
+                    </button>
+                {% else %}
+                    <button type="button" class="btn btn-success">
+                        <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('reservation_valid', {'id' : entity.id, 'valid' : 1}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Validé
+                        </a>
+                    </button>
+                {% endif %}
+            </td>
             <td class="noprint" style="text-align: center">
                 <a href="{{ path('reservation_show', {'id' : entity.id}) }}">
                     <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
@@ -150,6 +176,9 @@
         <script>
             {% for flashMessage in app.session.flashbag.get('success') %}
                 common().notice('{{ flashMessage }}','ok');
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+            common().notice('{{ flashMessage }}','ko');
             {% endfor %}
             common().date();
             common().heure();

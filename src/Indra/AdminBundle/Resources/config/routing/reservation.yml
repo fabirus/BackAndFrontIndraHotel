@@ -29,3 +29,7 @@ room_category:
     defaults: { _controller: IndraAdminBundle:Reservation:chambreCategorie, _locale : fr }
     options:
         expose: true
+
+reservation_valid:
+    path:     /reservation/{id}/{valid}
+    defaults: { _controller: IndraAdminBundle:Reservation:valid }
