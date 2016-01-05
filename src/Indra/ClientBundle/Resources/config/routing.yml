@@ -5,3 +5,7 @@ indra_client_homepage:
 chambre:
     resource: "@IndraClientBundle/Resources/config/routing/chambre.yml"
     prefix:   /
+
+reservation:
+    resource: "@IndraClientBundle/Resources/config/routing/reservation.yml"
+    prefix:   /

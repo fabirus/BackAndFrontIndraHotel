@@ -1,0 +1,7 @@
+reservationClient_informations:
+    path:     /reservation
+    defaults: { _controller: IndraClientBundle:Reservation:index }
+
+reservationClient_create:
+    path:     /reservationClient/create
+    defaults: { _controller: IndraClientBundle:Reservation:create }

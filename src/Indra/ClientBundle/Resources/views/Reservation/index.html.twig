@@ -1,0 +1,122 @@
+{% extends 'baseClient.html.twig' %}
+{% block title %}INDRA Hotel | Réservation {% endblock %}
+
+{% block body %}
+    <div class="contact-bg2">
+        <div class="container">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success" role="alert" style="font-size: 18px;margin-top: 2%;">
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}
+            <div class="booking">
+                <h3>Réservation</h3>
+                <div class="col-md-8 booking-form">
+                        {{ form_start(form) }}
+                            {{ form_errors(form) }}
+
+                            {{ form_row(form.nom) }}
+                            {{ form_row(form.email) }}
+                            {{ form_label(form.tel) }}
+                            <div class="form-group">
+                                <div class='input-group' id="tel">
+                                    <span class="input-group-addon">+237</span>
+                                    {{ form_widget(form.tel) }}
+                                    <span class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </span>
+                                </div>
+                            </div>
+                            {{ form_label(form.heure) }}
+                            <div class="form-group">
+                                <div class='input-group date hourpicker'>
+                                    {{ form_widget(form.heure) }}
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            {{ form_label(form.arrive) }}
+                            <div class="form-group">
+                                <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                                    {{ form_widget(form.arrive) }}
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            {{ form_label(form.depart) }}
+                            <div class="form-group">
+                                <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                                    {{ form_widget(form.depart) }}
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            {{ form_row(form.categorieChambre) }}
+                            {#{{ form_label(form.chambre) }}#}
+                            {#<select id="indra_adminbundle_reservation_chambre" name="indra_adminbundle_reservation[chambre]" class="result form-control">#}
+                            {#</select><br>#}
+                            <div id="remove">
+                                {{ form_row(form.chambre) }}
+                            </div>
+                            {{ form_row(form.requete) }}
+
+                            {{ form_widget(form.submit, { 'label': 'Enregister', 'attr' :{'type' : 'submit', 'class' : 'submit'}})}}
+                            <input type="reset" value="Reset">
+
+
+                        {{ form_end(form) }}
+                        {#<input type="submit" value="Submit">#}
+                        {#<input type="reset" value="Reset">#}
+                </div>
+                <div class="col-md-4 booking-news">
+                    <h4>Latest News</h4>
+                    <div class="LatestNews">
+                        <h6><a href="#">Starting New Ventures for a Current Business</a></h6>
+                        <span>01-7-2014 </span>
+                        <p>Faworki bonbon marshmallow caramels applicake tart gummi bears liquorice.</p>
+                    </div>
+                    <div class="LatestNews">
+                        <h6><a href="#">Starting New Ventures for a Current Business</a></h6>
+                        <span>01-7-2014 </span>
+                        <p>Faworki bonbon marshmallow caramels applicake tart gummi bears liquorice.</p>
+                    </div>
+                    <div class="LatestNews">
+                        <h6><a href="#">Starting New Ventures for a Current Business</a></h6>
+                        <span>01-7-2014 </span>
+                        <p>Faworki bonbon marshmallow caramels applicake tart gummi bears liquorice.</p>
+                    </div>
+                    <div class="LatestNews">
+                        <h6><a href="#">Starting New Ventures for a Current Business</a></h6>
+                        <span>01-7-2014 </span>
+                        <p>Faworki bonbon marshmallow caramels applicake tart gummi bears liquorice.</p>
+                    </div>
+                </div>
+
+                <div class="clearfix"> </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
+    <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script>
+        common().date();
+        common().heure();
+        $("form").validate();
+        common().validation();
+        $(".phoneNumber").rules("add", { phone: "" });
+        $('#remove').remove();
+    </script>
+
+{% endblock %}
