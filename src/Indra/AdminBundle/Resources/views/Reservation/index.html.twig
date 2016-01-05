@@ -28,6 +28,7 @@
         <th style="text-align: center">Requète</th>
         <th style="text-align: center">Type Log</th>
         <th style="text-align: center">Chambre</th>
+        <th style="text-align: center">Qte</th>
         <th style="text-align: center">Statut</th>
         <th class="noprint" style="text-align: center">Actions</th>
     </tr>
@@ -63,6 +64,7 @@
                     <span class="label label-danger">Non renseigné</span>
                 {% endif %}
             </td>
+            <td style="text-align: center">{{ entity.qte }}</td>
             <td style="text-align: center">{{ entity.statut }}</td>
             <td class="noprint" style="text-align: center">
                 <a href="{{ path('reservation_show', {'id' : entity.id}) }}">
@@ -123,6 +125,9 @@
                 <div id="remove">
                     {{ form_row(form.chambre) }}
                 </div>
+                <div id="display">
+                    {{ form_row(form.qte) }}
+                </div>
                 {{ form_row(form.requete) }}
 
                 <div class="modal-footer">
@@ -150,6 +155,7 @@
             common().validation();
             $(".phoneNumber").rules("add", { phone: "" });
             $('#remove').remove();
+            $('#display').css({'display' : 'none'});
         </script>
 
     {% endblock %}

@@ -92,6 +92,14 @@ class Reservation
      */
     private $statut = 1;
 
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="qte", type="integer")
+     */
+    private $qte = 1;
+
     /**
      * @var boolean
      *
@@ -116,6 +124,24 @@ class Reservation
     {
         return $this->id;
     }
+
+    /**
+     * @return int
+     */
+    public function getQte()
+    {
+        return $this->qte;
+    }
+
+    /**
+     * @param int $qte
+     */
+    public function setQte($qte)
+    {
+        $this->qte = $qte;
+    }
+
+
 
     /**
      * @return boolean

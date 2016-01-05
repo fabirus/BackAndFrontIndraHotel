@@ -80,6 +80,13 @@ class ReservationType extends AbstractType
                     'class' => 'form-control'
                 )
             ))
+            ->add('qte','number', array(
+                'label' => 'Nombre *',
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control number',
+                    'value' => '1'
+                )))
         ;
     }
     
