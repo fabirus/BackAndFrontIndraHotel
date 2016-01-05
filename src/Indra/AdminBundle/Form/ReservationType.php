@@ -85,7 +85,8 @@ class ReservationType extends AbstractType
                 'required' => false,
                 'attr' => array(
                     'class' => 'form-control number',
-                    'value' => '1'
+                    'value' => '1',
+                    'style' => 'width : 25%'
                 )))
         ;
     }

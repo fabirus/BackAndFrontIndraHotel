@@ -137,6 +137,9 @@
                     <div id="remove">
                         {{ form_row(edit_form.chambre) }}
                     </div>
+                    <div id="display">
+                        {{ form_row(form.qte) }}
+                    </div>
                     {{ form_row(edit_form.requete) }}
 
                     <div class="modal-footer">
@@ -166,6 +169,7 @@
         common().validation();
         $(".phoneNumber").rules("add", { phone: "" });
         $('#remove').remove();
+        $('#display').css({'display' : 'none'});
     </script>
 
 {% endblock %}
