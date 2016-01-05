@@ -254,6 +254,51 @@ function common() {
     };
 
     /**
+     * scrollTotop
+     *
+     */
+
+    var scrollToTop = function scrollToTop() {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('#upArrow').fadeIn();
+            } else {
+                $('#upArrow').fadeOut();
+            }
+        });
+
+        $('#upArrow').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    };
+
+    /**
+     * menuActif
+     *
+     */
+
+    var menu = function menu() {
+        var url = window.location.pathname,
+            urlRegExp = new RegExp(url.replace(/\/$/, '') + "$");
+        $('#main-menu a').each(function () {
+            if (urlRegExp.test(this.href.replace(/\/$/, ''))) {
+                $(this).addClass('active-menu');
+                $(this).parent().find('li').removeClass('active-menu');
+            }
+        });
+
+        $('.top-menu a').each(function () {
+            if (urlRegExp.test(this.href.replace(/\/$/, ''))) {
+                $(this).parent().addClass('active');
+                $(this).parent().find('li').removeClass('active');
+            }
+        });
+    };
+
+    /**
      * Search Animate Form
      */
     var searchFormAnimate = function searchFormAnimate(){
@@ -562,7 +607,9 @@ function common() {
         checkDateCustomBDD  : checkDateCustomBDD,
         fileShow            : fileShow,
         checkQte            : checkQte,
-        selectEntity        : selectEntity
+        selectEntity        : selectEntity,
+        scrollToTop         : scrollToTop,
+        menu                : menu,
     };
 }
 

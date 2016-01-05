@@ -141,8 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('js/client/jquery-ui.js')}}"></script>
     <script src="{{ asset('js/client/owl.carousel.js')}}"></script>
-    <script src="{{ asset('js/lib/scrollTop.js')}}"></script>
-    <script src="{{ asset('js/lib/menu.js')}}"></script>
+    <script src="{{ asset('js/lib/common.js')}}"></script>
 
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
@@ -163,6 +162,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             pagination : false,
             next : 'nextsqsqsq'
         });
+        common().scrollToTop();
+        common().menu();
     </script>
 {% endblock %}
 
