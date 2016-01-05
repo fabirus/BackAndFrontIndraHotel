@@ -34,30 +34,6 @@ class ReservationController extends Controller
     }
 
     /**
-     * Lists all Room By passing id of entity Categrory Room.
-     *
-     * @Route("/poste/service/{id}", name="poste_of_service")
-     * @Method("GET")
-     * @Template()
-     */
-    public function chambreCategorieAction($id)
-    {
-        $em       = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('IndraAdminBundle:Chambre')->findBy(array(
-            'categorie' => $id
-
-        ));
-
-        $json['view'] = $this->renderView('IndraAdminBundle:Reservation:roomCategorie.html.twig',
-            array(
-                'entities' => $entities
-            ));
-
-        $response = new Response(json_encode($json));
-        return $response;
-
-    }
-    /**
      * Creates a new Reservation entity.
      *
      * @Route("/", name="reservation_create")
@@ -85,6 +61,23 @@ class ReservationController extends Controller
             'entity' => $entity,
             'form'   => $form->createView()
         );
+    }
+
+    public function sendMail($email){
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('send@example.com')
+            ->setTo('recipient@example.com')
+            ->setBody(
+                $this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                    'Emails/registration.html.twig',
+                    array('name' => '')
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
     }
 
 

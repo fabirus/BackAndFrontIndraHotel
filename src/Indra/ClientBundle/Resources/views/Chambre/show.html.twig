@@ -6,6 +6,29 @@
         <div class="main">
             <div class="details">
                 <a href="#"><h2>{{ entity.nom }}</h2></a>
+                <div data-easyshare data-easyshare-url="">
+                    <div class="btn btn-facebook">
+                        <a data-easyshare-button="facebook" >
+                            <i class="fa fa-facebook"></i> Facebook
+                        </a>
+                    </div>
+                    <div class="btn btn-twitter">
+                        <a data-easyshare-button="twitter" >
+                            <i class="fa fa-twitter"></i> Twitter
+                        </a>
+                    </div>
+                    <div class="btn btn-googleplus">
+                        <a data-easyshare-button="google">
+                            <i class="fa fa-google-plus"></i> Google+
+                        </a>
+                    </div>
+                </div><br>
+                <!-- Twitter -->
+                {#<a href="http://www.twitter.com/share" title="Share on Twitter" target="_blank" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>#}
+                {#<!-- Facebook -->#}
+                {#<a href="https://www.facebook.com/sharer/sharer.php?u=" title="Share on Facebook" target="_blank" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>#}
+                {#<!-- Google+ -->#}
+                {#<a href="https://plus.google.com/share?url=" title="Share on Google+" target="_blank" class="btn btn-googleplus"><i class="fa fa-google-plus"></i> Google+</a>#}
                 <div class="det_text">
                     <p class="para">{{ entity.description }} </p>
                 </div>

@@ -2750,6 +2750,9 @@ display: none;
 .details a h2 {
 font-size: 19px;
 }
+.details a h2:hover {
+color: black
+}
 .content-grids {
 margin-top: 0em;
 }
