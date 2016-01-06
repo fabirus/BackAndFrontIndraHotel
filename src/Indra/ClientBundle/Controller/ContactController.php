@@ -63,6 +63,7 @@ class ContactController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success_contact_send', 'Message envoyé avec Succès !!');
+            $this->sendMail($entity);
 
             return $this->redirect($this->generateUrl('contact_client'));
         }
@@ -71,5 +72,23 @@ class ContactController extends Controller
             'entity' => $entity,
             'form'   => $form->createView()
         );
+    }
+
+    public function sendMail($entity){
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Demande de Contact')
+            ->setFrom($entity->getEmail())
+            ->setTo('indrahotel@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'email/contact.html.twig',
+                    array(
+                        'message'  => $entity->getSujet()
+                    )
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
     }
 }

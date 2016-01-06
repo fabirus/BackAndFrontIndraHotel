@@ -49,12 +49,14 @@ class ContactController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IndraAdminBundle:Contact')->find($id);
+        $editForm = $this->createEditForm($entity);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Contact entity.');
         }
         return array(
-            'entity'      => $entity,
+            'entity'     => $entity,
+            'edit_form'   => $editForm->createView(),
         );
     }
 
@@ -66,14 +68,10 @@ class ContactController extends Controller
         $user  = $this->get('security.context')->getToken()->getUser();
         $data   = array(
             "id"                =>  $entity->getId(),
-            "entite"            => 'RESERVATIOn',
-            "nom"               =>  $entity->getNom(),
+            "entite"            => 'CONTACT',
+            "reponse"           =>  $entity->getReponse(),
+            "Nom"               =>  $entity->getNom(),
             "telephome"         =>  $entity->getTel(),
-            "TypeChambre"       =>  $action == 'SUPPRESSION' ? 'none' : $entity->getCategorieChambre()->getNom(),
-            "Chambre"           =>  $action == 'SUPPRESSION' || $entity->getChambre() == null ? '0' : $entity->getChambre()->getNumero(),
-            'heure'             =>  $entity->getHeure(),
-            "Arrivée"           =>  $entity->getArrive(),
-            "Départ"            =>  $entity->getDepart(),
             "email"             =>  $entity->getEmail()
 
         );
@@ -122,16 +120,70 @@ class ContactController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'Modification de la Réservation avec Succès !!');
-            $this->operationUpdate($entity, 'MODIFICATION');
+            $this->get('session')->getFlashBag()->add('success', 'Réponse au message enregistrée avec Succès !!');
+            $this->operationUpdate($entity, 'REPONSE');
 
-
-            return $this->redirect($this->generateUrl('contact_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('contact_show', array('id' => $id)));
         }
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
         );
+    }
+
+    /**
+     * Valid AvanceSalaire entity.
+     *
+     * @Route("/avancesalaire/{id}/{valid}/{idEmploye}", name="avancesalaire_valid")
+     * @Method("VALID")
+     */
+    public function validAction($id, $valid)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('IndraAdminBundle:Contact')->find($id);
+
+        if($entity->getReponse() == null){
+
+            $this->get('session')->getFlashBag()->add('error_message', "Veuillez répondre au message puis envoyer !!");
+            return $this->redirect($this->generateUrl('contact_informations'));
+
+        }
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Contact entity.');
+        }
+        $entity->setStatut($valid);
+        $em->flush();
+
+        if($valid == 1){
+            $this->get('session')->getFlashBag()->add('error', 'Annulation de la réponse du message !!');
+        }
+
+        if($valid == 0) {
+            $this->get('session')->getFlashBag()->add('success', 'Envoie de la réponse au client avec Succès !!');
+            $this->sendMail($entity);
+        }
+
+        return $this->redirect($this->generateUrl('contact_informations'));
+    }
+
+
+    public function sendMail($entity){
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Réponse Demande de Contact')
+            ->setFrom('indrahotel@gmail.com')
+            ->setTo($entity->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'email/contact.html.twig',
+                    array(
+                        'message'  => $entity->getReponse()
+                    )
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
     }
 }

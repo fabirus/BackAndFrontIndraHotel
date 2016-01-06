@@ -1,51 +1,92 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Contact list</h1>
+{% block title %} {{ parent() }} | Messages {% endblock %}
 
-    <table class="records_list">
+{% block body -%}
+    <div class="alert alert-info" role="alert" style="font-size: 18px">Liste des Messages Reçus</div>
+    <div class="row">
+        <div class="col-md-6">
+            <i class="fa fa-plus-square fa-3x" data-toggle="modal"
+               data-target="#modalForm" title="Ajouter" style="color:
+        #0FAD8C;cursor: pointer;"></i>
+        </div>
+        <div class="col-md-6">
+            <i title="Imprimer" class="fa fa-print fa-3x" onclick="common().print('noprint', 'Liste des Messages Reçus')" style="float: right; cursor: pointer; margin-right: 2%"></i>
+        </div>
+    </div><br />
+
+    <table class="table table-hover table-bordered dataTable">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Tel</th>
-                <th>Sujet</th>
-                <th>Reponse</th>
-                <th>Statut</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th style="text-align: center">Date</th>
+            <th style="text-align: center">Nom</th>
+            <th style="text-align: center">Email</th>
+            <th style="text-align: center">Téléphone</th>
+            <th style="text-align: center">Réponse</th>
+            <th class="noprint" style="text-align: center">Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('contact_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nom }}</td>
-                <td>{{ entity.email }}</td>
-                <td>{{ entity.tel }}</td>
-                <td>{{ entity.sujet }}</td>
-                <td>{{ entity.reponse }}</td>
-                <td>{{ entity.statut }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('contact_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('contact_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                <td style="text-align: center">{{ entity.updatedAt|date("d/m/Y") }}</td>
+                <td style="text-align: center">{{ entity.nom }}</td>
+                <td style="text-align: center">{{ entity.email }}</td>
+                <td style="text-align: center">{{ entity.tel }}</td>
+                <td style="text-align: center">
+                    {% if entity.statut == 1 %}
+                        <button type="button" class="btn btn-danger">
+                            <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('contact_valid', {'id' : entity.id, 'valid' : 0}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Non
+                            </a>
+                        </button>
+                    {% else %}
+                        <button type="button" class="btn btn-success">
+                            <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('contact_valid', {'id' : entity.id, 'valid' : 1}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Oui
+                            </a>
+                        </button>
+                    {% endif %}
+                </td>
+                <td class="noprint" style="text-align: center">
+                    <a href="{{ path('contact_show', {'id' : entity.id}) }}">
+                        <i title="Voir" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% endblock %}
 
-        <ul>
-        <li>
-            <a href="{{ path('contact_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+        <script>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                common().notice('{{ flashMessage }}','ok');
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                common().notice('{{ flashMessage }}','ko');
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error_message') %}
+                common().notice('{{ flashMessage }}','ko');
+            {% endfor %}
+            common().dataTable(0);
+        </script>
+
     {% endblock %}

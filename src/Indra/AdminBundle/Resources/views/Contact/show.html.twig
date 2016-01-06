@@ -1,52 +1,100 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Contact</h1>
+{% block title %} {{ parent() }} | Contact {% endblock %}
 
-    <table class="record_properties">
-        <tbody>
+{% block body -%}
+    <div class="alert alert-info" role="alert" style="font-size: 18px">Demande de Contact du client {{ entity.nom }} !! <br>
+    </div>
+
+    <a href="{{ path('contact_informations') }}">
+        <i class="fa fa-backward fa-3x" title="Revenir à la liste" style="color:
+        #0FAD8C;cursor: pointer;"></i>
+    </a>
+    <i title="Modifier" style="color: black; float: right; cursor: pointer; margin-right: 2%" class="fa fa-envelope-o fa-3x" data-toggle="modal"
+       data-target="#modalForm"></i>
+    <i title="Imprimer" class="fa fa-print fa-3x" onclick="common().print('noprint', '')" style="float: right; cursor: pointer; margin-right: 2%"></i>
+    <div class="print">
+        <table class="table table-hover table-bordered" id="tabAvance" style="width: 70%;margin-left: auto;margin-right: auto;font-size: 20px;margin-top: 7%">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <th>Date</th>
+                <td>{{ entity.updatedAt|date("d/m/Y") }}</td>
             </tr>
             <tr>
                 <th>Nom</th>
-                <td>{{ entity.nom }}</td>
+                <td>{{ entity.nom}}</td>
             </tr>
             <tr>
                 <th>Email</th>
                 <td>{{ entity.email }}</td>
             </tr>
             <tr>
-                <th>Tel</th>
-                <td>{{ entity.tel }}</td>
+                <th>Téléphone</th>
+                <td>{{ entity.tel}}</td>
             </tr>
             <tr>
                 <th>Sujet</th>
-                <td>{{ entity.sujet }}</td>
+                <td>{{ entity.sujet}}</td>
             </tr>
-            <tr>
-                <th>Reponse</th>
-                <td>{{ entity.reponse }}</td>
-            </tr>
-            <tr>
-                <th>Statut</th>
-                <td>{{ entity.statut }}</td>
-            </tr>
-        </tbody>
-    </table>
+            {% if entity.reponse is not null %}
+                <tr>
+                    <th>Réponse</th>
+                    <td>{{ entity.reponse }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert alert-info">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Enregistrement de la Réponse au message</h4>
+                </div>
+                {{ form_start(edit_form) }}
+                <div class="modal-body">
+                    {{ form_errors(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('contact') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('contact_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+                    {{ form_row(edit_form.reponse) }}
+
+                    <div id="remove">
+                        {{ form_row(edit_form.nom) }}
+                        {{ form_row(edit_form.email) }}
+                        {{ form_row(edit_form.tel) }}
+                        {{ form_row(edit_form.sujet) }}
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        {{ form_widget(edit_form.submit, { 'label': 'Enregister', 'attr' :{'type' : 'button', 'class' :'btn btn-primary register'}})}}
+
+                    </div>
+                    {{ form_end(edit_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script>
+        {% for flashMessage in app.session.flashbag.get('success') %}
+        common().notice('{{ flashMessage }}','ok');
+        {% endfor %}
+        common().initPopover();
+        common().date();
+        common().heure();
+        common().dataTable(0);
+        $("form").validate();
+        common().validation();
+        $(".phoneNumber").rules("add", { phone: "" });
+        $('#remove').css({'display' : 'none'});
+    </script>
+
 {% endblock %}

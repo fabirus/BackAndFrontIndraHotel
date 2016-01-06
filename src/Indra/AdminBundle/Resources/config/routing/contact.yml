@@ -10,3 +10,6 @@ contact_update:
     path:     /contact/{id}/
     defaults: { _controller: IndraAdminBundle:Contact:update }
 
+contact_valid:
+    path:     /contact/{id}/{valid}
+    defaults: { _controller: IndraAdminBundle:Contact:valid }
