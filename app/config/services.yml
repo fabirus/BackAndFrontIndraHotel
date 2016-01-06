@@ -158,13 +158,13 @@ services:
         class: Indra\AdminBundle\Admin\ChambreAdmin
         arguments: [~, Indra\AdminBundle\Entity\Chambre, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: CHAMBRES, label: chambres}
+            - { name: sonata.admin, manager_type: orm, group: RECEPTION, label: chambres}
 
     admin.categorieChambre:
         class: Indra\AdminBundle\Admin\CategorieChambreAdmin
         arguments: [~, Indra\AdminBundle\Entity\CategorieChambre, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: CHAMBRES, label: Categories}
+            - { name: sonata.admin, manager_type: orm, group: RECEPTION, label: Categories}
 
     admin.gallery:
         class: Indra\AdminBundle\Admin\GalleryAdmin
@@ -177,6 +177,12 @@ services:
         arguments: [~, Indra\AdminBundle\Entity\Image, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: GALLERY & MEDIA, label: Images}
+
+    admin.reservation:
+        class: Indra\AdminBundle\Admin\ReservationAdmin
+        arguments: [~, Indra\AdminBundle\Entity\Reservation, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: RECEPTION, label: Reservation}
 
 
 
