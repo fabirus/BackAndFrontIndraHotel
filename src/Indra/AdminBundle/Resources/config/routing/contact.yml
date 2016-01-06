@@ -1,0 +1,12 @@
+contact_informations:
+    path:     /contact/informations
+    defaults: { _controller: IndraAdminBundle:Contact:index }
+
+contact_show:
+    path:     /contact/{id}
+    defaults: { _controller: IndraAdminBundle:Contact:show }
+
+contact_update:
+    path:     /contact/{id}/
+    defaults: { _controller: IndraAdminBundle:Contact:update }
+

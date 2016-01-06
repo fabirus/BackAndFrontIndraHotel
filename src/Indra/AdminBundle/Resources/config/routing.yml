@@ -98,3 +98,7 @@ chambre:
 reservation:
     resource: "@IndraAdminBundle/Resources/config/routing/reservation.yml"
     prefix:   /
+
+contact:
+    resource: "@IndraAdminBundle/Resources/config/routing/contact.yml"
+    prefix:   /

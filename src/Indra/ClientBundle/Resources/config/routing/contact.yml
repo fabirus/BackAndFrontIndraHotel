@@ -1,0 +1,7 @@
+contact_client:
+    path:     /contact
+    defaults: { _controller: IndraClientBundle:Contact:index }
+
+contact_client_create:
+    path:     /contact/create
+    defaults: { _controller: IndraClientBundle:Contact:create }

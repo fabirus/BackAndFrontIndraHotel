@@ -52,7 +52,7 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="reponse", type="text")
+     * @ORM\Column(name="reponse", type="text", nullable=true)
      */
     private $reponse;
 
@@ -63,6 +63,13 @@ class Contact
      */
     private $statut = 1;
 
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
 
     /**
      * Get id
@@ -72,6 +79,22 @@ class Contact
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = new \Datetime();
     }
 
     /**
