@@ -1252,8 +1252,9 @@ font-size: 32px;
 text-align:center;
 }
 .confer h2 span{
-color: #FFD700;
-font-size: 1.5em;
+	font-family: 'Pinyon Script', cursive;
+	color: darkorange;
+	font-size: 1.5em;
 }
 .conference-slider{
 	position:relative;
@@ -1356,12 +1357,13 @@ font-size: 1.5em;
 	}
 }
 /*-- responsive-mediaqueries --*/
-.confer h4{
-color:#2A2E33;
-font-size:25px;
-border-bottom:1px solid #2A2E33;
-width:36%;
-margin:2.5em 0 1em 0;
+.confer h3{
+	font-family: 'Pinyon Script', cursive;
+	text-align: center;
+	font-size:3em;
+	color:#2A2E33;
+	border-bottom:1px solid #2A2E33;
+	margin:2.5em 0 1em 0;
 }
 .confer p{
 color:#4C4C4C;

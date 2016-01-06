@@ -2,80 +2,80 @@
 {% block title %}INDRA Hotel | {{ entity.nom }} {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="main">
-            <div class="details">
-                <a href="#"><h2>{{ entity.nom }}</h2></a>
-                <div data-easyshare data-easyshare-url="">
-                    <div class="btn btn-facebook">
-                        <a data-easyshare-button="facebook" >
-                            <i class="fa fa-facebook"></i> Facebook
-                        </a>
-                    </div>
-                    <div class="btn btn-twitter">
-                        <a data-easyshare-button="twitter" >
-                            <i class="fa fa-twitter"></i> Twitter
-                        </a>
-                    </div>
-                    <div class="btn btn-googleplus">
-                        <a data-easyshare-button="google">
-                            <i class="fa fa-google-plus"></i> Google+
-                        </a>
-                    </div>
-                </div><br>
-                <!-- Twitter -->
-                {#<a href="http://www.twitter.com/share" title="Share on Twitter" target="_blank" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>#}
-                {#<!-- Facebook -->#}
-                {#<a href="https://www.facebook.com/sharer/sharer.php?u=" title="Share on Facebook" target="_blank" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>#}
-                {#<!-- Google+ -->#}
-                {#<a href="https://plus.google.com/share?url=" title="Share on Google+" target="_blank" class="btn btn-googleplus"><i class="fa fa-google-plus"></i> Google+</a>#}
-                <div class="det_text">
-                    <p class="para">{{ entity.description }} </p>
-                </div>
-                <div class="det_pic">
-                    <ul class="gridder">
-                        {% for image in entity.gallery.image %}
-                            <li class="gridder-list" data-griddercontent="#content{{ loop.index }}">
-                                <img width="600px" height="200px"  src="{{ app.request.basePath }}{{ vich_uploader_asset(image, 'imageFile') }}" />
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% for image in entity.gallery.image %}
-                    <div id="content{{ loop.index }}" class="gridder-content">
-                        <img width="1094px" height="417px" src="{{ app.request.basePath }}{{ vich_uploader_asset(image, 'imageFile') }}" alt="" />
-
-                    </div>
-                {% endfor %}
-                <br><br>
+    <div class="confer">
+        <div class="container">
+            <h2><span>{{ entity.nom }}</span></h2>
+            <div class="conference-slider">
+                <!-- Slideshow 3 -->
+                <ul class="conference-rslide" id="conference-slider">
+                    {% for image in entity.gallery.image %}
+                        <li>
+                            <img width="718px" height="370px" src="{{ app.request.basePath }}{{ vich_uploader_asset(image, 'imageFile') }}" />
+                        </li>
+                    {% endfor %}
+                </ul>
+                <!-- Slideshow 3 Pager -->
+                <ul id="slider3-pager">
+                    {% for image in entity.gallery.image %}
+                        <li>
+                            <a href="#">
+                                <img width="65px" height="50px" src="{{ app.request.basePath }}{{ vich_uploader_asset(image, 'imageFile') }}" />
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
+            <h3>Description</h3>
+            <p>{{ entity.description }}</p>
+            <div data-easyshare data-easyshare-url="">
+                <div class="btn btn-facebook">
+                    <a data-easyshare-button="facebook" >
+                        <i class="fa fa-facebook"></i> Facebook
+                    </a>
+                </div>
+                <div class="btn btn-twitter">
+                    <a data-easyshare-button="twitter" >
+                        <i class="fa fa-twitter"></i> Twitter
+                    </a>
+                </div>
+                <div class="btn btn-googleplus">
+                    <a data-easyshare-button="google">
+                        <i class="fa fa-google-plus"></i> Google+
+                    </a>
+                </div>
+            </div><br>
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('assets/vendor/jquery-gridder/dist/js/jquery.gridder.min.js')}}"></script>
+    <script src="{{ asset('js/client/responsiveslides.min.js')}}"></script>
     <script>
-        $('.gridder').gridderExpander({
-            scroll: false,
-            scrollOffset: 30,
-            scrollTo: "panel",                  // panel or listitem
-            animationSpeed: 400,
-            animationEasing: "easeInOutExpo",
-            showNav: true,                      // Show Navigation
-            nextText: "<i class='fa fa-arrow-right'></i>",                   // Next button text
-            prevText: "<i class='fa fa-arrow-left'></i>",               // Previous button text
-            closeText: "<i class='fa fa-times'></i>",                 // Close button text
-            onStart: function(){
-                //Gridder Inititialized
-            },
-            onContent: function(){
-                //Gridder Content Loaded
-            },
-            onClosed: function(){
-                //Gridder Closed
-            }
+        $("#conference-slider").responsiveSlides({
+            auto: true,
+            manualControls: '#slider3-pager'
         });
+
+//        $('.gridder').gridderExpander({
+//            scroll: false,
+//            scrollOffset: 30,
+//            scrollTo: "panel",                  // panel or listitem
+//            animationSpeed: 400,
+//            animationEasing: "easeInOutExpo",
+//            showNav: true,                      // Show Navigation
+//            nextText: "<i class='fa fa-arrow-right'></i>",                   // Next button text
+//            prevText: "<i class='fa fa-arrow-left'></i>",               // Previous button text
+//            closeText: "<i class='fa fa-times'></i>",                 // Close button text
+//            onStart: function(){
+//                //Gridder Inititialized
+//            },
+//            onContent: function(){
+//                //Gridder Content Loaded
+//            },
+//            onClosed: function(){
+//                //Gridder Closed
+//            }
+//        });
     </script>
 {% endblock %}

@@ -14,7 +14,6 @@ class HomeController extends Controller
             array('nom' => 'partenaires')
         );
 
-
         return $this->render('IndraClientBundle:Home:index.html.twig', array(
             'entities'    => $entities,
             'partenaires' => $partenaires[0]
