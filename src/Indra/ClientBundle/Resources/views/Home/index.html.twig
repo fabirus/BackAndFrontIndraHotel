@@ -108,34 +108,73 @@
 <!---->
 <!---->
     <div class="rooms text-center">
-    <div class="container">
-        <h3>Our Room Types</h3>
-        <div class="room-grids">
-            {% for entity in entities %}
-                <div class="col-md-6 room-sec">
-                    <a href="{{ path('chambre_show', {'id' : entity.id}) }}">
-                        <img width="350px" height="160px" src="{{ app.request.basePath }}{{ vich_uploader_asset(entity, 'imageFile') }}" alt=""/>
-                    </a>
-                    <a href="{{ path('chambre_show', {'id' : entity.id}) }}"><h4>{{ entity.nom }}</h4></a>
-                    <p>{{ entity.description|slice(0, 62)|raw  }}</p>
-                    <h4><a style="color: black"  href="{{ path('chambre_show', {'id' : entity.id}) }}">{{ entity.prix }} <b>FCFA</b></a></h4>
-                    <div class="items">
-                        <li style="margin: 1%;" title="wifi"><span class="glyphicon glyphicon-signal"> </span></li>
-                        <li style="margin: 1%;" title="Café"><span class="glyphicon glyphicon-glass"> </span></li>
-                        <li style="margin: 1%;" title="Téléphone"><span class="glyphicon glyphicon-phone-alt"> </span></li>
-                        <li style="margin: 1%;" title="Clim"><span class="glyphicon glyphicon-equalizer"> </span></li>
-                        <li style="margin: 1%;" title="Déjeuner"><span class="glyphicon glyphicon-cutlery"> </span></li>
+        <div class="container">
+            <h3>Our Room Types</h3>
+            <div class="room-grids">
+                {% for entity in entities %}
+                    <div class="col-md-6 room-sec">
+                        <a href="{{ path('chambre_show', {'id' : entity.id}) }}">
+                            <img width="350px" height="160px" src="{{ app.request.basePath }}{{ vich_uploader_asset(entity, 'imageFile') }}" alt=""/>
+                        </a>
+                        <a href="{{ path('chambre_show', {'id' : entity.id}) }}"><h4>{{ entity.nom }}</h4></a>
+                        <p>{{ entity.description|slice(0, 62)|raw  }}</p>
+                        <h4><a style="color: black"  href="{{ path('chambre_show', {'id' : entity.id}) }}">{{ entity.prix }} <b>FCFA</b></a></h4>
+                        <div class="items">
+                            <li style="margin: 1%;" title="wifi"><span class="glyphicon glyphicon-signal"> </span></li>
+                            <li style="margin: 1%;" title="Café"><span class="glyphicon glyphicon-glass"> </span></li>
+                            <li style="margin: 1%;" title="Téléphone"><span class="glyphicon glyphicon-phone-alt"> </span></li>
+                            <li style="margin: 1%;" title="Clim"><span class="glyphicon glyphicon-equalizer"> </span></li>
+                            <li style="margin: 1%;" title="Déjeuner"><span class="glyphicon glyphicon-cutlery"> </span></li>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-            <div class="clearfix"></div>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
         </div>
     </div>
-</div>
+    <div class="sponcers">
+		<div class="sponcers-head">
+		    <h3>Nos Partenaires</h3>
+		</div>
+	 </div>
+	 <ul id="flexiselDemo1">
+	    {% for image in partenaires.image  %}
+           <li>
+			<div class="biseller-column">
+			    <img src="{{ app.request.basePath }}{{ vich_uploader_asset(image, 'imageFile') }}" alt="">
+			</div>
+		</li>
+	    {% endfor %}
+	</ul>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/client/jquery.flexisel.js')}}"></script>
+    <script>
+        $("#flexiselDemo1").flexisel({
+            visibleItems: 3,
+            animationSpeed: 1000,
+            autoPlay: true,
+            autoPlaySpeed: 3000,
+            pauseOnHover: true,
+            enableResponsiveBreakpoints: true,
+            responsiveBreakpoints: {
+                portrait: {
+                    changePoint:480,
+                    visibleItems: 1
+                },
+                landscape: {
+                    changePoint:640,
+                    visibleItems: 2
+                },
+                tablet: {
+                    changePoint:768,
+                    visibleItems: 3
+                }
+            }
+        });
+    </script>
     {#<script src="{{ asset('http://s3.amazonaws.com/codecademy-content/courses/hour-of-code/js/alphabet.js')}}"></script>#}
     {#<script src="{{ asset('http://s3.amazonaws.com/codecademy-content/courses/hour-of-code/js/bubbles.js')}}"></script>#}
     {#<script>#}

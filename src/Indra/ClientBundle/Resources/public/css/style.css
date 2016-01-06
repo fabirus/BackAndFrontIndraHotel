@@ -675,7 +675,7 @@ background-size:cover;
 min-height:788px;
 padding:2% 0 8% 0;
 }
-.rooms h3{
+.rooms h3, .sponcers-head h3{
 font-family: 'Pinyon Script', cursive;
 font-size:3em;
 margin-bottom:20px;
@@ -1374,14 +1374,14 @@ margin:5px 0 10px 0;
 background:#fff;
 border-bottom:1px solid #999999;
 border-top:1px solid #999999;
-margin:2em 0;
+/*margin:2em 0;*/
 }
 .sponcers-head {
-margin:2px 0;
+/*margin:2px 0;*/
 border-bottom:2px solid #E8E8E8;
 border-top:2px solid #E8E8E8;
 text-align:center;
-padding:1em 0;
+/*padding:1em 0;*/
 background:#fff;
 }
 .sponcers-head h5{
