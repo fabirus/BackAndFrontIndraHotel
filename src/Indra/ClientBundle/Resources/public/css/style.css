@@ -62,7 +62,7 @@ margin:1em 0;
 font-weight:bold;
 }
 .logo h3 span{
-color:#FFD700;
+color:darkorange;
 position:relative;
 }
 .logo i{
@@ -90,13 +90,13 @@ font-weight: 600;
 .top-menu ul li.active a{
 background:#1E2329;
 color:#fff;
-border-top:2px solid #FFD700;
+border-top:2px solid darkorange;
 font-weight: 600;
 }
 .top-menu ul li a:hover{
 background:#1E2329;
 color:#fff;
-border-top:2px solid #FFD700;
+border-top:2px solid darkorange;
 }
 .banner{
 background:darkslategray;
@@ -234,7 +234,7 @@ border:none;
 }
 .reservation h5{
 	font-size: 15px;
-	color: #FFD700;
+	color: darkorange;
 	text-transform: capitalize;
 	margin-bottom: 6px;
 }
@@ -286,7 +286,7 @@ select option{
 .date_btn form input[type="submit"] {
 	text-transform:capitalize;
 	width: 90% !important;
-	background: #FFD700;
+	background: darkorange;
 	font-family: 'Open Sans', sans-serif;
 	color: #2A2E33;
 	padding: 8px;
@@ -827,7 +827,7 @@ line-height:1.5em;
 }
 .join a {
 color: #2B2A1F;
-background: #E7CB2C;
+background: darkorange;
 font-size: 12px;
 padding: 4px 17px;
 font-weight: bold;
@@ -838,7 +838,7 @@ border-radius: 10px;
 	-o-border-radius: 10px;
 margin-top: 1em;
 display: inline-block;
-border:2px solid #E7CB2C;
+border:2px solid darkorange;
 transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-moz-transition:0.5s all;
@@ -910,7 +910,7 @@ border:1px solid #fff;
 }
 .member form input[type="submit"]{
 color: #2B2A1F;
-background: #E7CB2C;
+background: darkorange;
 font-size: 12px;
 padding: 4px 17px;
 font-weight: bold;
@@ -922,7 +922,7 @@ border-radius: 10px;
 margin-top: 1em;
 width: 41% ! important;
 outline:none;
-border:2px solid #E7CB2C;
+border:2px solid darkorange;
 transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-moz-transition:0.5s all;
@@ -944,7 +944,7 @@ font-size:14px;
 color:#00CCFF;
 }
 .fotter-info h6 a:hover{
-color:#FFD700;
+color:darkorange;
 }
 /*--FACILITIES-PAGE--*/
 .main_bg{
@@ -1064,7 +1064,7 @@ top: 56%;
 left: 0%;
 }
 .caption a{
-background: #FFD700;
+background: darkorange;
 color: #2A2E33;
 display: block;
 padding: 8px;
@@ -1116,7 +1116,7 @@ font-weight:bold;
 font-size:32px;
 }
 .hotel-details a span{
-color:#FFD700;
+color:darkorange;
 font-size:1.5em;
 }
 .hotel-details h2{
@@ -1138,7 +1138,7 @@ margin:2em 0 5px 0;
 }
 .hotel-welcome h3 span{
 font-weight:bold;
-color:#FFD700;
+color:darkorange;
 }
 .hotel-welcome label{
 background:#939597;
@@ -1517,7 +1517,7 @@ width:30%;
 /*-webkit-appearance: none;*/
 /*}*/
 /*.booking-form input[type="text"]:hover,.booking-form textarea:hover {*/
-/*border: 1px solid #FFD700;*/
+/*border: 1px solid darkorange;*/
 /*-webkit-transition: all 0.3s ease-in-out;*/
 /*-moz-transition: all 0.3s ease-in-out;*/
 /*-o-transition: all 0.3s ease-in-out;*/
@@ -1548,8 +1548,8 @@ border-radius: 2px;
 -o-border-radius: 2px;
 }
 .booking-form input[type="submit"]:hover,.booking-form input[type="reset"]:hover,.contact-form input[type="reset"]:hover, .submit:hover  {
-background: #E7CB2C;
-border: 1px solid #E7CB2C;
+background: darkorange;
+border: 1px solid darkorange;
 }
 .booking-form textarea {
 resize: none;
@@ -1655,7 +1655,7 @@ padding-bottom: 6em;
 	/*-webkit-appearance: none;*/
 /*}*/
 /*.contact-form input[type="text"]:hover,.contact-form textarea:hover{*/
-/*border:1px solid #FFD700;*/
+/*border:1px solid darkorange;*/
 /*-webkit-transition: all 0.3s ease-in-out;*/
 	/*-moz-transition: all 0.3s ease-in-out;*/
 	/*-o-transition: all 0.3s ease-in-out;*/
@@ -1687,8 +1687,8 @@ padding-bottom: 6em;
 	-o-border-radius: 2px;
 }
 .contact-form input[type="submit"]:hover{
-	background: #E7CB2C;
-border: 1px solid #E7CB2C;
+	background: darkorange;
+border: 1px solid darkorange;
 }
 /*--Responsive-media-*/
 @media (max-width:1440px){
