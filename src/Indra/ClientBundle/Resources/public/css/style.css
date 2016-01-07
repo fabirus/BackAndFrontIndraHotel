@@ -1374,6 +1374,15 @@ text-align:center;
 	border-bottom:1px solid #2A2E33;
 	margin:2.5em 0 1em 0;
 }
+
+#article{
+	font-family: 'Pinyon Script', cursive;
+	text-align: center;
+	font-size:3em;
+	color:#2A2E33;
+	border-bottom:1px solid #2A2E33;
+	margin:0.5em 0 1em 0;
+}
 .confer p{
 color:#4C4C4C;
 font-size:14px;
