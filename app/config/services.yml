@@ -190,6 +190,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: BLOG, label: Article}
 
+#    admin.tourisme:
+#        class: Indra\AdminBundle\Admin\TourismeAdmin
+#        arguments: [~, Indra\AdminBundle\Entity\Tourisme, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: Tourisme, label: Tourisme}
+
 
 
 #mes services personnalisées

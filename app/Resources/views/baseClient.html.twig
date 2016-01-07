@@ -57,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul>
                             <li ><a href="{{ path('indra_client_homepage') }}">ACCUEIL</a></li>
                             <li><a class="scroll" href="restaurant.html">RESTAURANT & BAR</a></li>
-                            <li><a class="scroll" href="conference.html">TOURISME</a></li>
+                            {#<li><a class="scroll" href="conference.html">TOURISME</a></li>#}
                             <li><a class="scroll" href="{{ path('reservationClient_informations') }}">RESERVATION</a></li>
                             <li><a class="scroll" href="{{ path('blog_informations') }}">BLOG</a></li>
                             <li><a class="scroll" href="{{ path('indra_client_about') }}">A PROPOS DE NOUS</a></li>
@@ -111,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a href="#">READ MORE</a>
             </div>
             <div class="member">
-                <h4><a target="_blank" href="{{ path('admin_homepage') }}"><i style="color: white" class="fa fa-lock fa-3x"></i></a> &nbsp;&nbsp; MEMBERS AREA  </h4>
+                <h4><a target="_blank" title="Accès Administration" href="{{ path('admin_homepage') }}"><i style="color: white" class="fa fa-lock fa-3x"></i></a></h4>
 
                 {#<form>#}
                     {#<p>Username</p>#}
