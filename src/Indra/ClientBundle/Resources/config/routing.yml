@@ -2,6 +2,10 @@ indra_client_homepage:
     path:     /
     defaults: { _controller: IndraClientBundle:Home:index }
 
+indra_client_lastArticle:
+    path:     /last
+    defaults: { _controller: IndraClientBundle:Home:lastArticle }
+
 chambre:
     resource: "@IndraClientBundle/Resources/config/routing/chambre.yml"
     prefix:   /

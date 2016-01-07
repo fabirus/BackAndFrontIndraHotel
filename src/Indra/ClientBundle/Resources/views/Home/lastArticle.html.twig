@@ -1,0 +1,7 @@
+<div class="news">
+    <h4>DERNIERS ARTICLES</h4>
+    {% for article in articles %}
+        <h5 style="font-size: 16px;">{{ article.titre }}</h5>
+        <a style="font-size: 14px;" href="{{ path('blog_show', {'id' : article.id}) }}">{{ article.updatedAt|date("d/m/Y") }}</a>
+    {% endfor %}
+</div>

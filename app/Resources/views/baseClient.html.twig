@@ -91,21 +91,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="col-md-5 details">
             <div class="hotel-info">
-                <h4>ABOUT THIS HOTEL</h4>
-                <p>Suspendisse erat mi, tincidunt sit amet massa quis, commodo fermentum diam. Sed nec dui nec nunc tempor interdum.</p>
-                <p>Ut vulputate augue urna, ut porta dolor imperdiet a. Vestibulum nec leo eu magna aliquam ornare.</p>
+                <h4>A PROPOS DE NOUS</h4>
+                <p><b>INDRA HOTEL</b> acheté en <b>2006</b> sous l'ancien nom de SIM'S, a été classé parmi les hotels les plus fréquentés de Yaoundé
+                    vu son bon emplacement au Carrefour Bastos.<br>
+                    INDRA vous offre la possibilité de profiter d'une ambiance décontractante.</p>
             </div>
-            <div class="news">
-                <h4>LATEST NEWS</h4>
-                <h5>Grand Hotel Joins Deluxe Hotels</h5>
-                <a href="#">15 AUG</a>
-                <h5>Happy Christmas To Everyone</h5>
-                <a href="#">15 AUG</a>
-                <h5>Best Places To Visit 2014</h5>
-                <a href="#">15 AUG</a>
-                <h5>Various Offers</h5>
-                <a href="#">15 AUG</a>
-            </div>
+            {% block news %}
+                {{ render (controller('IndraClientBundle:Home:lastArticle')) }}
+            {% endblock %}
             <div class="clearfix"></div>
         </div>
         <div class="col-md-7 details">

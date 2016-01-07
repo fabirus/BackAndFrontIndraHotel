@@ -16,7 +16,21 @@ class HomeController extends Controller
 
         return $this->render('IndraClientBundle:Home:index.html.twig', array(
             'entities'    => $entities,
-            'partenaires' => $partenaires[0]
+            'partenaires' => $partenaires[0],
+        ));
+    }
+
+    public function lastArticleAction()
+    {
+        $em          = $this->getDoctrine()->getManager();
+        $articles   = $em->getRepository('IndraAdminBundle:Article')->findBy(
+            array(),
+            array('updatedAt' => 'desc'),
+            4
+        );
+
+        return $this->render('IndraClientBundle:Home:lastArticle.html.twig', array(
+            'articles'    => $articles
         ));
     }
 }
