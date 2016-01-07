@@ -1,0 +1,41 @@
+{% extends 'baseClient.html.twig' %}
+{% block title %}INDRA Hotel | A propos de Nous {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="main">
+            <div class="row service_list">
+                <h3 class="article">Notre Histoire</h3>
+                <p class="para" style="font-size: 0.9em"><b>INDRA HOTEL</b> acheté en <b>2006</b> sous l'ancien nom de SIM'S, a été classé parmi les hotels les plus fréquentés de Yaoundé - Cameroun
+                vu son bon emplacement au Carrefour Bastos autour des grands magasins à l'instar de <b>DOVV</b>, des boites de nuits (le LOFT NIGHT CLUB), des Snack-Bar
+                    (BLACK & WHITE).<br>
+                    INDRA vous offre la possibilité de profiter d'une ambiance décontractante
+                </p>
+                <h3 class="article">Notre Equipe</h3>
+                <div class="row result_client" data-content="employe" data-route="employe_search">
+                    {% for entity in entities %}
+                        <div class="col-md-3" aria-disabled="false">
+                                {% if not entity.imageName %}
+                                    <img style="border-radius: 50%;width: 200px;height: 200px;border: 3px solid #373A3F;cursor: pointer;" class="img-responsive avatar_employe"
+                                            {% if entity.sexe == 'feminin' %}
+                                                src="{{ asset('img/employes/default_girl_avatar.png') }}"
+                                            {% else %}
+                                                src="{{ asset('img/employes/avatar_default.jpg') }}"
+                                            {% endif %}
+                                         alt="{{ entity.nom }}" />
+                                {% else %}
+                                    <img  style="border-radius: 50%;width: 200px;height: 200px;border: 3px solid #373A3F;cursor: pointer;" class="img-responsive avatar_employe"
+                                         src="{{ app.request.basePath }}{{ vich_uploader_asset(entity, 'imageFile') }}"
+                                         alt="{{ entity.nom }}" />
+                                {% endif %}
+                            <p>{{ entity.prenom }} &nbsp;&nbsp;&nbsp; <b>{{ entity.poste }}</b></p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="clear"></div>
+
+            </div>
+            <div class="clear"></div><br><br>
+        </div>
+    </div>
+{% endblock %}

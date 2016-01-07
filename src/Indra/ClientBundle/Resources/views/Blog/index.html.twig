@@ -5,7 +5,7 @@
     <div class="container">
         <div class="main">
             <div class="row service_list">
-                <h3 id="article">Nos Articles</h3>
+                <h3 class="article">Nos Articles</h3>
                     {% for entity in entities %}
                             <div class=" col-md-4 ser_img">
                                 <a href="{{ path('blog_show', {'id' : entity.id}) }}">

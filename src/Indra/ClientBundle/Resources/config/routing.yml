@@ -17,3 +17,7 @@ contact:
 blog:
     resource: "@IndraClientBundle/Resources/config/routing/blog.yml"
     prefix:   /
+
+indra_client_about:
+    path:     /a-propos-de-nous
+    defaults: { _controller: IndraClientBundle:About:index }
