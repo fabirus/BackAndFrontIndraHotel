@@ -1,0 +1,11 @@
+indra_client_restaurant_bar:
+    path:     /restarant-bar
+    defaults: { _controller: IndraClientBundle:RestaurantBar:index }
+
+bar_show:
+    path:     /bar/{id}
+    defaults: { _controller: IndraClientBundle:RestaurantBar:showBar }
+
+resto_show:
+    path:     /restaurant/{id}
+    defaults: { _controller: IndraClientBundle:RestaurantBar:showResto }

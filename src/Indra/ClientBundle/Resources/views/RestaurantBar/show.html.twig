@@ -1,0 +1,40 @@
+{% extends 'baseClient.html.twig' %}
+{% block title %}INDRA Hotel | {{ entity.nom }} {% endblock %}
+
+{% block body %}
+    <div class="main_bg">
+        <div class="container">
+            <div class="main">
+                <div class="details">
+                    <h2 id="show_title">
+                        <span>{{ entity.nom }}</span>
+                    </h2><br>
+                    <div class="det_pic">
+                        <img width="1094px" height="417px" src="{{ app.request.basePath }}{{ vich_uploader_asset(entity, 'imageFile') }}"
+                             alt="{{ entity.nom }}" title="{{ entity.nom }}"  />
+                    </div>
+                    <div class="det_text">
+                        <p class="para">{{ entity.description|raw }} </p><br>
+                        <div data-easyshare data-easyshare-url="">
+                            <div class="btn btn-facebook">
+                                <a data-easyshare-button="facebook" >
+                                    <i class="fa fa-facebook"></i> Facebook
+                                </a>
+                            </div>
+                            <div class="btn btn-twitter">
+                                <a data-easyshare-button="twitter" >
+                                    <i class="fa fa-twitter"></i> Twitter
+                                </a>
+                            </div>
+                            <div class="btn btn-googleplus">
+                                <a data-easyshare-button="google">
+                                    <i class="fa fa-google-plus"></i> Google+
+                                </a>
+                            </div>
+                        </div><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

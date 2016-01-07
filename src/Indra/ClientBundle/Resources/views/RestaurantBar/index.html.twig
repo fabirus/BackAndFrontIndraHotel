@@ -1,0 +1,40 @@
+{% extends 'baseClient.html.twig' %}
+{% block title %}INDRA Hotel | A propos de Nous {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="main">
+            <div class="row service_list">
+                <h3 class="article">Nots Plats</h3>
+                <div class="row">
+                    {% for plat in plats %}
+                        {% if plat.imageName %}
+                            <div class="col-md-3" aria-disabled="false">
+                                    <a href="{{ path('resto_show', {'id' : plat.id}) }}">
+                                        <img style="border-radius: 50%;width: 200px;height: 200px;border: 3px solid #373A3F;cursor: pointer;" src="{{ app.request.basePath }}{{ vich_uploader_asset(plat, 'imageFile') }}"
+                                         class="img-responsive" alt="{{ plat.nom }}" title="{{ plat.nom }}" />
+                                    </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <h3 class="article">Nos Boissons</h3>
+                <div class="row">
+                    {% for boisson in boissons %}
+                        {% if boisson.imageName %}
+                            <div class="col-md-3" aria-disabled="false">
+                                <a href="{{ path('bar_show', {'id' : boisson.id}) }}">
+                                    <img style="border-radius: 50%;width: 200px;height: 200px;border: 3px solid #373A3F;cursor: pointer;" src="{{ app.request.basePath }}{{ vich_uploader_asset(boisson, 'imageFile') }}"
+                                     class="img-responsive" alt="{{ boisson.nom }}" title="{{ boisson.nom }}" />
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="clear"></div>
+
+            </div>
+            <div class="clear"></div><br><br>
+        </div>
+    </div>
+{% endblock %}

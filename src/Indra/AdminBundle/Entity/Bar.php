@@ -34,9 +34,9 @@ class Bar
     /**
      * @var string
      *
-     * @ORM\Column(name="descritpion", type="text")
+     * @ORM\Column(name="description", type="text")
      */
-    private $descritpion;
+    private $description;
 
     /**
      * @ORM\Column(type="datetime")
@@ -158,9 +158,9 @@ class Bar
      *
      * @return Bar
      */
-    public function setDescritpion($descritpion)
+    public function setDescription($description)
     {
-        $this->descritpion = $descritpion;
+        $this->description = $description;
 
         return $this;
     }
@@ -170,9 +170,9 @@ class Bar
      *
      * @return string
      */
-    public function getDescritpion()
+    public function getDescription()
     {
-        return $this->descritpion;
+        return $this->description;
     }
 }
 
