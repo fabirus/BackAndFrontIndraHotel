@@ -850,13 +850,13 @@ background:#333333;
 border:2px solid #fff;
 color:#fff;
 }
-.details a h2{
-margin:12px 0;
-color:#333333;
-}
-.details a h2:hover{
-color:#FAE36A;
-}
+/*.details a h2{*/
+/*margin:12px 0;*/
+/*color:#333333;*/
+/*}*/
+/*.details a h2:hover{*/
+/*color:#FAE36A;*/
+/*}*/
 .details{
 padding:0;
 }
@@ -1022,7 +1022,7 @@ span.next{
 	-o-transition-duration: 1s;
 	-moz-transition-duration: 1s;
 	-webkit-transition: -webkit-transform 1s;
-	background: url(../images/next.png) center no-repeat;
+	/*background: url(../images/next.png) center no-repeat;*/
 	height: 100%;
 	width: 100%;
 	position: absolute;
@@ -1251,7 +1251,16 @@ font-weight: bold;
 font-size: 32px;
 text-align:center;
 }
-.confer h2 span{
+
+.details h2{
+	color: #2A2E33;
+	/*padding: 1em 0 14px 0;*/
+	font-weight: bold;
+	font-size: 32px;
+	text-align:center;
+}
+
+.confer h2 span, .details h2 span{
 	font-family: 'Pinyon Script', cursive;
 	color: darkorange;
 	font-size: 1.5em;
@@ -2106,9 +2115,16 @@ margin: 0.5em 0;
 .main {
 padding: 2%;
 }
-.details a h2 {
-font-size: 24px;
-}
+/*#show_title{*/
+	/*font-family: 'Pinyon Script', cursive;*/
+	/*color: darkorange !important;*/
+	/*font-size: 1.5em;*/
+/*}*/
+/*.details a h2 {*/
+	/*font-family: 'Pinyon Script', cursive;*/
+	/*color: darkorange;*/
+	/*font-size: 1.5em;*/
+/*}*/
 /*----*/
 .hotel-details a {
 font-size: 22px;
@@ -2749,12 +2765,12 @@ font-size: 13px;
 .room-sec:nth-child(5) {
 display: none;
 }
-.details a h2 {
-font-size: 19px;
-}
-.details a h2:hover {
-color: black
-}
+/*.details a h2 {*/
+/*font-size: 19px;*/
+/*}*/
+/*.details a h2:hover {*/
+/*color: black*/
+/*}*/
 .content-grids {
 margin-top: 0em;
 }

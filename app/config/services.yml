@@ -184,6 +184,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: RECEPTION, label: Reservation}
 
+    admin.articleBlog:
+        class: Indra\AdminBundle\Admin\ArticleAdmin
+        arguments: [~, Indra\AdminBundle\Entity\Article, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: BLOG, label: Article}
+
 
 
 #mes services personnalisées

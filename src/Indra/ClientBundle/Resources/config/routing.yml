@@ -13,3 +13,7 @@ reservation:
 contact:
     resource: "@IndraClientBundle/Resources/config/routing/contact.yml"
     prefix:   /
+
+blog:
+    resource: "@IndraClientBundle/Resources/config/routing/blog.yml"
+    prefix:   /

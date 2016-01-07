@@ -147,3 +147,11 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
             namer:              vich_uploader.namer_uniqid
+
+        article_image_blog:
+            uri_prefix:         /img/blog
+            upload_destination: %kernel.root_dir%/../web/img/blog
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer:              vich_uploader.namer_uniqid

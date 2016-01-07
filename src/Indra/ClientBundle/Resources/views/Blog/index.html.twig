@@ -1,0 +1,27 @@
+{% extends 'baseClient.html.twig' %}
+{% block title %}INDRA Hotel | Blog {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="main">
+            <div class="row service_list">
+                    {% for entity in entities %}
+                            <div class=" col-md-4 ser_img">
+                                <a href="{{ path('blog_show', {'id' : entity.id}) }}">
+                                    <img width="244px" height="165px"  src="{{ app.request.basePath }}{{ vich_uploader_asset(entity, 'imageFile') }}" alt="" />
+                                    {#<span class="next fa fa-eye fa-2x"></span>#}
+                                </a><br>
+                                <a href="{{ path('blog_show', {'id' : entity.id}) }}"><h3>{{ entity.titre }}</h3></a>
+                                <p class="para">{{ entity.contenu|slice(0, 62)|raw  }}</p>
+                            </div>
+                    {% endfor %}
+                    <div class="clear"></div>
+            </div>
+            <div class="clear"></div><br><br>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

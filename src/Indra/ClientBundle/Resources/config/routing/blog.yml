@@ -1,0 +1,7 @@
+blog_informations:
+    path:     /blog
+    defaults: { _controller: IndraClientBundle:Blog:index }
+
+blog_show:
+    path:     /blog/{id}
+    defaults: { _controller: IndraClientBundle:Blog:show }
