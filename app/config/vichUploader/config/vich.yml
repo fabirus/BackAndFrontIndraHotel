@@ -155,3 +155,19 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
             namer:              vich_uploader.namer_uniqid
+
+        restaurant_image:
+            uri_prefix:         /img/restaurant
+            upload_destination: %kernel.root_dir%/../web/img/restaurant
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer:              vich_uploader.namer_uniqid
+
+        bar_image:
+            uri_prefix:         /img/bar
+            upload_destination: %kernel.root_dir%/../web/img/bar
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer:              vich_uploader.namer_uniqid

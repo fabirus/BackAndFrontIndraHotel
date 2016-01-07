@@ -190,6 +190,18 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: BLOG, label: Article}
 
+    admin.restaurant:
+        class: Indra\AdminBundle\Admin\RestaurantAdmin
+        arguments: [~, Indra\AdminBundle\Entity\Restaurant, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Restaurant & Bar, label: Restaurant}
+
+    admin.bar:
+        class: Indra\AdminBundle\Admin\BarAdmin
+        arguments: [~, Indra\AdminBundle\Entity\Bar, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Restaurant & Bar, label: Bar}
+
 #    admin.tourisme:
 #        class: Indra\AdminBundle\Admin\TourismeAdmin
 #        arguments: [~, Indra\AdminBundle\Entity\Tourisme, ~]

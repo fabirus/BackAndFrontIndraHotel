@@ -1,0 +1,178 @@
+<?php
+
+namespace Indra\AdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+/**
+ * Bar
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Indra\AdminBundle\Entity\Repository\BarRepository")
+ * @Vich\Uploadable
+ */
+class Bar
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descritpion", type="text")
+     */
+    private $descritpion;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     *
+     * @Vich\UploadableField(mapping="bar_image", fileNameProperty="imageName")
+     * @Assert\File(
+     * maxSize="2M",
+     * maxSizeMessage = "Taille max 2Mo",
+     * mimeTypes = {"image/jpeg", "image/png"},
+     * mimeTypesMessage = "Uploader une image au format jpg ou png"
+     * )
+     *
+     * @var File
+     */
+    private $imageFile;
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $imageName;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = new \Datetime();
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Bar
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set descritpion
+     *
+     * @param string $descritpion
+     *
+     * @return Bar
+     */
+    public function setDescritpion($descritpion)
+    {
+        $this->descritpion = $descritpion;
+
+        return $this;
+    }
+
+    /**
+     * Get descritpion
+     *
+     * @return string
+     */
+    public function getDescritpion()
+    {
+        return $this->descritpion;
+    }
+}
+
