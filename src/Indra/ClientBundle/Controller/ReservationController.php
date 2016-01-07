@@ -27,9 +27,16 @@ class ReservationController extends Controller
     {
         $entity     = new Reservation();
         $form       = $this->createCreateForm($entity);
+        $em         = $this->getDoctrine()->getManager();
+        $entities   = $em->getRepository('IndraAdminBundle:Article')->findBy(
+            array(),
+            array('updatedAt' => 'desc'),
+            4
+        );
 
         return $this->render('IndraClientBundle:Reservation:index.html.twig', array(
             'form'     => $form->createView(),
+            'articles' => $entities
         ));
     }
 

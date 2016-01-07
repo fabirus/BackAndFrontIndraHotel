@@ -6,8 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BlogController extends Controller
 {
-        public function indexAction()
-    {
+    public function indexAction(){
         $em         = $this->getDoctrine()->getManager();
         $entities   = $em->getRepository('IndraAdminBundle:Article')->findAll();
 

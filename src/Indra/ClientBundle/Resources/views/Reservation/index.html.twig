@@ -73,29 +73,15 @@
                         {#<input type="reset" value="Reset">#}
                 </div>
                 <div class="col-md-4 booking-news">
-                    <h4>Latest News</h4>
-                    <div class="LatestNews">
-                        <h6><a href="#">Starting New Ventures for a Current Business</a></h6>
-                        <span>01-7-2014 </span>
-                        <p>Faworki bonbon marshmallow caramels applicake tart gummi bears liquorice.</p>
-                    </div>
-                    <div class="LatestNews">
-                        <h6><a href="#">Starting New Ventures for a Current Business</a></h6>
-                        <span>01-7-2014 </span>
-                        <p>Faworki bonbon marshmallow caramels applicake tart gummi bears liquorice.</p>
-                    </div>
-                    <div class="LatestNews">
-                        <h6><a href="#">Starting New Ventures for a Current Business</a></h6>
-                        <span>01-7-2014 </span>
-                        <p>Faworki bonbon marshmallow caramels applicake tart gummi bears liquorice.</p>
-                    </div>
-                    <div class="LatestNews">
-                        <h6><a href="#">Starting New Ventures for a Current Business</a></h6>
-                        <span>01-7-2014 </span>
-                        <p>Faworki bonbon marshmallow caramels applicake tart gummi bears liquorice.</p>
-                    </div>
+                    <h4>Derniers Articles</h4>
+                    {% for article in articles %}
+                        <div class="LatestNews">
+                            <h6><a href="{{ path('blog_show', {'id' : article.id}) }}">{{ article.titre }}</a></h6>
+                            <span>{{ article.updatedAt|date("d/m/Y h:m") }}</span>
+                            <p>{{ article.contenu|slice(0, 62)|raw  }}</p>
+                        </div>
+                    {% endfor %}
                 </div>
-
                 <div class="clearfix"> </div>
 
             </div>
