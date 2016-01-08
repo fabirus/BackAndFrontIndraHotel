@@ -71,3 +71,73 @@
     background-color: #000;
     color: #fff
 }
+
+
+.facebook {
+    background-color: #3b5998;
+}
+
+.gplus {
+    background-color: #dd4b39;
+}
+
+.twitter {
+    background-color: #55acee;
+}
+
+.stumbleupon {
+    background-color: #eb4924;
+}
+
+.youtube {
+    background-color: #cc2127;
+}
+
+.linkedin {
+    background-color: #0077b5;
+}
+
+.buffer {
+    background-color: #323b43;
+}
+
+.socialfloat {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 200px;
+    z-index: 9999;
+}
+
+.socialfloat .fbtn {
+    width: 50px;
+    height: 50px;
+    display: block;
+    color: #fff;
+    text-align: center;
+
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+}
+
+.socialfloat .fbtn i {
+    font-size: 30px;
+    line-height: 50px;
+
+    /*margin: 8px;*/
+    width: 100%;
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.8);
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    transition: all ease 0.5s
+}
+
+.socialfloat .fbtn i:hover {
+    margin: 0px;
+    box-shadow: 6px 6px 4px 4px rgba(0,0,0,0.3);
+}
