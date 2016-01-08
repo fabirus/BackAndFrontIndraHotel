@@ -13,6 +13,7 @@
         'css/custom.css'
         'assets/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
         'assets/vendor/bootstrap-multiselect/dist/css/bootstrap-multiselect.css'
+        'assets/vendor/country-select-js/build/css/countrySelect.css'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
         {% endstylesheets %}
@@ -136,6 +137,11 @@
                                     {% if is_granted('ROLE_MANAGER') %}
                                         <li>
                                             <a href="{{ path('service_informations') }}">FACTURES</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_MANAGER') %}
+                                        <li>
+                                            <a href="{{ path('client_informations') }}">NOS CLIENTS</a>
                                         </li>
                                     {% endif %}
                                     {% if is_granted('ROLE_MANAGER') %}

@@ -106,3 +106,7 @@ reservation:
 contact:
     resource: "@IndraAdminBundle/Resources/config/routing/contact.yml"
     prefix:   /
+
+client:
+    resource: "@IndraAdminBundle/Resources/config/routing/client.yml"
+    prefix:   /

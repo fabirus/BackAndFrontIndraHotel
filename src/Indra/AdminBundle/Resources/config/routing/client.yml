@@ -1,0 +1,31 @@
+client_informations:
+    path:     /client
+    defaults: { _controller: IndraAdminBundle:Client:index }
+
+
+client_create:
+    path:     /client/create
+    defaults: { _controller: IndraAdminBundle:Client:create }
+
+client_show:
+    path:     /client/{id}
+    defaults: { _controller: IndraAdminBundle:Client:show }
+
+
+client_delete:
+    path:     /client/delete/{id}/{del}
+    defaults: { _controller: IndraAdminBundle:Client:delete, _locale : fr }
+    options:
+        expose: true
+
+
+client_update:
+    path:     /client/{id}/
+    defaults: { _controller: IndraAdminBundle:Client:update }
+
+
+#employe_search:
+#    path:     /recheche/employe
+#    defaults: { _controller: IndraAdminBundle:Employe:search, _locale : fr }
+#    options:
+#        expose: true

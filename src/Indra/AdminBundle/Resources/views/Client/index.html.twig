@@ -1,0 +1,134 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} | Clients {% endblock %}
+
+{% block body -%}
+    <div class="alert alert-info" role="alert" style="font-size: 18px">Liste des Clients</div>
+    <div class="row">
+        <div class="col-md-6">
+            <i class="fa fa-plus-square fa-3x" data-toggle="modal"
+               data-target="#modalForm" title="Ajouter" style="color:
+        #0FAD8C;cursor: pointer;"></i>
+        </div>
+        <div class="col-md-6">
+            <i title="Imprimer" class="fa fa-print fa-3x" onclick="common().print('noprint', 'Liste des Réservations')" style="float: right; cursor: pointer; margin-right: 2%"></i>
+        </div>
+    </div><br />
+
+    <table class="table table-hover table-bordered dataTable">
+        <thead>
+        <tr>
+            <th style="text-align: center">Nom</th>
+            <th style="text-align: center">Prénom</th>
+            <th style="text-align: center">Sexe</th>
+            <th style="text-align: center">Tél</th>
+            <th style="text-align: center">Email</th>
+            <th style="text-align: center">Date Naissance</th>
+            <th style="text-align: center">Lieu Naissance</th>
+            <th style="text-align: center">Nationalité</th>
+            <th style="text-align: center">Numéro Identité</th>
+            <th style="text-align: center">Date Del Identité</th>
+            <th class="noprint" style="text-align: center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td style="text-align: center">{{ entity.nom }}</td>
+                <td style="text-align: center">{{ entity.prenom }}</td>
+                <td style="text-align: center">{{ entity.sexe }}</td>
+                <td style="text-align: center">{{ entity.tel }}</td>
+                <td style="text-align: center">
+                    {% if entity.email is not null %}
+                        {{ entity.email }}
+                    {% else %}
+                        <span class="label label-danger">Non renseigné</span>
+                    {% endif %}
+                </td>
+                <td style="text-align: center">{{ entity.dateNaissance }}</td>
+                <td style="text-align: center">{{ entity.lieuNaissance }}</td>
+                <td style="text-align: center">{{ entity.nationalite }}</td>
+                <td style="text-align: center">{{ entity.numeroIdentite }}</td>
+                <td style="text-align: center">{{ entity.dateDelivranceId }}</td>
+                <td class="noprint" style="text-align: center">
+                    <a href="{{ path('client_show', {'id' : entity.id}) }}">
+                        <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert alert-info">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Enregistrement d'un Client</h4>
+                </div>
+                {{ form_start(form) }}
+                <div class="modal-body">
+                    {{ form_errors(form) }}
+
+                    {{ form_row(form.nom) }}
+                    {{ form_row(form.prenom) }}
+                    {{ form_row(form.sexe) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.tel) }}
+                    {{ form_label(form.dateNaissance) }}
+                    <div class="form-group">
+                        <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                            {{ form_widget(form.dateNaissance) }}
+                            <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        </div>
+                    </div>
+                    {{ form_row(form.lieuNaissance) }}
+                    {{ form_row(form.numeroIdentite) }}
+                    {{ form_label(form.dateDelivranceId) }}
+                    <div class="form-group">
+                        <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                            {{ form_widget(form.dateDelivranceId) }}
+                            <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        </div>
+                    </div>
+                    {{ form_row(form.nationalite) }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        {{ form_widget(form.submit, { 'label': 'Enregister', 'attr' :{'type' : 'button', 'class' :'btn btn-primary register'}})}}
+
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/country-select-js/build/js/countrySelect.min.js')}}"></script>
+        <script>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+            common().notice('{{ flashMessage }}','ok');
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+            common().notice('{{ flashMessage }}','ko');
+            {% endfor %}
+            $(".country").countrySelect();
+            common().date();
+            common().dataTable(0);
+            $("form").validate();
+            common().validation();
+            $(".phoneNumber").rules("add", { phone: "" });
+        </script>
+
+    {% endblock %}
