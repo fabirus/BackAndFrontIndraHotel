@@ -1,0 +1,7 @@
+rating_informations:
+    path:     /rating
+    defaults: { _controller: IndraClientBundle:Rating:index }
+
+rating_create:
+    path:     /rating/create
+    defaults: { _controller: IndraClientBundle:Rating:create }

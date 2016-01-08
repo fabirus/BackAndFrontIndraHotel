@@ -1379,14 +1379,15 @@ text-align:center;
 	margin:2.5em 0 1em 0;
 }
 
-.article{
+.article, .vote h3{
 	font-family: 'Pinyon Script', cursive;
 	text-align: center;
-	font-size:3em;
+	font-size:3em !important;
 	color:#2A2E33;
 	border-bottom:1px solid #2A2E33;
 	margin:0.5em 0 1em 0;
 }
+
 .confer p{
 color:#4C4C4C;
 font-size:14px;
@@ -1575,6 +1576,14 @@ margin-bottom: 3em;
 }
 .LatestNews span{
 font-size:0.75em;
+}
+
+.br-widget a{
+	font-size: 28px !important;
+}
+
+.br-theme-fontawesome-stars .br-widget a.br-selected:after{
+	color : darkorange !important;
 }
 /*--CONTACT-page--*/
 .contact-bg{

@@ -139,6 +139,20 @@
             </div>
         </div>
     </div>
+    <div class="vote">
+        <h3>Les Derniers Votes</h3>
+        <div class="row" style="width: 70%;margin-left: auto;margin-right: auto;">
+            {% for vote in votes %}
+                <div class="LatestNews col-md-4" style="height:136px ">
+                    <h4><a href="#"><b>{{ vote.nom }}</b> le {{ vote.updatedAt|date("d/m/Y") }} à {{ vote.updatedAt|date("h:m:s") }}</a></h4>
+                    {% for i in 1..vote.vote %}
+                        <span style="font-size: 1.5em;color: darkorange;" class="glyphicon glyphicon glyphicon-star" aria-hidden="true"></span>
+                    {% endfor %}
+                    <p>{{ vote.commentaire|slice(0, 200)|raw  }}</p>
+                </div>
+            {% endfor %}
+        </div>
+	</div>
     <div class="sponcers">
 		<div class="sponcers-head">
 		    <h3>Nos Partenaires</h3>

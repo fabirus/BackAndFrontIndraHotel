@@ -1,0 +1,64 @@
+{% extends 'baseClient.html.twig' %}
+{% block title %}INDRA Hotel | Réservation {% endblock %}
+
+{% block body %}
+    <div class="contact-bg2">
+        <div class="container">
+            {% for flashMessage in app.session.flashbag.get('success_rating') %}
+                <div class="alert alert-success" role="alert" style="font-size: 18px;margin-top: 2%;">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            <div class="booking">
+                <h3>Votre Point de Vue Compte énormement</h3>
+                <div class="col-md-8 booking-form">
+                        {{ form_start(form) }}
+                        {{ form_errors(form) }}
+
+                        {{ form_row(form.nom) }}<br>
+                        {{ form_row(form.vote) }}<br>
+                        {{ form_row(form.commentaire) }}
+                            <input type="reset" value="Reset">
+                            {{ form_widget(form.submit, { 'label': 'Enregister', 'attr' :{'type' : 'submit', 'class' : 'submit'}})}}
+
+
+
+                        {{ form_end(form) }}
+                        {#<input type="submit" value="Submit">#}
+                        {#<input type="reset" value="Reset">#}
+                </div>
+                <div class="col-md-4 booking-news">
+                    <h4>Derniers Votes</h4>
+                    {% for vote in votes %}
+                        <div class="LatestNews">
+                            <h6><a href="#">{{ vote.nom }}</a></h6>
+                            <span>{{ vote.updatedAt|date("d/m/Y h:m:s") }}</span>
+                            {% for i in 1..vote.vote %}
+                                <span style="font-size: 1.5em;color: darkorange;" class="glyphicon glyphicon glyphicon-star" aria-hidden="true"></span>
+                            {% endfor %}
+                            {#<p>{{ vote.commentaire|slice(0, 62)|raw  }}</p>#}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="clearfix"> </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery-bar-rating/dist/jquery.barrating.min.js') }}"></script>
+    <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
+    <script>
+        $("form").validate();
+        common().validation();
+        $('.vote').barrating({
+            theme: 'fontawesome-stars'
+        });
+    </script>
+
+{% endblock %}

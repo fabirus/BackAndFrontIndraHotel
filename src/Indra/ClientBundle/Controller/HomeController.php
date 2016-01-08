@@ -13,10 +13,16 @@ class HomeController extends Controller
         $partenaires = $em->getRepository('IndraAdminBundle:Gallery')->findBy(
             array('nom' => 'partenaires')
         );
+        $votes   = $em->getRepository('IndraAdminBundle:Rating')->findBy(
+            array(),
+            array('updatedAt' => 'desc'),
+            6
+        );
 
         return $this->render('IndraClientBundle:Home:index.html.twig', array(
             'entities'    => $entities,
             'partenaires' => $partenaires[0],
+            'votes'       => $votes
         ));
     }
 

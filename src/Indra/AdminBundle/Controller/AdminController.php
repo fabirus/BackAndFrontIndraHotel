@@ -28,6 +28,19 @@ class AdminController extends Controller
         ));
     }
 
+    public function votesAction()
+    {
+        $em          = $this->getDoctrine()->getManager();
+        $entities    = $em->getRepository('IndraAdminBundle:Rating')->findBy(
+            array(),
+            array('updatedAt' => 'desc')
+        );
+
+        return $this->render('IndraAdminBundle:Admin:votes.html.twig', array(
+            'entities' => $entities
+        ));
+    }
+
     public function verifTache($taches){
         $tacheArray['response'] = false;
 

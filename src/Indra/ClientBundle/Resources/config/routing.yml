@@ -14,6 +14,10 @@ reservation:
     resource: "@IndraClientBundle/Resources/config/routing/reservation.yml"
     prefix:   /
 
+rating:
+    resource: "@IndraClientBundle/Resources/config/routing/rating.yml"
+    prefix:   /
+
 contact:
     resource: "@IndraClientBundle/Resources/config/routing/contact.yml"
     prefix:   /

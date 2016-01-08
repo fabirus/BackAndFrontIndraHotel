@@ -2,6 +2,10 @@ admin_homepage:
     path:     /
     defaults: { _controller: IndraAdminBundle:Admin:index }
 
+admin_vote:
+    path:     /votes
+    defaults: { _controller: IndraAdminBundle:Admin:votes }
+
 employe:
     resource: "@IndraAdminBundle/Resources/config/routing/employe.yml"
     prefix:   /

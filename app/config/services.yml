@@ -202,6 +202,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: Restaurant & Bar, label: Bar}
 
+    admin.rating:
+        class: Indra\AdminBundle\Admin\RatingAdmin
+        arguments: [~, Indra\AdminBundle\Entity\Rating, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: RECEPTION, label: Votes}
+
 #    admin.tourisme:
 #        class: Indra\AdminBundle\Admin\TourismeAdmin
 #        arguments: [~, Indra\AdminBundle\Entity\Tourisme, ~]
