@@ -55,8 +55,9 @@ class ClientController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'Client ajoutée avec Succès !!');
 
-            return $this->redirect($this->generateUrl('client_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('client_informations'));
         }
 
         return array(

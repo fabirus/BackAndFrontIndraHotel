@@ -75,8 +75,26 @@
                     {{ form_row(form.nom) }}
                     {{ form_row(form.prenom) }}
                     {{ form_row(form.sexe) }}
-                    {{ form_row(form.email) }}
-                    {{ form_row(form.tel) }}
+                    {{ form_label(form.email) }}
+                    <div class="form-group">
+                        <div class='input-group'>
+                            <span class="input-group-addon">@</span>
+                            {{ form_widget(form.email) }}
+                            <span class="input-group-addon">
+                                    <i class="fa fa-envelope-o"></i>
+                                </span>
+                        </div>
+                    </div>
+                    {{ form_label(form.tel) }}
+                    <div class="form-group">
+                        <div class='input-group' id="tel">
+                            <span class="input-group-addon">+237</span>
+                            {{ form_widget(form.tel) }}
+                            <span class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </span>
+                        </div>
+                    </div>
                     {{ form_label(form.dateNaissance) }}
                     <div class="form-group">
                         <div class='input-group date datetimepicker' id="checkDate" data-employe="">
@@ -118,10 +136,10 @@
         <script type="text/javascript" src="{{ asset('assets/vendor/country-select-js/build/js/countrySelect.min.js')}}"></script>
         <script>
             {% for flashMessage in app.session.flashbag.get('success') %}
-            common().notice('{{ flashMessage }}','ok');
+                common().notice('{{ flashMessage }}','ok');
             {% endfor %}
             {% for flashMessage in app.session.flashbag.get('error') %}
-            common().notice('{{ flashMessage }}','ko');
+                common().notice('{{ flashMessage }}','ko');
             {% endfor %}
             $(".country").countrySelect();
             common().date();
