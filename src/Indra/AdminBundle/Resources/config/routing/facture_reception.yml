@@ -1,0 +1,26 @@
+factureReception_informations:
+    path:     /factureReception
+    defaults: { _controller: IndraAdminBundle:FactureReception:index }
+
+factureReception_create:
+    path:     /factureReception/create
+    defaults: { _controller: IndraAdminBundle:FactureReception:create }
+
+factureReception_show:
+    path:     /factureReception/{id}
+    defaults: { _controller: IndraAdminBundle:FactureReception:show }
+
+factureReception_delete:
+    path:     /factureReception/delete/{id}/{del}
+    defaults: { _controller: IndraAdminBundle:FactureReception:delete, _locale : fr}
+    options:
+        expose: true
+
+factureReception_update:
+    path:     /factureReception/{id}/
+    defaults: { _controller: IndraAdminBundle:FactureReception:update }
+
+
+factureReception_valid:
+    path:     /factureReception/{id}/{valid}
+    defaults: { _controller: IndraAdminBundle:FactureReception:valid }

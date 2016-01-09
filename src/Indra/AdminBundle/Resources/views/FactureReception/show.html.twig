@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>FactureReception</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ entity.statut }}</td>
+            </tr>
+            <tr>
+                <th>Datearrive</th>
+                <td>{{ entity.dateArrive }}</td>
+            </tr>
+            <tr>
+                <th>Datedepart</th>
+                <td>{{ entity.dateDepart }}</td>
+            </tr>
+            <tr>
+                <th>Paye</th>
+                <td>{{ entity.paye }}</td>
+            </tr>
+            <tr>
+                <th>Receptionniste</th>
+                <td>{{ entity.receptionniste }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('facturereception') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('facturereception_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

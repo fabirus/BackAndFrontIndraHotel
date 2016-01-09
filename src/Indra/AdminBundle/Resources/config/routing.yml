@@ -110,3 +110,7 @@ contact:
 client:
     resource: "@IndraAdminBundle/Resources/config/routing/client.yml"
     prefix:   /
+
+facture_reception:
+    resource: "@IndraAdminBundle/Resources/config/routing/facture_reception.yml"
+    prefix:   /
