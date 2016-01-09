@@ -1,16 +1,83 @@
 {% extends '::base.html.twig' %}
 
+{% block title %} {{ parent() }} | Client {% endblock %}
 {% block body -%}
-    <h1>Client edit</h1>
-
-    {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('client') }}">
-            Back to the list
+    <div class="alert alert-info" role="alert" style="font-size: 18px">{{ 'employe.show.infos'|trans({}, 'employe') }}</div>
+    <div>
+        <a href="{{ path('client_informations') }}">
+            <i class="fa fa-backward fa-3x" title="Revenir à la liste" style="color:
+        #0FAD8C;cursor: pointer;"></i>
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    </div>
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.sexe) }}
+        {{ form_label(form.email) }}
+        <div class="form-group">
+            <div class='input-group'>
+                <span class="input-group-addon">@</span>
+                {{ form_widget(form.email) }}
+                <span class="input-group-addon">
+                        <i class="fa fa-envelope-o"></i>
+                    </span>
+            </div>
+        </div>
+        {{ form_label(form.tel) }}
+        <div class="form-group">
+            <div class='input-group' id="tel">
+                <span class="input-group-addon">+237</span>
+                {{ form_widget(form.tel) }}
+                <span class="input-group-addon">
+                        <i class="fa fa-phone"></i>
+                    </span>
+            </div>
+        </div>
+        {{ form_label(form.dateNaissance) }}
+        <div class="form-group">
+            <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                {{ form_widget(form.dateNaissance) }}
+                <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </span>
+            </div>
+        </div>
+        {{ form_row(form.lieuNaissance) }}
+        {{ form_row(form.numeroIdentite) }}
+        {{ form_label(form.dateDelivranceId) }}
+        <div class="form-group">
+            <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                {{ form_widget(form.dateDelivranceId) }}
+                <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </span>
+            </div>
+        </div>
+        {{ form_row(form.nationalite) }}
+        {{ form_widget(form.submit, { 'label': 'Enregister', 'attr' :{'type' : 'button', 'class' :'btn btn-primary register registerPoste'}})}}
+
+        {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/country-select-js/build/js/countrySelect.min.js')}}"></script>
+    <script>
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            common().notice('{{ flashMessage }}','ok');
+        {% endfor %}
+        $(".country").countrySelect();
+        common().date();
+        common().dataTable(0);
+        $("form").validate();
+        common().validation();
+        $(".phoneNumber").rules("add", { phone: "" });
+    </script>
 {% endblock %}

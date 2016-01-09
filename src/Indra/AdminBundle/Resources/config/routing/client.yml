@@ -7,9 +7,9 @@ client_create:
     path:     /client/create
     defaults: { _controller: IndraAdminBundle:Client:create }
 
-client_show:
+client_edit:
     path:     /client/{id}
-    defaults: { _controller: IndraAdminBundle:Client:show }
+    defaults: { _controller: IndraAdminBundle:Client:edit }
 
 
 client_delete:
@@ -24,8 +24,3 @@ client_update:
     defaults: { _controller: IndraAdminBundle:Client:update }
 
 
-#employe_search:
-#    path:     /recheche/employe
-#    defaults: { _controller: IndraAdminBundle:Employe:search, _locale : fr }
-#    options:
-#        expose: true

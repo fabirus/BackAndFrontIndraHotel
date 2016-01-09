@@ -51,8 +51,8 @@
                 <td style="text-align: center">{{ entity.numeroIdentite }}</td>
                 <td style="text-align: center">{{ entity.dateDelivranceId }}</td>
                 <td class="noprint" style="text-align: center">
-                    <a href="{{ path('client_show', {'id' : entity.id}) }}">
-                        <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
+                    <a href="{{ path('client_edit', {'id' : entity.id}) }}">
+                        <i title="Modifier" style="cursor: pointer; margin-right: 4%; color: orange;" class="fa fa-pencil fa-2x"></i>
                     </a>
                 </td>
             </tr>
@@ -137,9 +137,6 @@
         <script>
             {% for flashMessage in app.session.flashbag.get('success') %}
                 common().notice('{{ flashMessage }}','ok');
-            {% endfor %}
-            {% for flashMessage in app.session.flashbag.get('error') %}
-                common().notice('{{ flashMessage }}','ko');
             {% endfor %}
             $(".country").countrySelect();
             common().date();
