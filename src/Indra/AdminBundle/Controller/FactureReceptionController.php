@@ -125,7 +125,6 @@ class FactureReceptionController extends Controller
         return $form;
     }
 
-
     /**
      * Finds and displays a FactureReception entity.
      *
@@ -135,18 +134,18 @@ class FactureReceptionController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em         = $this->getDoctrine()->getManager();
+        $entity     = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
 
-        $entity = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find FactureReception entity.');
-        }
-
+        $entities = $em->getRepository('IndraAdminBundle:FactureReception')->findBy(
+            array('updatedAt' => $entity->getUpdatedAt())
+        );
 
         return array(
-            'entity'      => $entity,
+            'entities' => $entities,
+            'entityDate'   => $entity
         );
+
     }
 
 
@@ -207,7 +206,7 @@ class FactureReceptionController extends Controller
      * @Route("/avancesalaire/{id}/{valid}/{idEmploye}", name="avancesalaire_valid")
      * @Method("VALID")
      */
-    public function validPaieAction($id, $valid)
+    public function validPaieAction($id, $valid, $idDate)
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
@@ -226,7 +225,7 @@ class FactureReceptionController extends Controller
             $this->get('session')->getFlashBag()->add('success', 'Facture Payée !!');
         }
 
-        return $this->redirect($this->generateUrl('facturereception_informations'));
+        return $this->redirect($this->generateUrl('facturereception_show', array('id' => $idDate)));
     }
 
     /**
@@ -235,7 +234,7 @@ class FactureReceptionController extends Controller
      * @Route("/avancesalaire/{id}/{valid}/{idEmploye}", name="avancesalaire_valid")
      * @Method("VALID")
      */
-    public function validOccupationAction($id, $valid, $idChambre)
+    public function validOccupationAction($id, $valid, $idChambre, $idDate)
     {
         $em         = $this->getDoctrine()->getManager();
         $entity     = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
@@ -257,7 +256,7 @@ class FactureReceptionController extends Controller
             $this->get('session')->getFlashBag()->add('success', 'Chambre Libérée !!');
         }
 
-        return $this->redirect($this->generateUrl('facturereception_informations'));
+        return $this->redirect($this->generateUrl('facturereception_show', array('id' => $idDate)));
     }
 
 

@@ -3,7 +3,7 @@
 {% block title %} {{ parent() }} | Liste des Factures d'Hébergement {% endblock %}
 
 {% block body -%}
-<div class="alert alert-info" role="alert" style="font-size: 18px">Liste des Factures d'Hébergement</div>
+<div class="alert alert-info" role="alert" style="font-size: 18px">Liste des Dates d'Hébergement </div>
 <div class="row">
     <div class="col-md-6">
         <i class="fa fa-plus-square fa-3x" data-toggle="modal"
@@ -15,88 +15,20 @@
     </div>
 </div><br />
 
-<table class="table table-hover table-bordered dataTable">
+<table class="table table-hover table-bordered dataTable" id="routerDate" data-route="facturereception_show">
     <thead>
     <tr>
         <th style="text-align: center">Date</th>
-        <th style="text-align: center">Arrivée</th>
-        <th style="text-align: center">Départ</th>
-        <th style="text-align: center">Client</th>
-        <th style="text-align: center">Chambre</th>
-        <th style="text-align: center">Nbre Personnes</th>
-        <th style="text-align: center">Payé ?</th>
-        <th style="text-align: center">Statut</th>
-        <th style="text-align: center">Réceptionniste</th>
         <th class="noprint" style="text-align: center">Actions</th>
     </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr {% if entity.del == 1 %} class="danger" {% endif %}>
+        <tr>
             <td style="text-align: center">{{ entity.updatedAt|date('d/m/y') }}</td>
-            <td style="text-align: center">{{ entity.dateArrive }}</td>
-            <td style="text-align: center">{{ entity.dateDepart }}</td>
-            <td style="text-align: center">{{ entity.client }}</td>
-            <td style="text-align: center">{{ entity.chambre }}</td>
-            <td style="text-align: center">{{ entity.qtePers }}</td>
-            <td style="text-align: center">
-                {% if entity.paye == 1 %}
-                    <button type="button" class="btn btn-danger">
-                        <a style="color:white" href="
-                        {% if is_granted('ROLE_ADMIN') %}
-                            {{ path('facturereception_valid_paie', {'id' : entity.id, 'valid' : 0}) }}
-                        {% else %}
-                            #
-                        {% endif %}
-                            ">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Non
-                        </a>
-                    </button>
-                {% else %}
-                    <button type="button" class="btn btn-success">
-                        <a style="color:white" href="
-                        {% if is_granted('ROLE_ADMIN') %}
-                            {{ path('facturereception_valid_paie', {'id' : entity.id, 'valid' : 1}) }}
-                        {% else %}
-                            #
-                        {% endif %}
-                            ">
-                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Oui
-                        </a>
-                    </button>
-                {% endif %}
-            </td>
-            <td style="text-align: center">
-                {% if entity.statut == 1 %}
-                    <button type="button" class="btn btn-danger">
-                        <a style="color:white" href="
-                        {% if is_granted('ROLE_ADMIN') %}
-                            {{ path('facturereception_valid_occupation', {'id' : entity.id, 'valid' : 0, 'idChambre' : entity.chambre.id}) }}
-                        {% else %}
-                            #
-                        {% endif %}
-                            ">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Occupée
-                        </a>
-                    </button>
-                {% else %}
-                    <button type="button" class="btn btn-success">
-                        <a style="color:white" href="
-                        {% if is_granted('ROLE_ADMIN') %}
-                            {{ path('facturereception_valid_occupation', {'id' : entity.id, 'valid' : 1, 'idChambre' : entity.chambre.id}) }}
-                        {% else %}
-                            #
-                        {% endif %}
-                            ">
-                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Libre
-                        </a>
-                    </button>
-                {% endif %}
-            </td>
-            <td style="text-align: center">{{ entity.receptionniste }}</td>
             <td class="noprint" style="text-align: center">
-                <a href="{{ path('reservation_show', {'id' : entity.id}) }}">
-                    <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
+                <a href="{{ path('facturereception_show', {'id' : entity.id}) }}">
+                    <i title="Voir" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
                 </a>
             </td>
         </tr>
@@ -137,6 +69,7 @@
                     </div>
                 </div>
                 {{ form_row(form.qtePers) }}
+                {{ form_row(form.montant) }}
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -159,9 +92,6 @@
         <script>
             {% for flashMessage in app.session.flashbag.get('success') %}
                 common().notice('{{ flashMessage }}','ok');
-            {% endfor %}
-            {% for flashMessage in app.session.flashbag.get('error') %}
-                common().notice('{{ flashMessage }}','ko');
             {% endfor %}
             common().date();
             $('.multiselectOne').multiselect({

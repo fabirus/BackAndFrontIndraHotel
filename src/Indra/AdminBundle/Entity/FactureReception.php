@@ -79,6 +79,13 @@ class FactureReception
      */
     private $del = 0;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="montant", type="float")
+     */
+    private $montant;
+
 
     /**
      * @var string
@@ -104,6 +111,23 @@ class FactureReception
     {
         return $this->id;
     }
+
+    /**
+     * @return float
+     */
+    public function getMontant()
+    {
+        return $this->montant;
+    }
+
+    /**
+     * @param float $montant
+     */
+    public function setMontant($montant)
+    {
+        $this->montant = $montant;
+    }
+
 
     /**
      * @return mixed

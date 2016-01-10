@@ -1,178 +1,123 @@
 {% extends '::base.html.twig' %}
 
-{% block title %} {{ parent() }} | Réservation {% endblock %}
+{% block title %} {{ parent() }} | Liste des Factures d'Hébergement {% endblock %}
 
 {% block body -%}
-    <div class="alert alert-info" role="alert" style="font-size: 18px">Réservation du client {{ entity.nom }} !! <br>
-        {% if entity.statut == 1 %}
-            <b style="text-decoration: underline">NB:</b> Pour pouvoir imprimer, la Réservation  doit etre validée par un réceptionniste
-        {% endif %}
-    </div>
-
-    <a href="{{ path('reservation_informations') }}">
-        <i class="fa fa-backward fa-3x" title="Revenir à la liste" style="color:
+    <div class="alert alert-info" role="alert" style="font-size: 18px">Liste des Factures d'Hébergement du {{ entityDate.updatedAt|date('d/m/y') }}</div>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{ path('facturereception_informations' ) }}">
+                <i class="fa fa-backward fa-3x" title="Revenir à la liste" style="color:
         #0FAD8C;cursor: pointer;"></i>
-    </a>
-    {% if entity.del == 0 %}
-        <a style="color: red; cursor: pointer; float: right" tabindex="0"  role="button" data-toggle="popover" data-placement="left" data-route="reservation_delete">
-            <i  title="Supprimer"  class="fa fa-trash-o fa-3x"></i>
-        </a>
-        {% include '::common/delete.html.twig' %}
-    {% else %}
-        <a href="{{ path('reservation_delete', {'id' : entity.id, 'del' : 0}) }}">
-            <i title="Activer" style="color: forestgreen; cursor: pointer; float: right" class="fa fa-check fa-3x"></i>
-        </a>
-    {% endif %}
-    <i title="Modifier" style="color: orange; float: right; cursor: pointer; margin-right: 2%" class="fa fa-pencil fa-3x" data-toggle="modal"
-       data-target="#modalForm"></i>
-    {% if entity.statut == 0 %}
-        <i title="Imprimer" class="fa fa-print fa-3x" onclick="common().print('noprint', '')" style="float: right; cursor: pointer; margin-right: 2%"></i>
-    {% endif %}
-    <div class="print">
-        <h3 style="font-size: 20px;float: right; margin-right: 5%">Douala, le <b>{{ "now"|date("d/m/Y") }}</b></h3><br><br><br><br>
-        <h3><b style="font-size: 20px;text-decoration: underline;margin-left: 5%">Réservation:</b> {{ entity.updatedAt|date("d/m/Y") }}</h3>
-        <table class="table table-hover table-bordered" id="tabAvance" style="width: 70%;margin-left: auto;margin-right: auto;font-size: 20px;margin-top: 7%">
-            <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ entity.nom}}</td>
-            </tr>
-            {% if entity.email is not null %}
-                <tr>
-                    <th>Email</th>
-                    <td>{{ entity.email }}</td>
-                </tr>
-            {% endif %}
-            <tr>
-                <th>Téléphone</th>
-                <td>{{ entity.tel}}</td>
-            </tr>
-            <tr>
-                <th>Heure Arrivée</th>
-                <td>{{ entity.heure}}</td>
-            </tr>
-            <tr>
-                <th>Date Arrivée</th>
-                <td>{{ entity.arrive}}</td>
-            </tr>
-            <tr>
-                <th>Date Départ</th>
-                <td>{{ entity.depart }}</td>
-            </tr>
-            <tr>
-                <th>Type de Logement</th>
-                <td>{{ entity.categorieChambre }}</td>
-            </tr>
-            {% if entity.chambre is not null %}
-                <tr>
-                    <th>Chambre</th>
-                    <td>{{ entity.chambre }}</td>
-                </tr>
-            {% endif %}
-            <tr>
-                <th>Nombre de Chambres</th>
-                <td>{{ entity.qte }}</td>
-            </tr>
-            {% if entity.requete is not null %}
-                <tr>
-                    <th>Requète</th>
-                    <td>{{ entity.requete }}</td>
-                </tr>
-            {% endif %}
-            </tbody>
-        </table>
-        <div class="row" style="margin-top : 10%; font-size: 20px">
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-6" style="float:right;text-align: right;">
-                <b>La Réception</b>
-            </div>
+            </a>
         </div>
-    </div>
-    <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header alert alert-info">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Enregistrement d'une réservation</h4>
-                </div>
-                {{ form_start(edit_form) }}
-                <div class="modal-body">
-                    {{ form_errors(edit_form) }}
-
-                    {{ form_row(edit_form.nom) }}
-                    {{ form_row(edit_form.email) }}
-                    {{ form_row(edit_form.tel) }}
-                    {{ form_label(edit_form.heure) }}
-                    <div class="form-group">
-                        <div class='input-group date hourpicker'>
-                            {{ form_widget(edit_form.heure) }}
-                            <span class="input-group-addon">
-                            <i class="fa fa-clock-o"></i>
-                        </span>
-                        </div>
-                    </div>
-                    {{ form_label(edit_form.arrive) }}
-                    <div class="form-group">
-                        <div class='input-group date datetimepicker' id="checkDate" data-employe="">
-                            {{ form_widget(edit_form.arrive) }}
-                            <span class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                        </div>
-                    </div>
-                    {{ form_label(edit_form.depart) }}
-                    <div class="form-group">
-                        <div class='input-group date datetimepicker' id="checkDate" data-employe="">
-                            {{ form_widget(edit_form.depart) }}
-                            <span class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                        </div>
-                    </div>
-                    {{ form_row(edit_form.categorieChambre) }}
-                    {{ form_label(edit_form.chambre) }}
-                    <select id="indra_adminbundle_reservation_chambre" name="indra_adminbundle_reservation[chambre]" class="result form-control">
-                    </select><br>
-                    <div id="remove">
-                        {{ form_row(edit_form.chambre) }}
-                    </div>
-                    <div id="display">
-                        {{ form_row(edit_form.qte) }}
-                    </div>
-                    {{ form_row(edit_form.requete) }}
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                        {{ form_widget(edit_form.submit, { 'label': 'Enregister', 'attr' :{'type' : 'button', 'class' :'btn btn-primary register'}})}}
-
-                    </div>
-                    {{ form_end(edit_form) }}
-                </div>
-            </div>
+        <div class="col-md-6">
+            <i title="Imprimer" class="fa fa-print fa-3x" onclick="common().print('noprint', 'Liste des Factures d\'Hébergement')" style="float: right; cursor: pointer; margin-right: 2%"></i>
         </div>
-    </div>
+    </div><br />
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
-    <script>
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            common().notice('{{ flashMessage }}','ok');
+    <table class="table table-hover table-bordered dataTable">
+        <thead>
+        <tr>
+            <th style="text-align: center">Arrivée</th>
+            <th style="text-align: center">Départ</th>
+            <th style="text-align: center">Client</th>
+            <th style="text-align: center">Chambre</th>
+            <th style="text-align: center">Nbre Personnes</th>
+            <th style="text-align: center">Montant</th>
+            <th style="text-align: center">Payé ?</th>
+            <th style="text-align: center">Statut</th>
+            <th style="text-align: center">Réceptionniste</th>
+            <th class="noprint" style="text-align: center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr {% if entity.del == 1 %} class="danger" {% endif %}>
+                <td style="text-align: center">{{ entity.dateArrive }}</td>
+                <td style="text-align: center">{{ entity.dateDepart }}</td>
+                <td style="text-align: center">{{ entity.client }}</td>
+                <td style="text-align: center">{{ entity.chambre }}</td>
+                <td style="text-align: center">{{ entity.qtePers }}</td>
+                <td style="text-align: center">{{ entity.montant }} <b>FCFA</b></td>
+                <td style="text-align: center">
+                    {% if entity.paye == 1 %}
+                        <button type="button" class="btn btn-danger">
+                            <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('facturereception_valid_paie', {'id' : entity.id, 'valid' : 0, 'idDate' : entityDate.id}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Non
+                            </a>
+                        </button>
+                    {% else %}
+                        <button type="button" class="btn btn-success">
+                            <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('facturereception_valid_paie', {'id' : entity.id, 'valid' : 1, 'idDate' : entityDate.id}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Oui
+                            </a>
+                        </button>
+                    {% endif %}
+                </td>
+                <td style="text-align: center">
+                    {% if entity.statut == 1 %}
+                        <button type="button" class="btn btn-danger">
+                            <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('facturereception_valid_occupation', {'id' : entity.id, 'valid' : 0, 'idChambre' : entity.chambre.id, 'idDate' : entityDate.id}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Occupée
+                            </a>
+                        </button>
+                    {% else %}
+                        <button type="button" class="btn btn-success">
+                            <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('facturereception_valid_occupation', {'id' : entity.id, 'valid' : 1, 'idChambre' : entity.chambre.id, 'idDate' : entityDate.id}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Libre
+                            </a>
+                        </button>
+                    {% endif %}
+                </td>
+                <td style="text-align: center">{{ entity.receptionniste }}</td>
+                <td class="noprint" style="text-align: center">
+                    <a href="{{ path('reservation_show', {'id' : entity.id}) }}">
+                        <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
+                    </a>
+                </td>
+            </tr>
         {% endfor %}
-        common().initPopover();
-        common().date();
-        common().heure();
-        common().dataTable(0);
-        $("form").validate();
-        common().validation();
-        $(".phoneNumber").rules("add", { phone: "" });
-        $('#remove').remove();
-        $('#display').css({'display' : 'none'});
-    </script>
+        </tbody>
+    </table>
 
 {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
+        <script>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+            common().notice('{{ flashMessage }}','ok');
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+            common().notice('{{ flashMessage }}','ko');
+            {% endfor %}
+            common().dataTable(0);
+        </script>
+
+    {% endblock %}

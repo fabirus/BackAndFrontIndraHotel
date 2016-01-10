@@ -9,6 +9,8 @@ facturereception_create:
 facturereception_show:
     path:     /factureReception/{id}
     defaults: { _controller: IndraAdminBundle:FactureReception:show }
+    options:
+        expose: true
 
 facturereception_delete:
     path:     /factureReception/delete/{id}/{del}
@@ -22,9 +24,9 @@ facturereception_update:
 
 
 facturereception_valid_paie:
-    path:     /factureReceptionPaie/{id}/{valid}
+    path:     /factureReceptionPaie/{id}/{valid}/{idDate}
     defaults: { _controller: IndraAdminBundle:FactureReception:validPaie }
 
 facturereception_valid_occupation:
-    path:     /factureReceptionOccupation/{id}/{valid}/{idChambre}
+    path:     /factureReceptionOccupation/{id}/{valid}/{idChambre}/{idDate}
     defaults: { _controller: IndraAdminBundle:FactureReception:validOccupation }

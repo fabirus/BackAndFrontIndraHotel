@@ -52,10 +52,16 @@ class FactureReceptionType extends AbstractType
             ))
             ->add('qtePers','number', array(
                 'label' => 'Nombre *',
-                'required' => false,
+                'required' => true,
                 'attr' => array(
                     'class' => 'form-control number',
                     'value' => '1'
+                )))
+            ->add('montant','number', array(
+                'label' => 'Montant *',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control number',
                 )))
         ;
     }
