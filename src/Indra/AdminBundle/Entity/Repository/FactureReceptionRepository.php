@@ -10,4 +10,12 @@ namespace Indra\AdminBundle\Entity\Repository;
  */
 class FactureReceptionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findGroupDateBuilder(){
+
+        $qb =  $this->createQueryBuilder('f')
+                    ->groupBy('f.updatedAt')
+        ;
+//        var_dump($qb->getQuery());
+        return $qb->getQuery()->getResult();
+    }
 }

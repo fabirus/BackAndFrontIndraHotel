@@ -3,6 +3,8 @@
 namespace Indra\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * FactureReception
@@ -85,6 +87,13 @@ class FactureReception
      */
     private $receptionniste;
 
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string
+     */
+    private $updatedAt;
+
 
     /**
      * Get id
@@ -94,6 +103,22 @@ class FactureReception
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     /**

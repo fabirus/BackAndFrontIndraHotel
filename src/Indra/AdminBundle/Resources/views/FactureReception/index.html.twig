@@ -18,6 +18,7 @@
 <table class="table table-hover table-bordered dataTable">
     <thead>
     <tr>
+        <th style="text-align: center">Date</th>
         <th style="text-align: center">Arrivée</th>
         <th style="text-align: center">Départ</th>
         <th style="text-align: center">Client</th>
@@ -25,12 +26,14 @@
         <th style="text-align: center">Nbre Personnes</th>
         <th style="text-align: center">Payé ?</th>
         <th style="text-align: center">Statut</th>
+        <th style="text-align: center">Réceptionniste</th>
         <th class="noprint" style="text-align: center">Actions</th>
     </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr {% if entity.del == 1 %} class="danger" {% endif %}>
+            <td style="text-align: center">{{ entity.updatedAt|date('d/m/y') }}</td>
             <td style="text-align: center">{{ entity.dateArrive }}</td>
             <td style="text-align: center">{{ entity.dateDepart }}</td>
             <td style="text-align: center">{{ entity.client }}</td>
@@ -90,6 +93,7 @@
                     </button>
                 {% endif %}
             </td>
+            <td style="text-align: center">{{ entity.receptionniste }}</td>
             <td class="noprint" style="text-align: center">
                 <a href="{{ path('reservation_show', {'id' : entity.id}) }}">
                     <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>

@@ -9,6 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Indra\AdminBundle\Entity\FactureReception;
 use Indra\AdminBundle\Form\FactureReceptionType;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Intl\DateFormatter\DateFormat;
 
 /**
  * FactureReception controller.
@@ -31,7 +34,7 @@ class FactureReceptionController extends Controller
         $entity     = new FactureReception();
         $form       = $this->createCreateForm($entity);
 
-        $entities = $em->getRepository('IndraAdminBundle:FactureReception')->findAll();
+        $entities = $em->getRepository('IndraAdminBundle:FactureReception')->findGroupDateBuilder();
 
         return array(
             'entities' => $entities,
@@ -58,6 +61,7 @@ class FactureReceptionController extends Controller
 
         if ($form->isValid()) {
             $entity->setReceptionniste($user->getFirstname().' '. $user->getLastname());
+            $entity->setUpdatedAt(date('Y-m-d H:i:s'));
             $em->persist($entity);
             $em->flush();
             $this->updateChambre($chambre, $em, 1);
