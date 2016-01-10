@@ -33,7 +33,7 @@ class Chambre
      *
      * @ORM\Column(name="statut", type="boolean")
      */
-    private $statut = 1;
+    private $statut = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="CategorieChambre")

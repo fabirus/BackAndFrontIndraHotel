@@ -1,49 +1,170 @@
 {% extends '::base.html.twig' %}
 
+{% block title %} {{ parent() }} | Liste des Factures d'Hébergement {% endblock %}
+
 {% block body -%}
-    <h1>FactureReception list</h1>
+<div class="alert alert-info" role="alert" style="font-size: 18px">Liste des Factures d'Hébergement</div>
+<div class="row">
+    <div class="col-md-6">
+        <i class="fa fa-plus-square fa-3x" data-toggle="modal"
+           data-target="#modalForm" title="Ajouter" style="color:
+        #0FAD8C;cursor: pointer;"></i>
+    </div>
+    <div class="col-md-6">
+        <i title="Imprimer" class="fa fa-print fa-3x" onclick="common().print('noprint', 'Liste des Factures d\'Hébergement')" style="float: right; cursor: pointer; margin-right: 2%"></i>
+    </div>
+</div><br />
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Statut</th>
-                <th>Datearrive</th>
-                <th>Datedepart</th>
-                <th>Paye</th>
-                <th>Receptionniste</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('facturereception_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.statut }}</td>
-                <td>{{ entity.dateArrive }}</td>
-                <td>{{ entity.dateDepart }}</td>
-                <td>{{ entity.paye }}</td>
-                <td>{{ entity.receptionniste }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('facturereception_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('facturereception_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<table class="table table-hover table-bordered dataTable">
+    <thead>
+    <tr>
+        <th style="text-align: center">Arrivée</th>
+        <th style="text-align: center">Départ</th>
+        <th style="text-align: center">Client</th>
+        <th style="text-align: center">Chambre</th>
+        <th style="text-align: center">Nbre Personnes</th>
+        <th style="text-align: center">Payé ?</th>
+        <th style="text-align: center">Statut</th>
+        <th class="noprint" style="text-align: center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr {% if entity.del == 1 %} class="danger" {% endif %}>
+            <td style="text-align: center">{{ entity.dateArrive }}</td>
+            <td style="text-align: center">{{ entity.dateDepart }}</td>
+            <td style="text-align: center">{{ entity.client }}</td>
+            <td style="text-align: center">{{ entity.chambre }}</td>
+            <td style="text-align: center">{{ entity.qtePers }}</td>
+            <td style="text-align: center">
+                {% if entity.paye == 1 %}
+                    <button type="button" class="btn btn-danger">
+                        <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('reservation_valid', {'id' : entity.id, 'valid' : 0}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Non
+                        </a>
+                    </button>
+                {% else %}
+                    <button type="button" class="btn btn-success">
+                        <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('reservation_valid', {'id' : entity.id, 'valid' : 1}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Oui
+                        </a>
+                    </button>
+                {% endif %}
+            </td>
+            <td style="text-align: center">
+                {% if entity.statut == 1 %}
+                    <button type="button" class="btn btn-danger">
+                        <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('reservation_valid', {'id' : entity.id, 'valid' : 0}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Occupée
+                        </a>
+                    </button>
+                {% else %}
+                    <button type="button" class="btn btn-success">
+                        <a style="color:white" href="
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ path('reservation_valid', {'id' : entity.id, 'valid' : 1}) }}
+                        {% else %}
+                            #
+                        {% endif %}
+                            ">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Libre
+                        </a>
+                    </button>
+                {% endif %}
+            </td>
+            <td class="noprint" style="text-align: center">
+                <a href="{{ path('reservation_show', {'id' : entity.id}) }}">
+                    <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
-        <ul>
-        <li>
-            <a href="{{ path('facturereception_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+<!-- Modal -->
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-info">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Enregistrement d'une Facture d'hébergement</h4>
+            </div>
+            {{ form_start(form) }}
+            <div class="modal-body">
+                {{ form_errors(form) }}
+
+                {{ form_row(form.chambre) }}
+                {{ form_row(form.client) }}
+                {{ form_label(form.dateArrive) }}
+                <div class="form-group">
+                    <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                        {{ form_widget(form.dateArrive) }}
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                {{ form_label(form.dateDepart) }}
+                <div class="form-group">
+                    <div class='input-group date datetimepicker' id="checkDate" data-employe="">
+                        {{ form_widget(form.dateDepart) }}
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                {{ form_row(form.qtePers) }}
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    {{ form_widget(form.submit, { 'label': 'Enregister', 'attr' :{'type' : 'button', 'class' :'btn btn-primary register'}})}}
+
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment-with-locales.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('assets/vendor/bootstrap-multiselect/dist/js/bootstrap-multiselect.js')}}"></script>
+        <script>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                common().notice('{{ flashMessage }}','ok');
+            {% endfor %}
+            common().date();
+            $('.multiselectOne').multiselect({
+                enableFiltering: true,
+                nonSelectedText: 'Aucun Choix'
+            });
+            $(".modal-body .btn-group").css({'width' : '80%', 'margin-left' : '5%','margin-bottom': '2%'});
+            common().dataTable(0);
+            $("form").validate();
+            common().validation();
+        </script>
+
     {% endblock %}

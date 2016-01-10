@@ -27,12 +27,15 @@ class FactureReceptionController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em         = $this->getDoctrine()->getManager();
+        $entity     = new FactureReception();
+        $form       = $this->createCreateForm($entity);
 
         $entities = $em->getRepository('IndraAdminBundle:FactureReception')->findAll();
 
         return array(
             'entities' => $entities,
+            'form'     => $form->createView(),
         );
     }
     /**
@@ -44,22 +47,59 @@ class FactureReceptionController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new FactureReception();
-        $form = $this->createCreateForm($entity);
+        $entity         = new FactureReception();
+        $em             = $this->getDoctrine()->getManager();
+        $dataform       = $request->request->get('indra_adminbundle_facturereception');
+        $idChambre      = $dataform['chambre'];
+        $chambre        = $em->getRepository('IndraAdminBundle:Chambre')->find($idChambre);
+        $user           = $this->get('security.context')->getToken()->getUser();
+        $form           = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $entity->setReceptionniste($user->getFirstname().' '. $user->getLastname());
             $em->persist($entity);
             $em->flush();
+            $this->updateChambre($chambre, $em, 1);
+            $this->get('session')->getFlashBag()->add('success', 'Facture ajoutée avec Succès !!');
 
-            return $this->redirect($this->generateUrl('facturereception_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('facturereception_informations'));
         }
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
         );
+    }
+
+    public function updateChambre($entity, $em, $statut){
+
+        $entity->setStatut($statut);
+        $em->flush();
+    }
+
+    /**
+     * Operation Create Entity
+     */
+
+    public function operationUpdate($entity, $action) {
+        $user  = $this->get('security.context')->getToken()->getUser();
+        $data   = array(
+            "id"                =>  $entity->getId(),
+            "entite"            => 'RESERVATIOn',
+            "nom"               =>  $entity->getNom(),
+            "telephome"         =>  $entity->getTel(),
+            "TypeChambre"       =>  $action == 'SUPPRESSION' ? 'none' : $entity->getCategorieChambre()->getNom(),
+            "Chambre"           =>  $action == 'SUPPRESSION' || $entity->getChambre() == null ? '0' : $entity->getChambre()->getNumero(),
+            'heure'             =>  $entity->getHeure(),
+            "Arrivée"           =>  $entity->getArrive(),
+            "Départ"            =>  $entity->getDepart(),
+            "email"             =>  $entity->getEmail()
+
+        );
+
+        $this->get('application.operation')->update($data, $user, $action);
+
     }
 
     /**
@@ -81,23 +121,6 @@ class FactureReceptionController extends Controller
         return $form;
     }
 
-    /**
-     * Displays a form to create a new FactureReception entity.
-     *
-     * @Route("/new", name="facturereception_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new FactureReception();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
 
     /**
      * Finds and displays a FactureReception entity.

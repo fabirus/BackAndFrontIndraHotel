@@ -91,6 +91,12 @@ class Client
      */
     private $sexe;
 
+
+    public function __toString(){
+        return $this->nom. ' '. $this->prenom;
+
+    }
+
     /**
      * Get id
      *

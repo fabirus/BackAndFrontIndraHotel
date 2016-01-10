@@ -26,7 +26,7 @@ class FactureReception
      *
      * @ORM\Column(name="statut", type="boolean")
      */
-    private $statut;
+    private $statut = 1;
 
     /**
      * @var string
@@ -48,7 +48,7 @@ class FactureReception
      *
      * @ORM\Column(name="paye", type="boolean")
      */
-    private $paye;
+    private $paye = 1;
 
 
     /**
@@ -61,6 +61,21 @@ class FactureReception
      * @ORM\ManyToOne(targetEntity="Client")
      */
     private $client;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="qtePers", type="integer")
+     */
+    private $qtePers = 1;
+
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="del", type="boolean")
+     */
+    private $del = 0;
 
 
     /**
@@ -80,6 +95,39 @@ class FactureReception
     {
         return $this->id;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isDel()
+    {
+        return $this->del;
+    }
+
+    /**
+     * @param boolean $del
+     */
+    public function setDel($del)
+    {
+        $this->del = $del;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQtePers()
+    {
+        return $this->qtePers;
+    }
+
+    /**
+     * @param int $qtePers
+     */
+    public function setQtePers($qtePers)
+    {
+        $this->qtePers = $qtePers;
+    }
+
 
     /**
      * @return string

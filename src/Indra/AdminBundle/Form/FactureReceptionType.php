@@ -15,13 +15,48 @@ class FactureReceptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('statut')
-            ->add('dateArrive')
-            ->add('dateDepart')
-            ->add('paye')
-            ->add('receptionniste')
-            ->add('chambre')
-            ->add('client')
+//            ->add('statut')
+            ->add('dateArrive','text', array(
+                'label' => 'Date d\'arrivée *',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control dateFormat',
+                    'placeholder' => 'Format JJ/MM/AA',
+                    'readOnly'  => 'readOnly'
+                )
+            ))
+            ->add('dateDepart','text', array(
+                'label' => 'Date départ *',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control dateFormat',
+                    'placeholder' => 'Format JJ/MM/AA',
+                    'readOnly'  => 'readOnly'
+                )
+            ))
+//            ->add('paye')
+//            ->add('receptionniste')
+            ->add('chambre',null, array(
+                'label' => 'Chambre *',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control multiselectOne'
+                )
+            ))
+            ->add('client',null, array(
+                'label' => 'Client *',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control multiselectOne'
+                )
+            ))
+            ->add('qtePers','number', array(
+                'label' => 'Nombre *',
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control number',
+                    'value' => '1'
+                )))
         ;
     }
     

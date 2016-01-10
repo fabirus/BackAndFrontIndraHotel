@@ -38,8 +38,6 @@ class ChambreController extends Controller
                     ->getQuery()
                 ;
                 $entities = $query->getArrayResult();
-//                $entities = $this->get('projet.search')->searchRoom($select);
-//                print_r($entities[0]);
             }
             else {
                 $entities = $em->getRepository('IndraAdminBundle:Chambre')->findAll();
