@@ -28,6 +28,9 @@
             <th style="text-align: center">Payé ?</th>
             <th style="text-align: center">Statut</th>
             <th style="text-align: center">Réceptionniste</th>
+            {% if entityDate.updatedAt|date('d/m/y')|date('U') == "now"|date_modify('-1 day')|date('d/m/y')|date('U') %}
+                <th style="text-align: center">Reconduire</th>
+            {% endif %}
             <th class="noprint" style="text-align: center">Actions</th>
         </tr>
         </thead>
@@ -95,6 +98,16 @@
                     {% endif %}
                 </td>
                 <td style="text-align: center">{{ entity.receptionniste }}</td>
+                {% if entityDate.updatedAt|date('d/m/y')|date('U') == "now"|date_modify('-1 day')|date('d/m/y')|date('U') %}
+                    <td style="text-align: center">
+                            <button type="button" class="btn btn-success">
+                                <a style="color:white" href="
+                                    {{ path('facturereception_reconduire', {'id' : entity.id}) }}">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Reconduire
+                                </a>
+                            </button>
+                    </td>
+                {% endif %}
                 <td class="noprint" style="text-align: center">
                     <a href="{{ path('facturereception_print', {'id' : entity.id, 'idDate' : entityDate.id}) }}">
                         <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
@@ -112,10 +125,10 @@
         <script type="text/javascript"  src="{{ asset('js/lib/common.js')}}"></script>
         <script>
             {% for flashMessage in app.session.flashbag.get('success') %}
-            common().notice('{{ flashMessage }}','ok');
+                common().notice('{{ flashMessage }}','ok');
             {% endfor %}
             {% for flashMessage in app.session.flashbag.get('error') %}
-            common().notice('{{ flashMessage }}','ko');
+                common().notice('{{ flashMessage }}','ko');
             {% endfor %}
             common().dataTable(0);
         </script>

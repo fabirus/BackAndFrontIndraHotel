@@ -22,6 +22,9 @@ facturereception_update:
     path:     /factureReception/{id}/
     defaults: { _controller: IndraAdminBundle:FactureReception:update }
 
+facturereception_reconduire:
+    path:     /factureReceptionreconduire/{id}/
+    defaults: { _controller: IndraAdminBundle:FactureReception:reconduire }
 
 facturereception_valid_paie:
     path:     /factureReceptionPaie/{id}/{valid}/{idDate}

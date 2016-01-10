@@ -7,7 +7,7 @@ function common() {
         $('.datetimepicker').datetimepicker({
             'locale'            : 'fr',
             format              : 'L',
-            daysOfWeekDisabled  : [0,7],
+            //daysOfWeekDisabled  : [0,7],
             showClear           : true,
             showClose           : true,
             ignoreReadonly      : true,

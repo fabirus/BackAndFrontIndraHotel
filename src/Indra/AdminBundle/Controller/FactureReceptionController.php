@@ -61,13 +61,12 @@ class FactureReceptionController extends Controller
 
         if ($form->isValid()) {
             $entity->setReceptionniste($user->getFirstname().' '. $user->getLastname());
-            $entity->setUpdatedAt(date('Y-m-d H:i:s'));
+            $entity->setUpdatedAt(date('Y-m-d'));
             $em->persist($entity);
             $em->flush();
             $this->updateChambre($chambre, $em, 1);
             $this->get('session')->getFlashBag()->add('success', 'Facture ajoutée avec Succès !!');
             $this->operationUpdate($entity, 'CREATION');
-
 
             return $this->redirect($this->generateUrl('facturereception_informations'));
         }
@@ -76,6 +75,38 @@ class FactureReceptionController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
+    }
+
+    public function reconduireAction($id){
+        $entity         = new FactureReception();
+        $em             = $this->getDoctrine()->getManager();
+        $entityF        = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
+        $entitiesF      = $em->getRepository('IndraAdminBundle:FactureReception')->findBy(
+            array(
+                'chambre'   => $entityF->getChambre()->getId(),
+                'client'    => $entityF->getClient()->getId(),
+                'updatedAt' => date('Y-m-d')
+                )
+        );
+        $user           = $this->get('security.context')->getToken()->getUser();
+        $entity         = clone $entityF;
+        $entity->setReceptionniste($user->getFirstname().' '. $user->getLastname());
+        $entity->setUpdatedAt(date('Y-m-d'));
+        if(count($entitiesF) > 0) {
+            $this->get('session')->getFlashBag()->add('error', 'Cette Chambre est déja utilisée par le client'.$entity->getClient());
+        }
+        else {
+            $em->persist($entity);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'Hébergement Reconduite avec Succès !!');
+        }
+
+        $this->operationUpdate($entity, 'RECONDUIRE');
+
+        return $this->redirect($this->generateUrl('facturereception_show', array(
+            'id' => $id
+        )));
+
     }
 
     public function updateChambre($entity, $em, $statut){
