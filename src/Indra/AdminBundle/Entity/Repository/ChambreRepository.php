@@ -10,4 +10,23 @@ namespace Indra\AdminBundle\Entity\Repository;
  */
 class ChambreRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array Ces deux fonctions vont de paires findActiveService et findActiveServiceQueryBuilder
+     * @return List of Active Service
+     */
+    function findActiveChambre(){
+        $qb = $this->findActiveChambreQueryBuilder();
+        return  $qb->getQuery()->getResult();
+    }
+
+    public function findActiveChambreQueryBuilder()
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        return $qb->select('c')
+            ->from('IndraAdminBundle:Chambre', 'c')
+            ->where('c.statut = 0')
+            ->orderBy('c.numero');
+
+    }
 }

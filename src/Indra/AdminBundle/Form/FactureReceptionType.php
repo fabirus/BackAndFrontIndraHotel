@@ -15,7 +15,6 @@ class FactureReceptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//            ->add('statut')
             ->add('dateArrive','text', array(
                 'label' => 'Date d\'arrivée *',
                 'required' => true,
@@ -34,15 +33,23 @@ class FactureReceptionType extends AbstractType
                     'readOnly'  => 'readOnly'
                 )
             ))
-//            ->add('paye')
-//            ->add('receptionniste')
-            ->add('chambre',null, array(
+//            ->add('chambre',null, array(
+//                'label' => 'Chambre *',
+//                'required' => true,
+//                'attr' => array(
+//                    'class' => 'form-control multiselectOne'
+//                )
+//            ))
+            ->add('chambre','entity', array(
                 'label' => 'Chambre *',
-                'required' => true,
+                'class' =>'Indra\AdminBundle\Entity\Chambre',
+                'property' =>'numero',
+                'query_builder' => function(\Indra\AdminBundle\Entity\Repository\ChambreRepository $repository){
+                    return $repository->findActiveChambreQueryBuilder();
+                },
                 'attr' => array(
                     'class' => 'form-control multiselectOne'
-                )
-            ))
+                )))
             ->add('client',null, array(
                 'label' => 'Client *',
                 'required' => true,
