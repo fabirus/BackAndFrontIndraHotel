@@ -96,7 +96,7 @@
                 </td>
                 <td style="text-align: center">{{ entity.receptionniste }}</td>
                 <td class="noprint" style="text-align: center">
-                    <a href="{{ path('reservation_show', {'id' : entity.id}) }}">
+                    <a href="{{ path('facturereception_print', {'id' : entity.id, 'idDate' : entityDate.id}) }}">
                         <i title="Modifier" style="cursor: pointer; margin-right: 4%" class="fa fa-eye fa-2x"></i>
                     </a>
                 </td>

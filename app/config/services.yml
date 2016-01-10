@@ -208,6 +208,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: RECEPTION, label: Votes}
 
+    admin.factureReception:
+        class: Indra\AdminBundle\Admin\FactureReceptionAdmin
+        arguments: [~, Indra\AdminBundle\Entity\FactureReception, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: RECEPTION, label: Facture de Reception}
+
 #    admin.tourisme:
 #        class: Indra\AdminBundle\Admin\TourismeAdmin
 #        arguments: [~, Indra\AdminBundle\Entity\Tourisme, ~]

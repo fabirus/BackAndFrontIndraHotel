@@ -30,3 +30,13 @@ facturereception_valid_paie:
 facturereception_valid_occupation:
     path:     /factureReceptionOccupation/{id}/{valid}/{idChambre}/{idDate}
     defaults: { _controller: IndraAdminBundle:FactureReception:validOccupation }
+
+facturereception_print:
+    path:     /facturereception/{id}/{idDate}
+    defaults: { _controller: IndraAdminBundle:FactureReception:print }
+
+facturereception_delete:
+    path:     /facturereception/delete/{id}/{del}
+    defaults: { _controller: IndraAdminBundle:FactureReception:delete, _locale : fr}
+    options:
+        expose: true

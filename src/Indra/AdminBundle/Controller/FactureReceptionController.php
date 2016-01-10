@@ -66,6 +66,8 @@ class FactureReceptionController extends Controller
             $em->flush();
             $this->updateChambre($chambre, $em, 1);
             $this->get('session')->getFlashBag()->add('success', 'Facture ajoutée avec Succès !!');
+            $this->operationUpdate($entity, 'CREATION');
+
 
             return $this->redirect($this->generateUrl('facturereception_informations'));
         }
@@ -90,16 +92,12 @@ class FactureReceptionController extends Controller
         $user  = $this->get('security.context')->getToken()->getUser();
         $data   = array(
             "id"                =>  $entity->getId(),
-            "entite"            => 'RESERVATIOn',
-            "nom"               =>  $entity->getNom(),
-            "telephome"         =>  $entity->getTel(),
-            "TypeChambre"       =>  $action == 'SUPPRESSION' ? 'none' : $entity->getCategorieChambre()->getNom(),
-            "Chambre"           =>  $action == 'SUPPRESSION' || $entity->getChambre() == null ? '0' : $entity->getChambre()->getNumero(),
-            'heure'             =>  $entity->getHeure(),
-            "Arrivée"           =>  $entity->getArrive(),
-            "Départ"            =>  $entity->getDepart(),
-            "email"             =>  $entity->getEmail()
-
+            "entite"            => 'FACTURE RECEPTION',
+            "nom"               =>  $entity->getClient()->getNom(),
+            "montant"           =>  $entity->getMontant(),
+            "hambre"            =>  $entity->getChambre()->getNumero(),
+            "Arrivée"           =>  $entity->getDateArrive(),
+            "Départ"            =>  $entity->getDateDepart(),
         );
 
         $this->get('application.operation')->update($data, $user, $action);
@@ -142,10 +140,34 @@ class FactureReceptionController extends Controller
         );
 
         return array(
-            'entities' => $entities,
-            'entityDate'   => $entity
+            'entities'    => $entities,
+            'entityDate'  => $entity
         );
 
+    }
+
+    /**
+     * Finds and displays a AvanceSalaire entity.
+     *
+     * @Route("/avancesalaire/{id}/{idEmploye}", name="avancesalaire_print")
+     * @Method("GET")
+     * @Template("")
+     */
+    public function printAction($id, $idDate)
+    {
+        $em         = $this->getDoctrine()->getManager();
+        $entity     = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
+        $editForm   = $this->createEditForm($entity);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find FactureReception entity.');
+        }
+
+        return array(
+            'entity'        => $entity,
+            'form'          => $editForm->createView(),
+            'idDate'        => $idDate
+        );
     }
 
 
@@ -176,9 +198,11 @@ class FactureReceptionController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em         = $this->getDoctrine()->getManager();
+        $idDate     = $request->request->get('idDate');
+        $entity     = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
+        $user       = $this->get('security.context')->getToken()->getUser();
 
-        $entity = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find FactureReception entity.');
@@ -188,14 +212,21 @@ class FactureReceptionController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->setReceptionniste($user->getFirstname().' '. $user->getLastname());
             $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'Facture Modifiée avec Succès !!');
+            $this->operationUpdate($entity, 'MODIFICATION');
 
-            return $this->redirect($this->generateUrl('facturereception_edit', array('id' => $id)));
+
+            return $this->redirect($this->generateUrl('facturereception_print', array(
+                'id' => $id,
+                'idDate' => $idDate)
+            ));
         }
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'        => $editForm->createView(),
         );
     }
 
@@ -257,6 +288,30 @@ class FactureReceptionController extends Controller
         }
 
         return $this->redirect($this->generateUrl('facturereception_show', array('id' => $idDate)));
+    }
+
+    /**
+     * Deletes a Employe entity.
+     *
+     * @Route("/employe/delete/{id}/{del}", name="employe_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction($id, $del)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find FactureReception entity.');
+        }
+
+        $entity->setDel($del);
+        $em->flush();
+        if ($del == 1){
+            $this->operationUpdate($entity, 'SUPPRESSION');
+        }
+
+        return $this->redirect($this->generateUrl('facturereception_show', array('id' => $id)));
     }
 
 
