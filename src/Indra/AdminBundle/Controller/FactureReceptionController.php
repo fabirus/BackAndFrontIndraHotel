@@ -139,40 +139,12 @@ class FactureReceptionController extends Controller
             throw $this->createNotFoundException('Unable to find FactureReception entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
-    /**
-     * Displays a form to edit an existing FactureReception entity.
-     *
-     * @Route("/{id}/edit", name="facturereception_edit")
-     * @Method("GET")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find FactureReception entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
 
     /**
     * Creates a form to edit a FactureReception entity.
@@ -209,7 +181,6 @@ class FactureReceptionController extends Controller
             throw $this->createNotFoundException('Unable to find FactureReception entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -222,49 +193,68 @@ class FactureReceptionController extends Controller
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
+
+
     /**
-     * Deletes a FactureReception entity.
+     * Valid AvanceSalaire entity.
      *
-     * @Route("/{id}", name="facturereception_delete")
-     * @Method("DELETE")
+     * @Route("/avancesalaire/{id}/{valid}/{idEmploye}", name="avancesalaire_valid")
+     * @Method("VALID")
      */
-    public function deleteAction(Request $request, $id)
+    public function validPaieAction($id, $valid)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find FactureReception entity.');
+        }
+        $entity->setPaye($valid);
+        $em->flush();
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find FactureReception entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if($valid == 1){
+            $this->get('session')->getFlashBag()->add('error', 'Facture non Payée !!');
         }
 
-        return $this->redirect($this->generateUrl('facturereception'));
+        if($valid == 0) {
+            $this->get('session')->getFlashBag()->add('success', 'Facture Payée !!');
+        }
+
+        return $this->redirect($this->generateUrl('facturereception_informations'));
     }
 
     /**
-     * Creates a form to delete a FactureReception entity by id.
+     * Valid AvanceSalaire entity.
      *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
+     * @Route("/avancesalaire/{id}/{valid}/{idEmploye}", name="avancesalaire_valid")
+     * @Method("VALID")
      */
-    private function createDeleteForm($id)
+    public function validOccupationAction($id, $valid, $idChambre)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('facturereception_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+        $em         = $this->getDoctrine()->getManager();
+        $entity     = $em->getRepository('IndraAdminBundle:FactureReception')->find($id);
+        $chambre    = $em->getRepository('IndraAdminBundle:Chambre')->find($idChambre);
+        $this->updateChambre($chambre, $em, $valid);
+
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find FactureReception entity.');
+        }
+        $entity->setStatut($valid);
+        $em->flush();
+
+        if($valid == 1){
+            $this->get('session')->getFlashBag()->add('error', 'Chambre Occupée !!');
+        }
+
+        if($valid == 0) {
+            $this->get('session')->getFlashBag()->add('success', 'Chambre Libérée !!');
+        }
+
+        return $this->redirect($this->generateUrl('facturereception_informations'));
     }
+
+
 }

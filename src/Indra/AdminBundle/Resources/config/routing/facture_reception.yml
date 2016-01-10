@@ -21,6 +21,10 @@ facturereception_update:
     defaults: { _controller: IndraAdminBundle:FactureReception:update }
 
 
-facturereception_valid:
-    path:     /factureReception/{id}/{valid}
-    defaults: { _controller: IndraAdminBundle:FactureReception:valid }
+facturereception_valid_paie:
+    path:     /factureReceptionPaie/{id}/{valid}
+    defaults: { _controller: IndraAdminBundle:FactureReception:validPaie }
+
+facturereception_valid_occupation:
+    path:     /factureReceptionOccupation/{id}/{valid}/{idChambre}
+    defaults: { _controller: IndraAdminBundle:FactureReception:validOccupation }
