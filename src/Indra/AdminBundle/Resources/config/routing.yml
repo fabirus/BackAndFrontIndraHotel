@@ -114,3 +114,7 @@ client:
 facture_reception:
     resource: "@IndraAdminBundle/Resources/config/routing/facture_reception.yml"
     prefix:   /
+
+facturebarrestaurant:
+    resource: "@IndraAdminBundle/Resources/config/routing/facturebarrestaurant.yml"
+    prefix:   /
