@@ -67,6 +67,9 @@ class Restaurant
      */
     private $imageName;
 
+    public function __toString(){
+        return $this->nom;
+    }
 
     /**
      * Get id
